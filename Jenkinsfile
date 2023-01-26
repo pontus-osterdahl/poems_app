@@ -4,7 +4,7 @@ pipeline {
         stage("Build"){
             steps {
                 dir("poems_app"){
-                    sh "mvnw spring-boot:run"
+                    sh "./mvnw spring-boot:run"
                 }
             }
         }
