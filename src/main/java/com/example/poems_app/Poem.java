@@ -2,9 +2,11 @@ package com.example.poems_app;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -32,6 +34,17 @@ public class Poem implements Indexable {
 	@JsonProperty("title")
 	private String title;
 	
+	@ManyToMany
+	private Set<BibItem> bibItems;
+	
+	public Set<BibItem> getBibItems() {
+		return this.bibItems;
+	}
+	
+	public void setBibItems(Set<BibItem> bibItems) {
+		this.bibItems = bibItems;
+	}
+	
 	public int getId(){
 		return this.id;
 	}
@@ -58,6 +71,7 @@ public class Poem implements Indexable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 
 	@XmlTransient
 	@Override

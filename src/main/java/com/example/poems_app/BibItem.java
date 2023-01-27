@@ -1,5 +1,7 @@
 package com.example.poems_app;
 
+import java.util.Set;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -19,6 +22,9 @@ public abstract class BibItem {
 	protected String title;
 	protected String author;
 	protected String identifier;
+	
+	@ManyToMany
+	protected Set<Poem> poems;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -57,5 +63,4 @@ public abstract class BibItem {
 	public String getIdentifier() {
 		return this.identifier;
 	}
-	
 }
