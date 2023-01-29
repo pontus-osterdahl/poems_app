@@ -18,15 +18,22 @@ public class LibrisReader implements BibItemReader {
 	}
 	
 	private String getFirstStringHelper(JSONObject jObj, String type) {
-		Object obj = jObj.get(type);
-		if (obj instanceof String) {
-			return (String) obj;
-		}
-		else if(obj instanceof JSONArray) {
-			return ((JSONArray) obj).getString(0);
-		} 
 		
-		return "";
+		String val = "";
+		
+		try {
+			Object obj = jObj.get(type);
+		    if (obj instanceof String) {
+			    val =  (String) obj;
+		    }
+		    else if(obj instanceof JSONArray) {
+			    val = ((JSONArray) obj).getString(0);
+		    } 
+		}
+		catch (Exception e) {
+			
+		}
+		return val;
 		
 	}
 	
@@ -37,18 +44,7 @@ public class LibrisReader implements BibItemReader {
 		String tmpIsbn = getFirstStringHelper(jObj, "isbn");
 		String tmpDate = getFirstStringHelper(jObj, "date");
 		String tmpIdentifier = getFirstStringHelper(jObj, "identifier");
-		
-		/**
-		try {
-			tmpTitle = jObj.getString("title");
-			tmpPublisher = jObj.getString("publisher");
-			tmpAuthor = jObj.getString("creator");
-			tmpIsbn = jObj.getString("isbn");
-			tmpDate = jObj.getString("date");
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}*/
+
 		return new Book(tmpTitle,tmpAuthor,tmpIsbn,tmpPublisher,tmpDate,tmpIdentifier);
 		
 	}
@@ -61,8 +57,6 @@ public class LibrisReader implements BibItemReader {
 		}
 		
 		return null;
-		//BibItem bibItem = BibItemFactory.createBibItem(type);
-		//JsonParser.parseBibItem(bibItem);
 	}
 	
 	@Override
@@ -99,39 +93,3 @@ class JsonParser {
 	}
 	
 }
-
-/**
-class Visitor {
-	public BibItem g
-}
-
-class BibItemJsonFactory {
-	
-	public static BibItem createBibItem(JSONObject jObj) {
-		String type = jObj.getString("type");
-		if("book".equals(type)) {
-			String tmpTitle = "";
-			String tmpAuthor = "";
-			String tmpPublisher = "";
-			String tmpIsbn = "";
-			String tmpDate = "";
-			
-			try {
-				tmpTitle = jObj.getString("title");
-				tmpPublisher = jObj.getString("publisher");
-				tmpAuthor = jObj.getString("creator");
-				tmpIsbn = jObj.getString("isbn");
-				tmpDate = jObj.getString("date");
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			return new Book(tmpTitle,tmpAuthor,tmpIsbn,tmpPublisher,tmpDate);
-			
-		}
-	    return null;
-	}
-	
-	
-	
-}*/
