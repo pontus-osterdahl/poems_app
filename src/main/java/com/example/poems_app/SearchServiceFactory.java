@@ -1,5 +1,8 @@
 package com.example.poems_app;
 
+import com.example.poems_app.services.PoemSearchService;
+import com.example.poems_app.services.SearchService;
+
 public class SearchServiceFactory {
 
 	public static SearchService getSearchService(String service)

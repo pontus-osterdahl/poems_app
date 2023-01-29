@@ -1,4 +1,4 @@
-package com.example.poems_app;
+package com.example.poems_app.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +8,13 @@ import java.util.Optional;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.poems_app.Indexer;
+import com.example.poems_app.IndexerFactory;
+import com.example.poems_app.Poem;
+import com.example.poems_app.PoemIndexDatabaseSyncher;
+import com.example.poems_app.PoemRepository;
+import com.example.poems_app.SearchServiceFactory;
 
 @Service
 public class PoemService implements BeanService<Poem> {

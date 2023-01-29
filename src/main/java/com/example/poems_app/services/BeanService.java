@@ -1,4 +1,4 @@
-package com.example.poems_app;
+package com.example.poems_app.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.solr.client.solrj.SolrServerException;
+
+import com.example.poems_app.Poem;
 
 public interface BeanService<T> {
 
