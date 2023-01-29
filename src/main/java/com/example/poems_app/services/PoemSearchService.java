@@ -1,4 +1,4 @@
-package com.example.poems_app;
+package com.example.poems_app.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,15 +11,10 @@ import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.SolrException;
-import org.springframework.stereotype.Service;
 
-public interface SearchService<T> {
-    public List<T> search(String queryItem) throws SolrServerException, IOException;
-    public List<T> getAll() throws SolrServerException, IOException;
-}
+import com.example.poems_app.Poem;
 
-class PoemSearchService implements SearchService<Poem>{
+public class PoemSearchService implements SearchService<Poem>{
 	@Override
 	public List<Poem> search(String queryItem) throws SolrServerException, IOException {
 		SolrQuery query = new SolrQuery();

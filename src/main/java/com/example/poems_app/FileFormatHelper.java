@@ -31,11 +31,10 @@ public class FileFormatHelper {
   }
   
   public static boolean hasXMLFormat(MultipartFile file) {
-	 /** if(!XML_TYPE.equals(file.getContentType())) {
+	 if(!XML_TYPE.equals(file.getContentType())) {
 		  return false;
-	  }*/
-	  
-	  return true;
+	 }
+	 return true;
   }
   
   public static List<Poem> csvToPoems(InputStream is) {
@@ -65,12 +64,6 @@ public class FileFormatHelper {
 	  Unmarshaller um = jaxbContext.createUnmarshaller();
 	  um.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 	  return (ComplexPoemOld) um.unmarshal(is);
-	  
-  }
-  
-  public static TeiRepresentation xmlToTeiRepresentation(InputStream is) throws JAXBException {
-      JAXBContext jaxbContext 	= JAXBContext.newInstance(TeiRepresentation.class );
-	  return (TeiRepresentation) jaxbContext.createUnmarshaller().unmarshal(is);
 	  
   }
   
