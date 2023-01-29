@@ -22,45 +22,62 @@ public abstract class BibItem {
 	protected String title;
 	protected String author;
 	protected String identifier;
-	
+
 	@ManyToMany
 	protected Set<Poem> poems;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	protected BibItem() {
-		
+
 	}
-	
+
 	protected BibItem(String title, String author, String identifier) {
 		this.title = title;
 		this.author = author;
 		this.identifier = identifier;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getTitle() {
 		return this.title;
 	}
-	
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	public String  getAuthor() {
+
+	public String getAuthor() {
 		return this.author;
 	}
-	
+
 	public void setIdentifier(String identifier) {
 		this.identifier = identifier;
 	}
-	
+
 	public String getIdentifier() {
 		return this.identifier;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (!(o instanceof BibItem)) {
+			return false;
+		}
+
+		BibItem bibItem = (BibItem) o;
+
+		return bibItem.getTitle().equals(this.title) && bibItem.getAuthor().equals(this.author)
+				&& bibItem.getIdentifier().equals(this.identifier);
+	}
+
 }

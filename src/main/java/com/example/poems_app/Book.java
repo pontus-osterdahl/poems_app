@@ -58,5 +58,25 @@ public class Book extends BibItem {
 		this.date = date;
 	}
 	
+	@Override
+	public boolean equals(Object o) {
+			if (o == this) {
+				return true;
+			}
+
+			if(!super.equals(o)) {
+				return false;
+			}
+			
+			if (!(o instanceof Book)) {
+				return false;
+			}
+
+			Book book = (Book) o;
+			
+			return book.getIsbn().equals(this.isbn) && book.getPublisher().equals(this.publisher)
+					&& book.getDate().equals(this.date);
+		}
+	}
 	
-}
+
