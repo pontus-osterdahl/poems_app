@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-public class GustavLarssonApplication {
+public class PoemsAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GustavLarssonApplication.class, args);
+		SpringApplication.run(PoemsAppApplication.class, args);
 	}
 
 }
