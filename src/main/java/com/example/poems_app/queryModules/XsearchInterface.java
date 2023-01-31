@@ -1,0 +1,107 @@
+package com.example.poems_app.queryModules;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.example.poems_app.BibItem;
+import com.example.poems_app.Book;
+import com.example.poems_app.queryInterfaces.QueryInterface;
+
+public class XsearchInterface implements QueryInterface {
+
+	@Override
+	public List<BibItem> performQuery(String host, String query) {
+		
+		URL url = null;
+		List<BibItem> bibItems = null;
+		try {
+			url = new URL(host + query + "&format=json");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			String json = IOUtils.toString(url, Charset.forName("UTF-8"));
+			bibItems = parseQueryResult(new JSONObject(json));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return bibItems;
+	}
+	
+	public BibItem getBibItem(JSONObject jObj) {
+		
+		BibItem bibItem = parseJson(jObj);
+		//BibItem bibItem = BibItemJsonFactory.createBibItem(jObj);
+		return bibItem;
+	}
+	
+	private String getFirstStringHelper(JSONObject jObj, String type) {
+		
+		String val = "";
+		
+		try {
+			Object obj = jObj.get(type);
+		    if (obj instanceof String) {
+			    val =  (String) obj;
+		    }
+		    else if(obj instanceof JSONArray) {
+			    val = ((JSONArray) obj).getString(0);
+		    } 
+		}
+		catch (Exception e) {
+			
+		}
+		return val;
+		
+	}
+	
+	private Book parseJsonToBook(JSONObject jObj) {
+		String tmpTitle = getFirstStringHelper(jObj, "title");
+		String tmpAuthor = getFirstStringHelper(jObj, "creator");
+		String tmpPublisher = getFirstStringHelper(jObj, "publisher");
+		String tmpIsbn = getFirstStringHelper(jObj, "isbn");
+		String tmpDate = getFirstStringHelper(jObj, "date");
+		String tmpIdentifier = getFirstStringHelper(jObj, "identifier");
+
+		return new Book(tmpTitle,tmpAuthor,tmpIsbn,tmpPublisher,tmpDate,tmpIdentifier);
+		
+	}
+	
+	private BibItem parseJson(JSONObject jObj) {
+		String type = jObj.getString("type");
+		
+		if("book".equals(type)) {
+			return parseJsonToBook(jObj);
+		}
+		
+		return null;
+	}
+	
+	public List<BibItem> parseQueryResult(JSONObject jObj) {
+		List<BibItem> list = new ArrayList<BibItem>();
+		JSONObject jObj2 = (JSONObject) jObj.get("xsearch");
+		
+		JSONArray jArr = (JSONArray) jObj2.get("list");
+		for(int i = 0; i < jArr.length(); i++) {
+			JSONObject bibJson = (JSONObject) jArr.get(i);
+			BibItem bibItem = getBibItem(bibJson);
+			if(Objects.nonNull(bibItem)) {
+				list.add(bibItem);
+			}
+		}
+		return list;
+	}
+}

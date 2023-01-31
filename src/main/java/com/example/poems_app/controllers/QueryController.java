@@ -2,14 +2,18 @@ package com.example.poems_app.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.poems_app.BibItem;
 import com.example.poems_app.BibItemReader;
+import com.example.poems_app.BibItemSource;
 import com.example.poems_app.LibrisReader;
 import com.example.poems_app.QueryForm;
 import com.example.poems_app.factories.AbstractQueryFactory;
@@ -18,12 +22,46 @@ import com.example.poems_app.queryExecutors.BibItemQueryExecutor;
 import com.example.poems_app.queryExecutors.LibrisQueryExecutor;
 import com.example.poems_app.queryModules.LibrisQueryModule;
 import com.example.poems_app.queryModules.QueryModule;
+import com.example.poems_app.repositories.BibItemSourceRepository;
+import com.example.poems_app.services.ImportService;
 import com.example.poems_app.services.Importer;
 
 @RestController
 public class QueryController {
 	
 	private final List<String> types = List.of("Libris");
+	
+	@Autowired
+	private BibItemSourceRepository repository;
+	
+	@Autowired
+	private ImportService importService;
+	
+	@CrossOrigin
+	@GetMapping("/bibItemSources")
+	public Iterable<BibItemSource> getBibtemSources() {
+		return repository.findAll();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/bibItemSources/{id}")
+	public Optional<BibItemSource> getBibItemSource(@PathVariable int id) {
+		return repository.findById(id);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/getResultsFromBibItemSourceQuery")
+	public Iterable<BibItem> getResultsFromBibItemSourceQuery(@RequestBody QueryForm queryForm) throws IOException {	
+		String id = queryForm.getQueryType();
+		Optional<BibItemSource> bibItemSource = getBibItemSource(Integer.valueOf(id));
+		
+		BibItemSource bibSource = bibItemSource.get();
+				
+		String query = 	queryForm.getQueryValue();
+
+		return importService.getBibItems(bibSource, query);
+	}
+	
 	
 	@CrossOrigin
 	@GetMapping("/queryExecutors")
