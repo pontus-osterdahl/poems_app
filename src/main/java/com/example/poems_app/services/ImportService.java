@@ -11,7 +11,7 @@ import com.example.poems_app.queryInterfaces.QueryInterface;
 
 @Service
 public class ImportService {
-	
+
 	public List<BibItem> getBibItems (BibItemSource bibItemSource, String query) {
 		
 		String interfaceType = bibItemSource.getInterfaceType();
