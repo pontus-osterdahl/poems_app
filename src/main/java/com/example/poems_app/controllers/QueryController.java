@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,21 +33,24 @@ public class QueryController {
 	private final List<String> types = List.of("Libris");
 	
 	@Autowired
-	private BibItemSourceRepository repository;
-	
-	@Autowired
 	private ImportService importService;
 	
 	@CrossOrigin
 	@GetMapping("/bibItemSources")
 	public Iterable<BibItemSource> getBibtemSources() {
-		return repository.findAll();
+		return importService.findAllBibItemSources();
 	}
 	
 	@CrossOrigin
 	@GetMapping("/bibItemSources/{id}")
 	public Optional<BibItemSource> getBibItemSource(@PathVariable int id) {
-		return repository.findById(id);
+		return importService.findBibItemSourceById(id);
+	}
+	
+	@CrossOrigin
+	@PostMapping("/bibItemSources")
+	public BibItemSource getBibItemSource(@RequestBody BibItemSource bibItemSource) {
+		return importService.saveBibItemSource(bibItemSource);
 	}
 	
 	@CrossOrigin
