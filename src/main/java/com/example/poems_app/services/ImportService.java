@@ -40,5 +40,9 @@ public class ImportService {
 	public Iterable<BibItemSource> findAllBibItemSources() {
 		return repository.findAll();
 	}
+	
+	public void deleteBibItemSourceById(int id) {
+		repository.deleteById(id);
+	}
 
 }
