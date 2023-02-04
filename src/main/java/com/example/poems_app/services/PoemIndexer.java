@@ -1,7 +1,6 @@
 package com.example.poems_app.services;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -10,39 +9,51 @@ import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.stereotype.Service;
 
-import com.example.poems_app.Image;
 import com.example.poems_app.Indexer;
 import com.example.poems_app.Poem;
 
 @Service
-public class ImageIndexer implements Indexer<Image> { 
-
-	SolrClient client = getSolrClient();
+class PoemIndexer implements Indexer<Poem> { 
 	
-	@Override
-	public void index(Image item) {
+	protected SolrClient client;
+	public PoemIndexer() {
+		client = getSolrClient();
+	}
+	
+	public void index(Poem item){
+		
 		final SolrInputDocument doc = new SolrInputDocument();
 		
 		doc.addField("id", item.getId());
-		doc.addField("name", item.getName());
-		doc.addField("description", item.getDescription());
-		doc.addField("date",  item.getDate());
-		doc.addField("filepath", item.getFilepath());
+		doc.addField("title", item.getTitle());
+		doc.addField("text", item.getText());
 		
 		try {
-     		client.add("images", doc);
-	    	client.commit("images");
+     		client.add("poems", doc);
+	    	client.commit("poems");
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
 	}
 	
-	public void indexAll(Iterable<Image> items) {
-		for(Image i : items) {
-			index(i);
+	public void indexAll(Iterable<Poem> items) {
+		for(Poem poem : items) {
+			index(poem);
+		}
+	}
+	
+	public void clearIndex() throws SolrServerException, IOException {
+		client.deleteByQuery("poems", "*:*");
+		client.commit("poems");
+	}
+	
+	public void removeItem(Poem item)  {
+		try {
+			client.deleteById(Integer.toString(item.getId()));
+		} catch (SolrServerException | IOException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -52,18 +63,4 @@ public class ImageIndexer implements Indexer<Image> {
 		
 		return solr;
 	}
-
-	@Override
-	public void removeItem(Image item) throws SolrServerException, IOException {
-		client.deleteById(Integer.toString(item.getId()));
-		client.commit();
-		
-	}
-
-	@Override
-	public void clearIndex() throws SolrServerException, IOException {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
