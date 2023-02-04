@@ -33,6 +33,10 @@ public class ImportService {
 		return repository.save(bibItemSource);
 	}
 	
+	public BibItemSource updateBibItemSource(BibItemSource bibItemSource) {
+		return repository.save(bibItemSource);
+	}
+	
 	public Optional<BibItemSource> findBibItemSourceById(int id) {
 		return repository.findById(id);
 	}
