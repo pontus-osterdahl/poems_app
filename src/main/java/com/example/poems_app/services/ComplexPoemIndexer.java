@@ -46,4 +46,10 @@ public class ComplexPoemIndexer implements Indexer<ComplexPoemOld>{
 		client.deleteById(Integer.toString(item.getId()));
 		
 	}
+
+	@Override
+	public void clearIndex() throws SolrServerException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }
