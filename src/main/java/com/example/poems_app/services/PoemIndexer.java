@@ -13,7 +13,7 @@ import com.example.poems_app.Indexer;
 import com.example.poems_app.Poem;
 
 @Service
-class PoemIndexer implements Indexer<Poem> { 
+public class PoemIndexer implements Indexer<Poem> { 
 	
 	protected SolrClient client;
 	public PoemIndexer() {
