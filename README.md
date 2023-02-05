@@ -1,3 +1,3 @@
 # poems_app
 
-Backend to poems-app
+Java Spring backend and Angular frontend to poems-app
