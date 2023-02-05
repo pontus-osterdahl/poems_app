@@ -11,9 +11,11 @@ import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
+import org.springframework.stereotype.Service;
 
 import com.example.poems_app.Poem;
 
+@Service
 public class PoemSearchService implements SearchService<Poem>{
 	@Override
 	public List<Poem> search(String queryItem) throws SolrServerException, IOException {
@@ -35,6 +37,33 @@ public class PoemSearchService implements SearchService<Poem>{
 		return poems;
 	}
 	
+	public Poem getByid(int id) {
+		SolrQuery query = new SolrQuery();
+		query.setQuery("id:" + id);
+		query.setStart(0);
+		
+		SolrClient solrClient = getSolrClient();
+		SolrDocumentList docList = null;
+		
+		
+		QueryResponse response;
+		try {
+			response = solrClient.query("poems", query);
+			docList = response.getResults();
+		} catch (SolrServerException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		List<Poem> poems = new ArrayList<Poem>();
+		
+		for(SolrDocument doc : docList) {
+			Poem poem = mapDocToPoem(doc);
+			poems.add(poem);
+		}		
+		return poems.size() > 0 ? poems.get(0) : null;
+	}
 	
 	private Poem mapDocToPoem(SolrDocument doc) {
 		Poem poem = new Poem();

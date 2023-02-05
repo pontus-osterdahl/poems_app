@@ -13,9 +13,10 @@ import com.example.poems_app.Indexer;
 import com.example.poems_app.Poem;
 
 @Service
-class PoemIndexer implements Indexer<Poem> { 
+public class PoemIndexer implements Indexer<Poem> { 
 	
 	protected SolrClient client;
+	
 	public PoemIndexer() {
 		client = getSolrClient();
 	}
@@ -51,15 +52,25 @@ class PoemIndexer implements Indexer<Poem> {
 	
 	public void removeItem(Poem item)  {
 		try {
-			client.deleteById(Integer.toString(item.getId()));
+			client.deleteByQuery("poems", "id:" + item.getId());
+			client.commit("poems");
 		} catch (SolrServerException | IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	public void removeById(int id)  {
+		try {
+			System.out.println(client.deleteByQuery("poems", "id:" + id));
+			client.commit("poems");
+		} catch (SolrServerException | IOException e) {
+			System.out.println("Delete not working");
+		}
+	}
+	
 	protected SolrClient getSolrClient() {
 		HttpSolrClient solr = new HttpSolrClient.Builder("http://localhost:8983/solr").build();
-		solr.setParser(new XMLResponseParser());
+		//solr.setParser(new XMLResponseParser());
 		
 		return solr;
 	}
