@@ -1,0 +1,9 @@
+<p>add-poem works!</p>
+Title: <br/>
+<input [(ngModel)] = "poem.title"> <br/>
+Text: <br/>
+<input [(ngModel)] = "poem.text"> <br>
+<div *ngIf="poem.title && poem.text">
+    <button (click)="addPoem()">Add poem</button>
+</div>
+

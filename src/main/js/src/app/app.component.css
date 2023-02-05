@@ -1,0 +1,26 @@
+.back-div{
+    background-color:white;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center top; 
+}
+
+.content{
+   text-align: center;
+}
+
+
+nav {
+
+    font-size: 20pt;
+}
+
+a {
+    padding: 20pt;
+}
+
+.app_component_back {
+    text-align: center;
+    background-color: green;
+    
+}
