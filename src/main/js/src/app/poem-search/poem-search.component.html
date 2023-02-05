@@ -1,0 +1,20 @@
+<p>poem-search works! {{ searchterm }}</p>
+Search poem by:
+
+<select #selectCriteria (change)="onSelected(selectCriteria.value)">
+    <option *ngFor="let item of criteria">{{item}}</option>
+</select>
+<br/>
+<input [(ngModel)]="searchterm">
+
+    <button (click)="search()">Search poem</button>
+
+<div *ngFor="let poem of poems">
+    {{poem.title}} <br/>
+    {{poem.text}} <br/>
+</div>
+
+
+
+
+

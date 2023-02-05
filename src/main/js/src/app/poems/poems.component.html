@@ -1,0 +1,9 @@
+<h2>Dikter</h2>
+
+<div *ngFor="let poem of poems">
+    <button (click)="onSelect(poem)">
+        <span>{{poem.title}}</span>
+    </button> <br/>
+</div>
+
+<app-poem [poem]="selectedPoem"></app-poem>
