@@ -1,4 +1,4 @@
-package com.example.poems_app.services;
+package com.example.poems_app;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.poems_app.BibItem;
-import com.example.poems_app.BibItemSource;
 import com.example.poems_app.factories.QueryInterfaceFactory;
 import com.example.poems_app.queryInterfaces.QueryInterface;
 import com.example.poems_app.repositories.BibItemSourceRepository;

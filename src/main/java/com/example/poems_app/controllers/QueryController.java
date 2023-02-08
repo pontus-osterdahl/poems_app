@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.poems_app.BibItem;
 import com.example.poems_app.BibItemReader;
 import com.example.poems_app.BibItemSource;
+import com.example.poems_app.ImportService;
 import com.example.poems_app.LibrisReader;
 import com.example.poems_app.QueryForm;
 import com.example.poems_app.factories.AbstractQueryFactory;
@@ -26,7 +27,6 @@ import com.example.poems_app.queryExecutors.LibrisQueryExecutor;
 import com.example.poems_app.queryModules.LibrisQueryModule;
 import com.example.poems_app.queryModules.QueryModule;
 import com.example.poems_app.repositories.BibItemSourceRepository;
-import com.example.poems_app.services.ImportService;
 import com.example.poems_app.services.Importer;
 
 @RestController

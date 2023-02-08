@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.poems_app.BibItem;
 import com.example.poems_app.BibItemSource;
 import com.example.poems_app.Book;
-import com.example.poems_app.services.ImportService;
+import com.example.poems_app.ImportService;
 
 public class XsearchInterfaceTest {	
 	
