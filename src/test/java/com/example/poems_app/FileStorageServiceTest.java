@@ -13,9 +13,9 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-class ImageServiceTest {
+class FileStorageServiceTest {
 
-	private ImageService imageService;
+	private FileStorageService imageService;
 	private final String PATH = "src/main/resources/tmp.tmp";
 
 	@AfterEach
@@ -25,7 +25,7 @@ class ImageServiceTest {
 
 	@Test
 	void test() throws IOException {
-		imageService = new ImageService();
+		imageService = new FileStorageService();
 		MockMultipartFile mockFile = new MockMultipartFile("tmp.tmp", "Hello World".getBytes());
 		imageService.saveImageOnServer(mockFile, PATH);
 		assertEquals(FileUtils.readFileToString(new File(PATH), "UTF-8"), "Hello World");

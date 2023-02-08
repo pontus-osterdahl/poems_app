@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class ImageService {
+public class FileStorageService {
 
 	@Autowired
 	private ImageRepository imgRepository;
@@ -26,11 +26,18 @@ public class ImageService {
 	 * Method to save an image to a specified location  
 	 * @param image MultipartFile to be saved
 	 * @param path Path to save file to
+	 * @return Destination of saved image. Null if image could not be saved.
 	 * @throws IOException
 	 */
-	public void saveImageOnServer(MultipartFile image, String path) throws IOException {
-		File file = new File(path);
-		image.transferTo(file);
+	public String saveImageOnServer(MultipartFile image, String path) {
+		try {
+		    File file = new File(path);
+		    image.transferTo(file);
+		    return path;
+		}
+		catch (IOException e) {
+		    return null;	
+		}
 	}
 	
 }
