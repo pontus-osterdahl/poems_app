@@ -58,4 +58,13 @@ public class ImageController {
 	}
 	
 	
+	//Add MULTIPARTFILE
+	@CrossOrigin
+	@PostMapping("/images/addImageFile")
+	public Image saveImageToServer(@RequestBody Image img)
+	{
+		return imageService.saveImageToServer(img);
+	}
+	
+	
 }
