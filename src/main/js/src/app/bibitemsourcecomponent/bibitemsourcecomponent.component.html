@@ -1,0 +1,10 @@
+<p>bibitemsourcecomponent works!</p>
+Name: <br/>
+<input [(ngModel)] = "bibSource.name"> <br/>
+Host: <br/>
+<input [(ngModel)] = "bibSource.host"> <br>
+Interface: <br/>
+<input [(ngModel)] = "bibSource.interfaceType" />
+<div *ngIf="bibSource.name && bibSource.host && bibSource.interfaceType">
+    <button (click)="addBibSource()">Add bib spurce</button>
+</div>
