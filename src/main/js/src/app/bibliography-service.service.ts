@@ -23,7 +23,7 @@ export class BibliographyService {
 
   addBibliographySource(bibliographySource: BibliographySource){
     console.log("jobobo");
-    this.http.post<BibliographySource>(this.poemsUrl, bibliographySource);
+    this.http.post<BibliographySource>(this.poemsUrl, bibliographySource).subscribe(bibliographySource => bibliographySource);
   }
 
 

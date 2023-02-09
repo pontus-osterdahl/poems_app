@@ -11,6 +11,8 @@ import { PoemSearchComponent } from './poem-search/poem-search.component';
 import { AddFromFileComponent } from './add-from-file/add-from-file.component';
 import { BibliographyComponent } from './bibliography/bibliography.component';
 import { BibliographyDisplayComponent } from './bibliography-display/bibliography-display.component';
+import { BibitemsourcecomponentComponent } from './bibitemsourcecomponent/bibitemsourcecomponent.component';
+import { BibliographysourcecomponentComponent } from './bibliographysourcecomponent/bibliographysourcecomponent.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { BibliographyDisplayComponent } from './bibliography-display/bibliograph
     PoemSearchComponent,
     AddFromFileComponent,
     BibliographyComponent,
-    BibliographyDisplayComponent
+    BibliographyDisplayComponent,
+    BibitemsourcecomponentComponent,
+    BibliographysourcecomponentComponent
   ],
   imports: [
     BrowserModule,

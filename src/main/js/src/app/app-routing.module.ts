@@ -6,6 +6,7 @@ import { PoemSearchComponent } from './poem-search/poem-search.component';
 import { PoemsComponent } from './poems/poems.component';
 import { BibliographyComponent } from './bibliography/bibliography.component';
 import { BibliographyDisplayComponent } from './bibliography-display/bibliography-display.component';
+import { BibitemsourcecomponentComponent } from './bibitemsourcecomponent/bibitemsourcecomponent.component';
 
 const routes: Routes = [
   { path: 'poem', component: PoemComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'poem-search', component: PoemSearchComponent},
   { path: 'poems', component: PoemsComponent},
   { path: 'bibliography', component: BibliographyComponent},
-  { path: 'bibliographyDisplay', component: BibliographyDisplayComponent}
+  { path: 'bibliographyDisplay', component: BibliographyDisplayComponent},
+  { path: 'bibitemsourcecomponentComponent', component: BibitemsourcecomponentComponent}
 ];
 
 @NgModule({
