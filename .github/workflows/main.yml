@@ -26,5 +26,7 @@ jobs:
               run:
                   mysql -u root -proot -e "create user 'poems_user'@'localhost' identified by 'poems-db';"
                   mysql -u root -proot -e "grant all on poems_app_db.* to 'poems_user'@'localhost';"
+            - name: set_up_solr
+              run: curl -v http://localhost:8983/solr/admin/collections?action=CREATE&name=poems&numShards=2
             - name: test
               run: mvn test
