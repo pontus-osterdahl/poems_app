@@ -12,7 +12,8 @@ jobs:
             solr:
                 image: solr:8.3.1
                 ports:
-                    - 2010:8983
+                    - 8983:8983
+                
         steps: 
             - uses: actions/checkout@v3
             - name: start db
