@@ -15,10 +15,10 @@ jobs:
                   sudo service mysql start
             - name: create db
               run:
-                  sudo mysql -u root -proot -e "create database poems_app_db;"
+                  mysql -u root -proot -e "create database poems_app_db;"
             - name: create db_user
               run:
-                  sudo mysql -u root -proot -e "create user 'poems_user'@'localhost' identified by 'poems-db';"
-                  sudo mysql -u root -proot -e "grant all on poems_app_db.* to 'poems_user'@'localhost';"
+                  mysql -u root -proot -e "create user 'poems_user'@'localhost' identified by 'poems-db';"
+                  mysql -u root -proot -e "grant all on poems_app_db.* to 'poems_user'@'localhost';"
             - name: test
               run: mvn test
