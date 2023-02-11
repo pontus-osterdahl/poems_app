@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        services:
+            solr:
+                image: solr:8.3.1
+                ports:
+                    - 8983:8983
+                options: 
+                    solr:8.3.1 -p 8983:8983 create_collection -c poems
+                    -health-cmd "curl --fail http://localhost:8983/v2/cores || exit 1"
+                    -health-interval 10s
+                    -health-timeout 5s
+                    -health-retries 5
+        steps: 
+            - uses: actions/checkout@v3
+            - name: start db
+              run:
+                  sudo service mysql start
+            - name: create db
+              run:
+                  mysql -u root -proot -e "create database poems_app_db;"
+            - name: create db_user
+              run:
+                  mysql -u root -proot -e "create user 'poems_user'@'localhost' identified by 'poems-db';"
+                  mysql -u root -proot -e "grant all on poems_app_db.* to 'poems_user'@'localhost';"
+            - name: wait
+            - name: set_up_solr
+              run: curl -v http://localhost:8983/solr/admin/collections?action=CREATE&name=poems&numShards=2
+            - name: test
+              run: mvn test
