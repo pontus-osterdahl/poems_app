@@ -20,11 +20,7 @@ public class ImportService {
 		
 		String interfaceType = bibItemSource.getInterfaceType();
 		QueryInterface queryInterface = QueryInterfaceFactory.getQueryInterface(interfaceType);
-		List<BibItem> bibItems = queryInterface.performQuery(bibItemSource.getHost(), query);
-		for (BibItem bib : bibItems) {
-			System.out.println(bib.getTitle());
-		}
-		return bibItems;
+		return queryInterface.performQuery(bibItemSource.getHost(), query);
 	}
 	
 	public Iterable<BibItemSource> saveBibItemSources (Iterable<BibItemSource> bibItemSources) {
