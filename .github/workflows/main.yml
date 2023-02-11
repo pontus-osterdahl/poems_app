@@ -14,7 +14,7 @@ jobs:
                 ports:
                     - 8983:8983
                 options: 
-                    solr:8.3.1 -p 8983:8983 create_collection -c poems >-
+                    solr:8.3.1 -p 8983:8983 create_collection -c poems
                     --health-cmd "curl --fail http://localhost:8983/v2/cores || exit 1"
                     --health-interval 10s
                     --health-timeout 5s
