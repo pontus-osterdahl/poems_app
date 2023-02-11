@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.poems_app.BibItem;
@@ -72,14 +73,9 @@ public class QueryController {
 	
 	@CrossOrigin
 	@GetMapping("/getResultsFromBibItemSourceQuery")
-	public Iterable<BibItem> getResultsFromBibItemSourceQuery(@RequestBody QueryForm queryForm) throws IOException {	
-		String id = queryForm.getQueryType();
+	public Iterable<BibItem> getResultsFromBibItemSourceQuery(@RequestParam String id, @RequestParam String query) throws IOException {	
 		Optional<BibItemSource> bibItemSource = getBibItemSource(Integer.valueOf(id));
-		
 		BibItemSource bibSource = bibItemSource.get();
-				
-		String query = 	queryForm.getQueryValue();
-
 		return importService.getBibItems(bibSource, query);
 	}
 	

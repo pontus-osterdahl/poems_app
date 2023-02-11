@@ -1,0 +1,19 @@
+<p>search-bibitem-form works!</p>
+    <select [(ngModel)]="selectedBibItemSource">
+        <option *ngFor="let bibItemSource of bibItemSources" [ngValue]="bibItemSource">
+            {{bibItemSource.name}}
+        </option>
+    </select>
+
+    <div *ngIf="selectedBibItemSource && selectedBibItemSource.id != null">
+        <p>Please enter a search query!</p>
+        <input [(ngModel)]="query"><br>
+        <button (click)="performQuery(selectedBibItemSource.id)">Click</button>
+    </div>
+
+    <div *ngFor="let resultItem of result">
+        {{resultItem.title}}<br>
+        {{resultItem.author}}
+    </div>
+
+
