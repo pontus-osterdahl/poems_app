@@ -14,7 +14,7 @@ jobs:
                 ports:
                     - 8983:8983
                 options: 
-                    create_collection -c poems
+                    solr:8.3.1 create_collection -c poems
         steps: 
             - uses: actions/checkout@v3
             - name: start db
