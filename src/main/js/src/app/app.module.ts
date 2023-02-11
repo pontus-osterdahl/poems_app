@@ -13,6 +13,7 @@ import { BibliographyComponent } from './bibliography/bibliography.component';
 import { BibliographyDisplayComponent } from './bibliography-display/bibliography-display.component';
 import { BibitemsourcecomponentComponent } from './bibitemsourcecomponent/bibitemsourcecomponent.component';
 import { BibliographysourcecomponentComponent } from './bibliographysourcecomponent/bibliographysourcecomponent.component';
+import { SearchBibitemFormComponent } from './search-bibitem-form/search-bibitem-form.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BibliographysourcecomponentComponent } from './bibliographysourcecompon
     BibliographyComponent,
     BibliographyDisplayComponent,
     BibitemsourcecomponentComponent,
-    BibliographysourcecomponentComponent
+    BibliographysourcecomponentComponent,
+    SearchBibitemFormComponent
   ],
   imports: [
     BrowserModule,

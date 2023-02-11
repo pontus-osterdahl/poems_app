@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BibliographyServiceService } from './bibliography-service.service';
+import { BibliographyService } from './bibliography-service.service';
 
 describe('BibliographyServiceService', () => {
-  let service: BibliographyServiceService;
+  let service: BibliographyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BibliographyServiceService);
+    service = TestBed.inject(BibliographyService);
   });
 
   it('should be created', () => {
