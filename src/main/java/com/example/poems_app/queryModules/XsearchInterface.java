@@ -18,33 +18,16 @@ import com.example.poems_app.queryInterfaces.QueryInterface;
 
 public class XsearchInterface implements QueryInterface {
 
+	private final int DEFAULT_NR_RECORDS = 10;
+	
 	@Override
 	public List<BibItem> performQuery(String host, String query) {
-		
-		URL url = null;
-		List<BibItem> bibItems = null;
-		try {
-			url = new URL(host + query + "&format=json");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		try {
-			String json = IOUtils.toString(url, Charset.forName("UTF-8"));
-			bibItems = parseQueryResult(new JSONObject(json));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return bibItems;
+		return performQuery(host,query,DEFAULT_NR_RECORDS);
 	}
 	
 	public BibItem getBibItem(JSONObject jObj) {
 		
 		BibItem bibItem = parseJson(jObj);
-		//BibItem bibItem = BibItemJsonFactory.createBibItem(jObj);
 		return bibItem;
 	}
 	
@@ -103,5 +86,25 @@ public class XsearchInterface implements QueryInterface {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public List<BibItem> performQuery(String host, String query, int nrRecords) {
+		URL url = null;
+		List<BibItem> bibItems = null;
+		try {
+			url = new URL(host + query + "&n=" + nrRecords + "&format=json");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			String json = IOUtils.toString(url, Charset.forName("UTF-8"));
+			bibItems = parseQueryResult(new JSONObject(json));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return bibItems;
 	}
 }
