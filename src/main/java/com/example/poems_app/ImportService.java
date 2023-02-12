@@ -15,34 +15,39 @@ public class ImportService {
 
 	@Autowired
 	private BibItemSourceRepository repository;
-	
-	public List<BibItem> getBibItems (BibItemSource bibItemSource, String query) {
-		
+
+	public List<BibItem> getBibItems(BibItemSource bibItemSource, String query) {
 		String interfaceType = bibItemSource.getInterfaceType();
 		QueryInterface queryInterface = QueryInterfaceFactory.getQueryInterface(interfaceType);
 		return queryInterface.performQuery(bibItemSource.getHost(), query);
 	}
 	
-	public Iterable<BibItemSource> saveBibItemSources (Iterable<BibItemSource> bibItemSources) {
+	public List<BibItem> getBibItems(BibItemSource bibItemSource, String query, int nrRecords) {
+		String interfaceType = bibItemSource.getInterfaceType();
+		QueryInterface queryInterface = QueryInterfaceFactory.getQueryInterface(interfaceType);
+		return queryInterface.performQuery(bibItemSource.getHost(), query, nrRecords);
+	}
+
+	public Iterable<BibItemSource> saveBibItemSources(Iterable<BibItemSource> bibItemSources) {
 		return repository.saveAll(bibItemSources);
 	}
-	
+
 	public BibItemSource saveBibItemSource(BibItemSource bibItemSource) {
 		return repository.save(bibItemSource);
 	}
-	
+
 	public BibItemSource updateBibItemSource(BibItemSource bibItemSource) {
 		return repository.save(bibItemSource);
 	}
-	
+
 	public Optional<BibItemSource> findBibItemSourceById(int id) {
 		return repository.findById(id);
 	}
-	
+
 	public Iterable<BibItemSource> findAllBibItemSources() {
 		return repository.findAll();
 	}
-	
+
 	public void deleteBibItemSourceById(int id) {
 		repository.deleteById(id);
 	}
