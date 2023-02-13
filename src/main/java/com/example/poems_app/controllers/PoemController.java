@@ -1,4 +1,4 @@
-package com.example.poems_app;
+package com.example.poems_app.controllers;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -34,40 +34,46 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.poems_app.BibItem;
+import com.example.poems_app.BookWriter;
+import com.example.poems_app.Poem;
+import com.example.poems_app.services.BibItemService;
 import com.example.poems_app.services.PoemService;
 
 @RestController
 public class PoemController {
 	
 	@Autowired
-	PoemService dbService;
-//	private PoemService dbService = new PoemService();
+	PoemService poemService;
+	
+	@Autowired
+	BibItemService bibItemService;
 	
 	@CrossOrigin
 	@GetMapping("/poems/getPoem/{id}")
 	public Optional<Poem> getPoem(@PathVariable int id)
 	{
-		return dbService.getById(id);
+		return poemService.getById(id);
 	}
 	
 	@CrossOrigin
 	@GetMapping("/poems/getbyword/{word}")
 	public Iterable<Poem> getPoemsbyWord(@PathVariable String word){
-		return dbService.getByWord(word);
+		return poemService.getByWord(word);
 	}
 	
 	@CrossOrigin
 	@GetMapping("/poems/poems")
 	public Iterable<Poem> getPoems()
 	{
-		return dbService.getAll();
+		return poemService.getAll();
 	}
 	
 	@CrossOrigin
 	@PostMapping("/poems/addPoem")
 	public Poem addPoem(@RequestBody Poem poem)
 	{			
-		return dbService.add(poem);
+		return poemService.add(poem);
 	}
 	
 	
@@ -77,7 +83,7 @@ public class PoemController {
 	{			
 		if(id >= 0) {
     		poem.setId(id);
-    		return dbService.update(poem);
+    		return poemService.update(poem);
 		}
 		
 		return null;
@@ -87,12 +93,12 @@ public class PoemController {
 	@CrossOrigin
 	@PutMapping("/poems/reindex")
 	public void reIndexPoems() throws SolrServerException, IOException{
-		dbService.reIndex();
+		poemService.reIndex();
 	}
 
 	@GetMapping("/poems/{id}/getXml") 
 	public void downloadPoemFileXml(@PathVariable int id, HttpServletResponse response) {
-		Optional<Poem> p = dbService.getById(id);
+		Optional<Poem> p = poemService.getById(id);
 		p.ifPresent(poem -> {
 			try {
 				writeStringToXMLDownload(response, poem, "POEM_" + id + ".xml");
@@ -102,10 +108,17 @@ public class PoemController {
 		});
 	}
 	
+	
+	@CrossOrigin
+	@PostMapping("/poems/{id}/bibitem/{bibItemId}")
+	public ResponseEntity<Poem> addBibItemToPoem(@PathVariable int id, @PathVariable int bibItemId) throws Exception{
+		return new ResponseEntity<>(poemService.addBibItemToPoem(id, bibItemId),HttpStatus.OK);
+	}
+	
 	@CrossOrigin
 	@GetMapping("/poems/{id}/getFile")
 	public void downloadPoemFile(@PathVariable int id, HttpServletResponse response) throws IOException {
-		Optional<Poem> p = dbService.getById(id);
+		Optional<Poem> p = poemService.getById(id);
 		p.ifPresent(poem -> {
 			try {
 				writeStringToDownload(response, new BookWriter().writePoem(poem), "POEM_" + id + ".txt");
@@ -119,7 +132,7 @@ public class PoemController {
 	@GetMapping("/poems/getFullFile")
 	public void download(HttpServletResponse response) throws IOException {
 		
-		String fileContent = new BookWriter().writePoems(dbService.getAll());
+		String fileContent = new BookWriter().writePoems(poemService.getAll());
 		writeStringToDownload(response, fileContent, "ALL_POEMS.txt");
 	}
 	

@@ -41,6 +41,10 @@ public class Poem implements Indexable {
 		return this.bibItems;
 	}
 	
+	public void addBibItem(BibItem bibItem) {
+		this.bibItems.add(bibItem);
+	}
+	
 	public void setBibItems(Set<BibItem> bibItems) {
 		this.bibItems = bibItems;
 	}
