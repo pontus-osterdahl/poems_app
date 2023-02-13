@@ -15,9 +15,9 @@ public interface BeanService<T> {
 	
 	public Iterable<T> getAll();
 	
-	public Poem add(T item);
+	public T add(T item);
 	
-	public Poem update(T item);
+	public T update(T item);
 	
 	public Iterable<T> addItems(Iterable<T> items);
 	
