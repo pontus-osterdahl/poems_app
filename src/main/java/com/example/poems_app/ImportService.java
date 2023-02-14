@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.poems_app.factories.QueryInterfaceFactory;
-import com.example.poems_app.queryInterfaces.QueryInterface;
 import com.example.poems_app.repositories.BibItemSourceRepository;
+import com.example.poems_app.searchinterfaces.QueryInterface;
 
 @Service
 public class ImportService {

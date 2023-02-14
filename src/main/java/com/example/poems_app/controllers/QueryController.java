@@ -1,8 +1,10 @@
 package com.example.poems_app.controllers;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,16 +25,22 @@ import com.example.poems_app.factories.AbstractQueryFactory;
 import com.example.poems_app.factories.QueryFactoryInterface;
 import com.example.poems_app.queryExecutors.BibItemQueryExecutor;
 import com.example.poems_app.queryModules.QueryModule;
+import com.example.poems_app.searchinterfaces.SearchInterfaces;
 import com.example.poems_app.services.Importer;
 
 @RestController
 public class QueryController {
 
-	private final List<String> types = List.of("Libris");
-
 	@Autowired
 	private ImportService importService;
 
+	@CrossOrigin
+	@GetMapping("/searchInterfaceTypes") 
+	public Iterable<String> getInterfaces() {
+		return Arrays.asList(SearchInterfaces.values()).
+		stream().map(val -> val.toString()).collect(Collectors.toList());
+	}
+	
 	@CrossOrigin
 	@GetMapping("/bibItemSources")
 	public Iterable<BibItemSource> getBibtemSources() {
@@ -74,12 +82,6 @@ public class QueryController {
 		BibItemSource bibSource = bibItemSource.get();
 
 		return importService.getBibItems(bibSource, query, nrRecords);
-	}
-
-	@CrossOrigin
-	@GetMapping("/queryExecutors")
-	public Iterable<String> getQueryExecutors() {
-		return types;
 	}
 
 	@CrossOrigin

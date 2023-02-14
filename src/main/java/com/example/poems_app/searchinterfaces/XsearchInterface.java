@@ -1,4 +1,4 @@
-package com.example.poems_app.queryModules;
+package com.example.poems_app.searchinterfaces;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import com.example.poems_app.BibItem;
 import com.example.poems_app.Book;
-import com.example.poems_app.queryInterfaces.QueryInterface;
 
 public class XsearchInterface implements QueryInterface {
 

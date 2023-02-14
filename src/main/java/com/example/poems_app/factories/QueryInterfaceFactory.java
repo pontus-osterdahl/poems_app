@@ -1,7 +1,7 @@
 package com.example.poems_app.factories;
 
-import com.example.poems_app.queryInterfaces.QueryInterface;
-import com.example.poems_app.queryModules.XsearchInterface;
+import com.example.poems_app.searchinterfaces.QueryInterface;
+import com.example.poems_app.searchinterfaces.XsearchInterface;
 
 public class QueryInterfaceFactory {
 	static public QueryInterface getQueryInterface(String interfaceType) {
