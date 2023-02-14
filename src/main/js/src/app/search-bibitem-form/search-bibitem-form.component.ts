@@ -8,11 +8,13 @@ import { Bibitem } from '../bibitem';
   templateUrl: './search-bibitem-form.component.html',
   styleUrls: ['./search-bibitem-form.component.css']
 })
+
 export class SearchBibitemFormComponent implements OnInit {
 
   public bibItemSources: BibliographySource[] = []
   public selectedBibItemSource?: BibliographySource;
   public query: String = "";
+  public maxRecords?: Number;
   public result: Bibitem[] = [];
 
   constructor(private bibliographyService : BibliographyService) { }
@@ -23,8 +25,7 @@ export class SearchBibitemFormComponent implements OnInit {
   }
 
   public performQuery(id : number) : void {
-    console.log("test");
-    this.bibliographyService.getBibItemsFromSource(id, this.query).subscribe(result => this.result = result);
+    this.bibliographyService.getBibItemsFromSource(id, this.query, this.maxRecords).subscribe(result => this.result = result);
   }
 
   ngOnInit(): void {

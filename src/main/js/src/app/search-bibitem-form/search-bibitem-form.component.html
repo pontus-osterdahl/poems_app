@@ -8,6 +8,8 @@
     <div *ngIf="selectedBibItemSource && selectedBibItemSource.id != null">
         <p>Please enter a search query!</p>
         <input [(ngModel)]="query"><br>
+        <p>Maximum number of records</p>
+        <input [(ngModel)]="maxRecords"><br>
         <button (click)="performQuery(selectedBibItemSource.id)">Click</button>
     </div>
 

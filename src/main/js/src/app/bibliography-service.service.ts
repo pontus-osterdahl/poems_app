@@ -18,8 +18,11 @@ export class BibliographyService {
 
   }
 
-  getBibItemsFromSource(id: number, query: String) {
-     return this.http.get<Bibitem[]>(`http://localhost:8080/getResultsFromBibItemSourceQuery?id=${id}&query=${query}`);
+  getBibItemsFromSource(id: number, query: String, maxRecords?: Number) {
+    if (maxRecords == null) {
+      return this.http.get<Bibitem[]>(`http://localhost:8080/getResultsFromBibItemSourceQuery?id=${id}&query=${query}`);
+    }
+    return this.http.get<Bibitem[]>(`http://localhost:8080/getResultsFromBibItemSourceQuery?id=${id}&query=${query}&nrRecords=${maxRecords}`);
   }
 
   getBibliographySources() {
@@ -27,7 +30,6 @@ export class BibliographyService {
   }
 
   addBibliographySource(bibliographySource: BibliographySource){
-    console.log("jobobo");
     this.http.post<BibliographySource>(this.poemsUrl, bibliographySource).subscribe(bibliographySource => bibliographySource);
   }
 
