@@ -1,4 +1,4 @@
-package com.example.poems_app.queryInterfaces;
+package com.example.poems_app.searchinterfaces;
 
 import java.util.List;
 
