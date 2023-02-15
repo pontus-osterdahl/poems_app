@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.poems_app.Article;
 import com.example.poems_app.BibItem;
 import com.example.poems_app.Book;
 import com.example.poems_app.Image;
+import com.example.poems_app.repositories.ArticleRepository;
 import com.example.poems_app.repositories.BibItemRepository;
 import com.example.poems_app.repositories.BookRepository;
 
@@ -27,6 +29,9 @@ public class BibItemController {
 	
 	@Autowired
 	BookRepository bookRepository;
+	
+	@Autowired
+	ArticleRepository articleRepository;
 	
 	@CrossOrigin
 	@GetMapping("/bibItem/{isbn}")
@@ -44,6 +49,12 @@ public class BibItemController {
 	@PostMapping("/bibItem/book")
 	public Book saveBook(@RequestBody Book bibItem) {
 		return bookRepository.save(bibItem);
+	}
+	
+	@CrossOrigin
+	@PostMapping("/bibItem/article")
+	public BibItem saveBook(@RequestBody Article bibItem) {
+		return repository.save(bibItem);
 	}
 	
 	
