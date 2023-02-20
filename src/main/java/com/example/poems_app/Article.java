@@ -15,6 +15,15 @@ public class Article extends BibItem {
     	
     }
     
+    public void setId(int id) {
+    	super.id = id;
+    }
+    
+    public int getId() {
+    	return super.id;
+    }
+    
+    
     public Article(String title, String author, String identifier, String journal, String year, int volume, int number, String pages) {
 		super(title, author, identifier);
 		this.journal = journal;

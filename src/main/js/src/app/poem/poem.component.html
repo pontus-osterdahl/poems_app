@@ -1,4 +1,11 @@
 <div *ngIf="poem">
         <h2>{{poem.title}}</h2>
         {{poem.text}}
+        {{poem.id}}
+        <button (click)="showBibliography()">
+                <span>Show/Edit bibliography</span>
+        </button>
+<div *ngIf="displayBibliography">
+<a [routerLink]="['/bibliographydisplay', poem.id]">show bibliography</a>
+</div>
 </div>

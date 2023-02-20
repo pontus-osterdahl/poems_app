@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,6 +56,18 @@ public class BibItemController {
 	@PostMapping("/bibItem/article")
 	public BibItem saveBook(@RequestBody Article bibItem) {
 		return repository.save(bibItem);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/bibItem")
+	public Iterable<BibItem> getAllBibItems() {
+		return repository.findAll();
+	}
+	
+	@CrossOrigin
+	@GetMapping("/bibItem/poem/{id}")
+	public Iterable<BibItem> getBibItemByPoem(@PathVariable int id) {
+		return repository.findByPoems_id(id);
 	}
 	
 	

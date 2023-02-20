@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class Poem implements Indexable {
 	@JsonProperty("title")
 	private String title;
 	
+	@JsonBackReference
 	@ManyToMany
 	private Set<BibItem> bibItems;
 	

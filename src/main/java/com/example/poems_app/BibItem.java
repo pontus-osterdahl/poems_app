@@ -28,10 +28,22 @@ public abstract class BibItem {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	protected int id;
 
 	protected BibItem() {
 
+	}
+	
+	public Set<Poem> getPoems() {
+		return this.poems;
+	}
+	
+	public void addPoems(Poem poem) {
+		this.poems.add(poem);
+	}
+	
+	public void setBibItems(Set<Poem> poems) {
+		this.poems = poems;
 	}
 
 	protected BibItem(String title, String author, String identifier) {

@@ -10,5 +10,6 @@ import com.example.poems_app.BibItem;
 public interface BibItemRepository extends CrudRepository<BibItem, Integer> {
 
 	Iterable<BibItem> findByTitle(String title);
+	Iterable<BibItem> findByPoems_id(int id);
 	
 }
