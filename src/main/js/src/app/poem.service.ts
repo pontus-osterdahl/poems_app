@@ -14,6 +14,10 @@ export class PoemService {
 
   }
 
+  getPoemById(id : number) : Observable<Poem> {
+    return this.http.get<Poem>(this.poemsUrl + `/getPoem/${id}`);
+  }
+
   getPoemsByWord(word: String) : Observable<Poem[]> {
       return this.http.get<Poem[]>(this.poemsUrl + "/getbyword/" + word);
   }
@@ -24,7 +28,7 @@ export class PoemService {
 
   addPoem(poem: Poem){
     console.log("jobobo");
-    this.http.post<Poem>(this.poemsUrl + "/addPoem", poem).subscribe(hero => hero);
+    this.http.post<Poem>(this.poemsUrl + "/addPoem", poem).subscribe(poem => poem);
   }
 
   

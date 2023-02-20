@@ -13,9 +13,14 @@ export class BibliographyService {
 
 
   poemsUrl = 'http://localhost:8080/bibItemSources';
+  bibItemsurl = 'http://localhost:8080/bibItem';
 
   constructor( private http : HttpClient ) { 
 
+  }
+
+  getBibItemsByPoem(poems_id: number) {
+    return this.http.get<Bibitem[]>(this.bibItemsurl + `/poem/${poems_id}`);
   }
 
   getBibItemsFromSource(id: number, query: String, maxRecords?: Number) {

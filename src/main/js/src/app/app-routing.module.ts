@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'poem-search', component: PoemSearchComponent},
   { path: 'poems', component: PoemsComponent},
   { path: 'bibliography', component: BibliographyComponent},
-  { path: 'bibliographyDisplay', component: BibliographyDisplayComponent},
+  { path: 'bibliographydisplay/:id', component: BibliographyDisplayComponent},
   { path: 'bibitemsourcecomponentComponent', component: BibitemsourcecomponentComponent},
   { path: 'searchbibitemform', component: SearchBibitemFormComponent}
 ];

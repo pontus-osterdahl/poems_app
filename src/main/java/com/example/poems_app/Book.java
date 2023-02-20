@@ -13,19 +13,17 @@ public class Book extends BibItem {
 	private String date;
 	private final String TYPE = "book";
 	
-	/**public Book(JSONObject jObj) {
-	
-		catch(Exception e) {
-			
-		}
-		super(tmpTitle,tmpCreator,tmpIsbn,tmpPublisher,tmpDate);
-		
-		
-	}*/
-	
 	public Book() {
 		
 	}
+	
+    public void setId(int id) {
+    	super.id = id;
+    }
+    
+    public int getId() {
+    	return super.id;
+    }
 	
 	public Book(String title, String author, String identifier, String isbn, String publisher, String date) {
 		super(title, author, identifier);

@@ -1,1 +1,6 @@
-<p>bibliography-display works!</p>
+<div *ngIf="poem">
+<p>Bibliography for {{(poem | async)?.title }}</p>
+<div *ngFor="let bibItem of bibItems">
+    <app-bibitem [bibitem] = "bibItem"></app-bibitem>
+</div>
+</div>
