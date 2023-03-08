@@ -1,6 +1,7 @@
 package com.example.poems_app;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.csv.CSVFormat;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -31,10 +33,11 @@ public class FileFormatHelper {
   }
   
   public static boolean hasXMLFormat(MultipartFile file) {
-	 if(!XML_TYPE.equals(file.getContentType())) {
-		  return false;
-	 }
-	 return true;
+		 return !XML_TYPE.equals(file.getContentType());
+	  }
+  
+  public static boolean hasXMLFormat(File file) {
+	 return !XML_TYPE.equals(FilenameUtils.getExtension(file.getName()));
   }
   
   public static List<Poem> csvToPoems(InputStream is) {

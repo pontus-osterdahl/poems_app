@@ -22,6 +22,9 @@ public class FileStorageService {
 		return imgRepository.save(image);
 	}
 	
+	
+	
+	
 	/**
 	 * Method to save an image to a specified location  
 	 * @param image MultipartFile to be saved

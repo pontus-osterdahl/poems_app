@@ -15,6 +15,10 @@ import { BibitemsourcecomponentComponent } from './bibitemsourcecomponent/bibite
 import { BibliographysourcecomponentComponent } from './bibliographysourcecomponent/bibliographysourcecomponent.component';
 import { SearchBibitemFormComponent } from './search-bibitem-form/search-bibitem-form.component';
 import { BibitemComponent } from './bibitem/bibitem.component';
+import { OrigTextComponent } from './orig-text/orig-text.component';
+import { RegTextComponent } from './reg-text/reg-text.component';
+import { ContentItemComponent } from './content-item/content-item.component';
+import { TextPresentationComponent } from './text-presentation/text-presentation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { BibitemComponent } from './bibitem/bibitem.component';
     BibitemsourcecomponentComponent,
     BibliographysourcecomponentComponent,
     SearchBibitemFormComponent,
-    BibitemComponent
+    BibitemComponent,
+    OrigTextComponent,
+    RegTextComponent,
+    ContentItemComponent,
+    TextPresentationComponent
   ],
   imports: [
     BrowserModule,
