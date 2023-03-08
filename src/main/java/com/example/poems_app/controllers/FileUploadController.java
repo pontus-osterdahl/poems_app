@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class FileUploadController {
 	
 	@CrossOrigin
 	@PostMapping("/saveXmlPoem")
-	public XmlPoem addXmlPoem(@RequestPart XmlPoem xmlPoem, @RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException {
+	public XmlPoem addXmlPoem(@RequestPart XmlPoem xmlPoem, @RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 	    return fileStorage.savePoemWithFile(xmlPoem, file);	
 	}
 	
