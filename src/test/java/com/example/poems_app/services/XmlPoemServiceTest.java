@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -21,15 +22,15 @@ class XmlPoemServiceTest {
 	
 	
 	@Test
-	void shouldParseAndIndexPoem() throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
+	void shouldParseAndIndexPoem() throws FileNotFoundException, ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		XmlPoem poem = new XmlPoem();
 		poem.setFilepath("C:\\Users\\pontu\\test_5contentItems.xml");
 		
 		XmlPoemService xmlPoemService = new XmlPoemService();
 		List<ContentItem> contentItems = xmlPoemService.parsePoem(poem);
 		System.out.println(contentItems.get(1).getChoice().getOrig().getText());
-		assertTrue(contentItems.get(1).getChoice().getReg().getText().equals("blabla"));
 		assertTrue(contentItems.size() == 5);
+		assertTrue(contentItems.get(0).getRelations().get(0).equals("WA_Part01_A01_Antisthenes01_ci1"));
 	}
 
 }

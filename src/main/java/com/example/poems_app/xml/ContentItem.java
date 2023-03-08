@@ -1,6 +1,10 @@
 package com.example.poems_app.xml;
 
+import java.util.List;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -59,6 +63,20 @@ public class ContentItem {
 		this.textId = textId;
 	}
 	
+	public void setRelations(List<String> relations) {
+		this.relations = relations;
+	}
+	
+	public List<String> getRelations() {
+		return this.relations;
+	}
+	
+	public void addRelation(String relation) {
+		this.relations.add(relation);
+	}
+	
+	@ElementCollection
+	  private List<String> relations;
 	
 	
 	

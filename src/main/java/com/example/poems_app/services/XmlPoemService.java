@@ -12,6 +12,10 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -71,7 +75,7 @@ public class XmlPoemService {
 		return contentItemRepository.findAll();
 	}
 	
-	public List<ContentItem> parsePoem(XmlPoem xmlPoem) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException {
+	public List<ContentItem> parsePoem(XmlPoem xmlPoem) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		List<ContentItem> contentItems = new ArrayList<ContentItem>();
 		if(xmlPoem.getFilepath() == null) {
 			return contentItems;
@@ -83,20 +87,34 @@ public class XmlPoemService {
 		return contentItems;
 	}
 	
-	private List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException {
+	private List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException, XPathExpressionException {
 		List<ContentItem> contentItems = new ArrayList<ContentItem>();
 		ContentItemChoice choice = null;
 		if(FileFormatHelper.hasXMLFormat(file)) {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		    Document doc = builder.parse(new BufferedInputStream(new FileInputStream(file)));
+		    XPath xPath = XPathFactory.newInstance().newXPath();
 		    NodeList nodeList = doc.getElementsByTagName("seg");
 		    for (int i = 0; i < nodeList.getLength(); i++) {
 		    	System.out.println("In seg");
 		        Node current = nodeList.item(i);
 		        if (current.getNodeType() == Node.ELEMENT_NODE) {
 		        	if (current.getAttributes().getNamedItem("type").getTextContent().equals("contentItem")) {
-		        	    String id = current.getAttributes().getNamedItem("xml:id").getNodeValue();		        	    
+		        		List<String> relationsList = new ArrayList<String>();
+		        	    String id = current.getAttributes().getNamedItem("xml:id").getNodeValue();	
+		        	    
+		        	    NodeList relations = (NodeList) xPath.compile("//relation[@active=" + "'" + id + "'" + "]").evaluate(doc, XPathConstants.NODESET);
+		        	    for(int n = 0; n < relations.getLength(); n++) {	
+		        	    	Node relation = relations.item(n);
+		        	    	String relationStr = relation.getAttributes().getNamedItem("passive").getNodeValue();
+		        	    	System.out.println(relationStr);
+		        	        if (relationStr != null) {
+		        	            relationsList.add(relationStr);	
+		        	        }
+		        	    }
+		        	    
 		        	    NodeList choiceList = current.getChildNodes();
+		        	    
 		        	    for(int y = 0; y < choiceList.getLength(); y++) {
 		        	    	Node choiceNode = choiceList.item(y);
 		        	    	if(choiceNode != null && choiceNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -143,9 +161,10 @@ public class XmlPoemService {
 		        	    if(id != null) {
 		        	    	ContentItem item = new ContentItem();
 		        	    	item.setTextId(id);
+		        	    	item.setRelations(relationsList);
 		        	    	ContentItem persistentItem = contentItemRepository.save(item);
 		        	    	if(choice != null) {
-		        	    		choice.setContentitem(persistentItem);
+			        	    	choice.setContentitem(persistentItem);
 		        	    		ContentItemChoice persistentChoice = choiceRepository.save(choice);
 		        	    		persistentItem.setChoice(persistentChoice);
 		        	    		persistentItem = contentItemRepository.save(persistentItem);
@@ -191,7 +210,7 @@ public class XmlPoemService {
 	//TODO this should be read from a config file
 	private String folder = "C:\\Users\\pontu\\";
 	
-	public XmlPoem savePoemWithFile(XmlPoem poem, MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException {
+	public XmlPoem savePoemWithFile(XmlPoem poem, MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 		
 		String filePath = FilenameUtils.concat(folder, poem.getName() + ".xml");
 		File xmlFile = new File(filePath);
@@ -207,10 +226,9 @@ public class XmlPoemService {
 		poem.setContentItems(contentItemSet);
 		
 		
-		XmlPoem savedPoem = xmlPoemRepository.save(poem);
+//		XmlPoem savedPoem = xmlPoemRepository.save(poem);
 		//parseAndIndexPoem(poem);
 		return xmlPoemRepository.save(poem);
-//		return savedPoem;
 	}
 
 	public XmlPoem getXmlPoemById(int id) throws Exception {
