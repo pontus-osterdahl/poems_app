@@ -14,10 +14,7 @@ export class TextPresentationComponent implements OnInit {
   contentItems : ContentItem[] = [];
 
   ngOnInit(): void {
-    console.log("1");
     this.ciService.getContentItems().subscribe(contentItems => this.contentItems = contentItems);
-//    console.log(this.ciService.getContentItemByTextId("GV_Part01_A01_Antisthenes01_ci1"));
-
   }
 
 }

@@ -2,4 +2,7 @@
 <p>{{ci.textId}}</p>
 <div class="text">{{ci.choice.orig.text}}</div>
 <div class="reg">{{ci.choice.reg.text}}</div>
+<div *ngFor="let relation of ci.relations">
+    <br/>{{relation}}
+</div>
 </div>

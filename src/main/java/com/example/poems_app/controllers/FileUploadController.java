@@ -73,12 +73,5 @@ public class FileUploadController {
 	@PostMapping("/saveXmlPoem")
 	public XmlPoem addXmlPoem(@RequestPart XmlPoem xmlPoem, @RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 	    return fileStorage.savePoemWithFile(xmlPoem, file);	
-	}
-	
-	@CrossOrigin
-	@GetMapping("/xmlPoem/{id}")
-	public XmlPoem getXmlPoemById(@PathVariable int id) throws Exception {
-	    return xmlPoemService.getXmlPoemById(id);	
-	}
-	
+	}	
 }
