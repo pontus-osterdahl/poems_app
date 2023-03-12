@@ -19,6 +19,7 @@ import { OrigTextComponent } from './orig-text/orig-text.component';
 import { RegTextComponent } from './reg-text/reg-text.component';
 import { ContentItemComponent } from './content-item/content-item.component';
 import { TextPresentationComponent } from './text-presentation/text-presentation.component';
+import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TextPresentationComponent } from './text-presentation/text-presentation
     OrigTextComponent,
     RegTextComponent,
     ContentItemComponent,
-    TextPresentationComponent
+    TextPresentationComponent,
+    XmlpoemComponent
   ],
   imports: [
     BrowserModule,
