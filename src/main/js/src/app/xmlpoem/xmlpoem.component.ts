@@ -14,7 +14,7 @@ export class XmlpoemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("log");
-    this.xmlpoemService.getXmlPoem("7077").subscribe(poem => this.poem = poem);
+    this.xmlpoemService.getXmlPoem("15381").subscribe(poem => this.poem = poem);
   }
 
 }

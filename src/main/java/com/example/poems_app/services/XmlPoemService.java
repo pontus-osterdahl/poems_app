@@ -51,6 +51,9 @@ public class XmlPoemService {
 	private ContentItemRepository contentItemRepository;
 	
 	@Autowired
+	private ContentItemsExtractor ciExtractor;
+	
+	@Autowired
 	private ChoiceRepository choiceRepository;
 	
 	@Autowired
@@ -88,7 +91,7 @@ public class XmlPoemService {
 	}
 	
 	private List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException, XPathExpressionException {
-		List<ContentItem> contentItems = new ArrayList<ContentItem>();
+		/**List<ContentItem> contentItems = new ArrayList<ContentItem>();
 		ContentItemChoice choice = null;
 		if(FileFormatHelper.hasXMLFormat(file)) {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -179,7 +182,8 @@ public class XmlPoemService {
 		        	}
 		        }
 		    }
-		}
+		}*/
+		List<ContentItem> contentItems = ciExtractor.getContentItems(file);
 		return contentItems;
 	}
 	
@@ -222,7 +226,14 @@ public class XmlPoemService {
 		}
 //		List<ContentItem> contentItemList = parsePoem(poem);
 		List<ContentItem> contentItemList = getContentItems(xmlFile);
-		HashSet<ContentItem> contentItemSet = new HashSet<ContentItem>(contentItemList);
+		
+		Iterable<ContentItem> ciList = contentItemRepository.saveAll(contentItemList);
+		for(ContentItem ci : ciList) {
+			ci.setChoice(choiceRepository.save(ci.getChoice()));
+		}
+		Iterable<ContentItem> persistentList = contentItemRepository.saveAll(contentItemList);
+//		= new HashSet<ContentItem>(contentItemList);
+		HashSet<ContentItem> contentItemSet = new HashSet<ContentItem>((List)persistentList);
 		poem.setContentItems(contentItemSet);
 		
 		
