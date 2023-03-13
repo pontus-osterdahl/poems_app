@@ -130,7 +130,8 @@ public class ContentItemsExtractor {
 														System.out.println(
 																"CritApp: " + correction + " : " + origReading);
 														if (correction != "" && origReading != "") {
-															tmpCriticalApparatus += correction + " : " + origReading;
+															String addedValue = tmpCriticalApparatus != "" ? " | " : ""; 
+															tmpCriticalApparatus += addedValue + correction + " : " + origReading;
 														}
 													}
 												}
