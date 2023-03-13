@@ -23,6 +23,8 @@ public class Reg {
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
+	private String criticalApparatus;
+	
 	public void setText(String text) {
 		this.text = text;
 	}
@@ -37,6 +39,14 @@ public class Reg {
 	
 	public int getId() {
 		return this.id;
+	}
+	
+	public void setCriticalApparatus(String criticalApparatus) {
+		this.criticalApparatus = criticalApparatus;
+	}
+	
+	public String getCriticalApparatus() {
+		return this.criticalApparatus;
 	}
 	
 	public void setContentItemChoice(ContentItemChoice choice) {
