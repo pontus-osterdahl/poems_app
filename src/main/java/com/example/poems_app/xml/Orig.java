@@ -17,9 +17,6 @@ public class Orig {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
-	private ContentItemChoice choice;
-	
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
@@ -43,12 +40,4 @@ public class Orig {
 		return this.id;
 	}
 	
-	public void setContentItemChoice(ContentItemChoice choice) {
-		this.choice = choice;
-	}
-	
-	public ContentItemChoice getContentItemChoice() {
-		return this.choice;
-	}
-
 }

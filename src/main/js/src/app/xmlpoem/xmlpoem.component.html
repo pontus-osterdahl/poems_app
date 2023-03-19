@@ -1,5 +1,5 @@
 <div *ngIf="poem">
-    hej
+    <p>{{poem.name}}</p>
     <div *ngFor="let ci of poem.contentItems">
         <app-content-item [ci] = "ci" class="red"></app-content-item>
     </div>
