@@ -17,9 +17,6 @@ public class Reg {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
-	private ContentItemChoice choice;
-	
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
@@ -47,13 +44,5 @@ public class Reg {
 	
 	public String getCriticalApparatus() {
 		return this.criticalApparatus;
-	}
-	
-	public void setContentItemChoice(ContentItemChoice choice) {
-		this.choice = choice;
-	}
-	
-	public ContentItemChoice getContentItemChoice() {
-		return this.choice;
 	}
 }

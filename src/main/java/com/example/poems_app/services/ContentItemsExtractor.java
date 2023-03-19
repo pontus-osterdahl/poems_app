@@ -144,10 +144,10 @@ public class ContentItemsExtractor {
 										}
 									}
 									if (orig != null) {
-										choice.setOrig(origRepository.save(orig));
+										choice.setOrig(orig);
 									}
 									if (reg != null) {
-										choice.setReg(regRepository.save(reg));
+										choice.setReg(reg);
 									}
 								}
 							}
@@ -156,10 +156,8 @@ public class ContentItemsExtractor {
 							ContentItem item = new ContentItem();
 							item.setTextId(id);
 							item.setRelations(relationsList);
-							ContentItem permCi = ciRepository.save(item);
 							if (choice != null) {
-								choice.setContentitem(permCi);
-								item.setChoice(choiceRepository.save(choice));
+								item.setChoice(choice);
 							}
 							contentItems.add(item);
 						}

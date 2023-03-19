@@ -2,6 +2,7 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -23,7 +24,7 @@ public class ContentItem {
 	@Column(unique=true)
 	private String textId;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private ContentItemChoice choice;
 	
 	@ManyToOne
