@@ -5,4 +5,5 @@ export class OrigText {
     }
     id : number;
     text : String;
+ 
 }

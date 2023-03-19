@@ -10,6 +10,9 @@ export class XmlpoemComponent implements OnInit {
 
   poem? : XmlPoem;
 
+  showOrig : boolean = true;
+  showReg : boolean = true;
+
   constructor(private xmlpoemService : XmlpoemService) { }
 
   ngOnInit(): void {
