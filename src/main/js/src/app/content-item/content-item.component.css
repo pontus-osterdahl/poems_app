@@ -1,9 +1,30 @@
 .text {
     background-color: blue;
     max-width: 500px;
+     
+}
+
+.contentItem {
+    border: 5px solid red;
+    max-width: 500px;
+}
+
+p {
+    max-width: 500px;
 }
 
 .reg {
     background-color: white;
     max-width: 500px;
+    cursor: pointer;
 }
+
+.hidden {
+    width: 300px;
+    background-color: white;
+    color: blue;
+    text-align: center;
+    z-index: 10000;
+    bottom: 125%;
+    left: 50%;
+  }

@@ -1,8 +1,21 @@
 <div *ngIf="ci">
+<div class="contentItem">
 <p>{{ci.textId}}</p>
 <div class="text">{{ci.choice.orig.text}}</div>
-<div class="reg">{{ci.choice.reg.text}}</div>
-<div *ngFor="let relation of ci.relations">
-    <br/>{{relation}}
+<div class="reg">{{ci.choice.reg.text}} <br/>
+=============================================
+<br/>
+    {{ci.choice.reg.criticalApparatus}}
+    </div>
+
+<div *ngIf="ci.relations.length > 0">
+    <p>Is related to:</p>
+</div>
+
+<div *ngFor="let relation of ci.relations" class="hidden">
+{{relation}}
 </div>
 </div>
+</div>
+
+
