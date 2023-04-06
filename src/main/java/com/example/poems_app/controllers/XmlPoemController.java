@@ -7,6 +7,7 @@ import java.util.stream.StreamSupport;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,16 +16,21 @@ import com.example.poems_app.services.XmlPoemService;
 import com.example.poems_app.xml.XmlPoem;
 import com.example.poems_app.xml.XmlPoemDTO;
 
-import lombok.AllArgsConstructor;
+//import lombok.AllArgsConstructor;
 
 //@AllArgsConstructor
 @RestController
 public class XmlPoemController {
 
-	
 	private final ModelMapper mapper = new ModelMapper();
 	@Autowired
 	private XmlPoemService xmlPoemService;
+	
+	@CrossOrigin
+	@DeleteMapping("/xmlPoem/{id}")
+	public void deleteXmlPoemById(@PathVariable int id) {
+		xmlPoemService.deleteXmlPoemById(id);
+	}
 	
 	@CrossOrigin
 	@GetMapping("/xmlPoem/{id}")

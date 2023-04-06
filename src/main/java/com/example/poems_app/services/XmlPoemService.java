@@ -126,6 +126,10 @@ public class XmlPoemService {
 	//TODO this should be read from a config file
 	private String folder = "C:\\Users\\pontu\\";
 	
+	public void deleteXmlPoemById(int id) {
+		xmlPoemRepository.deleteById(id);
+	}
+	
 	public XmlPoem savePoemWithFile(XmlPoem poem, MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 		
 		String filePath = FilenameUtils.concat(folder, poem.getName() + ".xml");
@@ -136,7 +140,6 @@ public class XmlPoemService {
 		catch(IOException e) {
 			filePath = null;
 		}
-//		List<ContentItem> contentItemList = parsePoem(poem);
 		List<ContentItem> contentItemList = getContentItems(xmlFile);
 		
 		Iterable<ContentItem> ciList = contentItemRepository.saveAll(contentItemList);
@@ -144,18 +147,13 @@ public class XmlPoemService {
 			ci.setChoice(choiceRepository.save(ci.getChoice()));
 		}
 		Iterable<ContentItem> persistentList = contentItemRepository.saveAll(contentItemList);
-//		= new HashSet<ContentItem>(contentItemList);
 		HashSet<ContentItem> contentItemSet = new HashSet<ContentItem>((List)persistentList);
 		poem.setContentItems(contentItemSet);
 		
-		
-//		XmlPoem savedPoem = xmlPoemRepository.save(poem);
-		//parseAndIndexPoem(poem);
 		return xmlPoemRepository.save(poem);
 	}
 
 	public XmlPoem getXmlPoemById(int id) throws Exception {
 		return xmlPoemRepository.findById(id).orElseThrow(Exception::new);
 	}
-	
 }
