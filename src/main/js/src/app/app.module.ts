@@ -20,6 +20,7 @@ import { RegTextComponent } from './reg-text/reg-text.component';
 import { ContentItemComponent } from './content-item/content-item.component';
 import { TextPresentationComponent } from './text-presentation/text-presentation.component';
 import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
+import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
     RegTextComponent,
     ContentItemComponent,
     TextPresentationComponent,
-    XmlpoemComponent
+    XmlpoemComponent,
+    XmlpoemsComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { SearchBibitemFormComponent } from './search-bibitem-form/search-bibitem
 import { ContentItemComponent } from './content-item/content-item.component';
 import { TextPresentationComponent } from './text-presentation/text-presentation.component';
 import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
+import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
 
 const routes: Routes = [
   { path: 'poem', component: PoemComponent},
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'searchbibitemform', component: SearchBibitemFormComponent},
   { path: 'contentItem', component: ContentItemComponent},
   { path: 'contentItems', component: TextPresentationComponent},
-  { path: 'xmlpoem', component: XmlpoemComponent}
+  { path: 'xmlpoem', component: XmlpoemComponent},
+  { path: 'xmlpoems', component: XmlpoemsComponent}
 ];
 
 @NgModule({

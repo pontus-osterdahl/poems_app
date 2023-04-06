@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { XmlPoem } from '../xmlpoem';
 import { XmlpoemService } from '../xmlpoem.service';
 @Component({
@@ -10,6 +10,8 @@ export class XmlpoemComponent implements OnInit {
 
   poem? : XmlPoem;
 
+  @Input() id? : number;
+
   showOrig : boolean = true;
   showReg : boolean = true;
 
@@ -17,7 +19,9 @@ export class XmlpoemComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("log");
-    this.xmlpoemService.getXmlPoem("15381").subscribe(poem => this.poem = poem);
+    if(this.id != null) {
+        this.xmlpoemService.getXmlPoem(this.id).subscribe(poem => this.poem = poem);
+    }
   }
 
 }
