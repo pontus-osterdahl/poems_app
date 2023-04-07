@@ -130,6 +130,12 @@ public class XmlPoemService {
 		xmlPoemRepository.deleteById(id);
 	}
 	
+	
+	public XmlPoem saveXmlPoem(XmlPoem poem) {
+		return xmlPoemRepository.save(poem);
+	}
+	
+	
 	public XmlPoem savePoemWithFile(XmlPoem poem, MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 		
 		String filePath = FilenameUtils.concat(folder, poem.getName() + ".xml");
