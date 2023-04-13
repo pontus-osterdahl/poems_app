@@ -22,9 +22,12 @@ import com.example.poems_app.xml.XmlPoemDTO;
 @RestController
 public class XmlPoemController {
 
-	private final ModelMapper mapper = new ModelMapper();
+	//private final ModelMapper mapper = new ModelMapper();
 	@Autowired
 	private XmlPoemService xmlPoemService;
+	
+	@Autowired
+	ModelMapper mapper;
 	
 	@CrossOrigin
 	@DeleteMapping("/xmlPoem/{id}")
