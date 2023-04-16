@@ -20,6 +20,10 @@ public class ContentItemChoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JsonBackReference
+	private ContentItem contentItem;
 
 	public void setReg(Reg reg) {
 		this.reg = reg;
@@ -43,6 +47,15 @@ public class ContentItemChoice {
 	
 	public int getId() {
 		return this.id;
+	}
+	
+	public ContentItem getContentItem() {
+		return contentItem;
+	}
+	
+	public void setContentItem(ContentItem contentItem) {
+		this.contentItem = contentItem;
+		
 	}
 	
 	
