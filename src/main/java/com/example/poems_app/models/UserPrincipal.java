@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.poems_app.entities.User;
-
+/**
 public class UserPrincipal implements UserDetails {
 
 	private final User user;
@@ -51,4 +51,8 @@ public class UserPrincipal implements UserDetails {
 		return true;
 	}
 
+}*/
+
+public class UserPrincipal {
+	
 }

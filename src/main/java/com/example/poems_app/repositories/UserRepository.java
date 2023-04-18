@@ -9,5 +9,5 @@ import com.example.poems_app.entities.User;
 import com.example.poems_app.xml.XmlPoem;
 
 public interface UserRepository extends CrudRepository<User, UUID>{
-	Optional<User> findByEmail(String email);
+	//Optional<User> findByEmail(String email);
 }

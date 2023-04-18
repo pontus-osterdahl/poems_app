@@ -18,9 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.example.poems_app.services.ApplictionUserDetailsService;
 import com.example.poems_app.util.JwtUtil;
 
-@Component
-public class JwtRequestFilter extends OncePerRequestFilter {
-
+//@Component
+public class JwtRequestFilter {//extends OncePerRequestFilter {
+/**
 	@Autowired
 	private ApplictionUserDetailsService userDetailsService ;
 	
@@ -64,5 +64,5 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		
 	}
 	
-	
+	*/
 }

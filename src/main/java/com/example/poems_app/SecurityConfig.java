@@ -17,16 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Configuration
 public class SecurityConfig {
 	
-	@Autowired
-	JwtRequestFilter jwtFilter;
+//	@Autowired
+//	JwtRequestFilter jwtFilter;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		 http.authorizeHttpRequests((authz) -> authz
              .antMatchers(HttpMethod.GET).permitAll()
          )
-		 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+	//	 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
          .httpBasic(withDefaults());
+		 http.csrf().disable();
      return http.build();
 	}
 }

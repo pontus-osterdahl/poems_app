@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import com.example.poems_app.entities.User;
 import com.example.poems_app.models.UserPrincipal;
 
-@Service
-public class ApplictionUserDetailsService implements UserDetailsService {
-
+//@Service
+public class ApplictionUserDetailsService  {//implements UserDetailsService {
+/**
 	@Autowired
 	UserService userService;
 	
@@ -68,6 +68,6 @@ public class ApplictionUserDetailsService implements UserDetailsService {
 		
 		return user;
 		
-	}
+	}*/
     
 }

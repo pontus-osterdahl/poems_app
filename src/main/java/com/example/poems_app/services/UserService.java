@@ -21,7 +21,7 @@ import com.example.poems_app.repositories.UserRepository;
 
 @Service
 public class UserService {
-
+/**
 	@Autowired
 	ModelMapper mapper;
 	
@@ -120,7 +120,7 @@ public class UserService {
 	private User findOrThrow(final UUID id) throws Exception {
 	return repo.findById(id)
 			.orElseThrow(() -> new Exception());
-	}
+	}*/
 }
 
 

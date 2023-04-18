@@ -21,7 +21,7 @@ import com.example.poems_app.services.UserService;
 
 @RestController
 public class UserController {
-
+/**
 	@Autowired
 	private UserService userService;
 	
@@ -49,5 +49,5 @@ public class UserController {
 	public void putUser(@PathVariable("id") UUID id, @Valid @RequestBody UserDTO user) throws Exception {
 		userService.updateUser(id, user, user.getPassword());	
 	}
-	
+*/	
 }

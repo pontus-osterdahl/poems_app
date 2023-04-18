@@ -16,7 +16,7 @@ import com.example.poems_app.util.JwtUtil;
 
 @RestController
 public class AuthenticateController {
-
+/**
 	//private AuthenticationManager authenticationManager = new AuthenticationManager();
 	@Autowired
 	private JwtUtil jwtTokenUtil;
@@ -41,5 +41,5 @@ public class AuthenticateController {
 		
 	}
 	
-	
+*/	
 }

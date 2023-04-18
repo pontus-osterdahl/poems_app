@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 public class UserDTO {
-    private UUID id;
+ /**   private UUID id;
     private String email;
     private String password;
     
@@ -28,5 +28,5 @@ public class UserDTO {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
+	}*/
 }
