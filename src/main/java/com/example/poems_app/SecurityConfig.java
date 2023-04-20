@@ -12,10 +12,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		 http.authorizeHttpRequests((authz) -> authz
-             .antMatchers(HttpMethod.GET).permitAll()
-         )
-         .httpBasic(withDefaults());
+		 //http.authorizeHttpRequests((authz) -> authz
+         //    .antMatchers(HttpMethod.GET).permitAll()
+         //)
+         //.httpBasic(withDefaults());
+		http.csrf().disable();
      return http.build();
 	}
 }
