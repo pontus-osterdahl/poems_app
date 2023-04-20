@@ -23,7 +23,6 @@ class ContentItemsExtractorTest {
 		
 		ContentItemsExtractor xmlPoemService = new ContentItemsExtractor();
 		List<ContentItem> contentItems = xmlPoemService.getContentItems(new File("C:\\Users\\pontu\\test_5contentItems.xml"));
-		System.out.println(contentItems.get(1).getChoice().getOrig().getText());
 		assertTrue(contentItems.size() == 5);
 		assertTrue(contentItems.get(0).getRelations().get(0).equals("WA_Part01_A01_Antisthenes01_ci1"));
 	}
