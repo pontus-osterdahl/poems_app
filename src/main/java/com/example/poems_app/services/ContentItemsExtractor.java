@@ -26,8 +26,6 @@ import org.xml.sax.SAXException;
 import com.example.poems_app.FileFormatHelper;
 import com.example.poems_app.repositories.ChoiceRepository;
 import com.example.poems_app.repositories.ContentItemRepository;
-import com.example.poems_app.repositories.OrigRepository;
-import com.example.poems_app.repositories.RegRepository;
 import com.example.poems_app.xml.ContentItem;
 import com.example.poems_app.xml.ContentItemChoice;
 import com.example.poems_app.xml.Orig;
@@ -36,11 +34,11 @@ import com.example.poems_app.xml.Reg;
 @Service
 public class ContentItemsExtractor {
 
-	@Autowired
+/**	@Autowired
 	private OrigRepository origRepository;
 
 	@Autowired
-	private RegRepository regRepository;
+	private RegRepository regRepository;*/
 
 	@Autowired
 	private ContentItemRepository ciRepository;

@@ -12,15 +12,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class ContentItemChoice {
 	
-	@OneToOne(cascade = {CascadeType.ALL})
+	/**@OneToOne(cascade = {CascadeType.ALL})
 	private Orig orig;
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Reg reg;
-	
+	*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+/**
 	public void setReg(Reg reg) {
 		this.reg = reg;
 	}
@@ -35,7 +35,7 @@ public class ContentItemChoice {
 	
 	public Orig getOrig() {
 		return this.orig;
-	}
+	}*/
 	
 	public void setId(int id) {
 		this.id = id;
