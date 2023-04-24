@@ -26,8 +26,6 @@ import org.xml.sax.SAXException;
 import com.example.poems_app.FileFormatHelper;
 import com.example.poems_app.repositories.ChoiceRepository;
 import com.example.poems_app.repositories.ContentItemRepository;
-import com.example.poems_app.repositories.OrigRepository;
-import com.example.poems_app.repositories.RegRepository;
 import com.example.poems_app.xml.ContentItem;
 import com.example.poems_app.xml.ContentItemChoice;
 import com.example.poems_app.xml.Orig;
@@ -36,17 +34,14 @@ import com.example.poems_app.xml.Reg;
 @Service
 public class ContentItemsExtractor {
 
-	@Autowired
+/**	@Autowired
 	private OrigRepository origRepository;
 
 	@Autowired
-	private RegRepository regRepository;
+	private RegRepository regRepository;*/
 
 	@Autowired
 	private ContentItemRepository ciRepository;
-
-	@Autowired
-	private ChoiceRepository choiceRepository;
 
 	public List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException,
 			SAXException, IOException, XPathExpressionException {
@@ -73,98 +68,15 @@ public class ContentItemsExtractor {
 							}
 						}
 
-						NodeList choiceList = current.getChildNodes();
-
-						for (int y = 0; y < choiceList.getLength(); y++) {
-							Node choiceNode = choiceList.item(y);
-							if (choiceNode != null && choiceNode.getNodeType() == Node.ELEMENT_NODE) {
-								if (choiceNode.getNodeName().equals("choice")) {
-									choice = new ContentItemChoice();
-									Orig orig = null;
-									Reg reg = null;
-									NodeList edChoiceList = choiceNode.getChildNodes();
-									for (int x = 0; x < edChoiceList.getLength(); x++) {
-
-										Node edChoiceNode = edChoiceList.item(x);
-										if (edChoiceNode.getNodeName().equals("orig")) {
-											orig = new Orig();
-											NodeList withinOrig = edChoiceNode.getChildNodes();
-											/**for (int u = 0; u < withinOrig.getLength(); u++) {
-												Node withinOrigNode = withinOrig.item(u);
-												if (withinOrigNode.getNodeType() == Node.ELEMENT_NODE) {
-													if (withinOrigNode.getNodeName().equals("expan")) {
-														String tmpString = withinOrigNode.getTextContent();
-														if (tmpString != null && tmpString != "") {
-															withinOrigNode.setTextContent("(" + tmpString + ")");
-															System.out.println("(" + tmpString + ")");
-														}
-													}
-												}
-
-											}
-											System.out.println(edChoiceNode.getTextContent());*/
-											orig.setText(edChoiceNode.getTextContent());
-										}
-										if (edChoiceNode.getNodeName().equals("reg")) {
-											reg = new Reg();
-											String tmpCriticalApparatus = "";
-											NodeList withinOrig = edChoiceNode.getChildNodes();
-											for (int u = 0; u < withinOrig.getLength(); u++) {
-												Node withinOrigNode = withinOrig.item(u);
-												if (withinOrigNode.getNodeType() == Node.ELEMENT_NODE) {
-													if (withinOrigNode.getNodeName().equals("choice")) {
-														String origReading = "";
-														String correction = "";
-														NodeList withinInnerChoiceList = withinOrigNode.getChildNodes();
-														for (int a = 0; a < withinInnerChoiceList.getLength(); a++) {
-															Node aNode = withinInnerChoiceList.item(a);
-															if (aNode.getNodeType() == Node.ELEMENT_NODE
-																	&& aNode.getNodeName().equals("sic")) {
-																origReading = aNode.getTextContent();
-																aNode.setTextContent("");
-															} else if (aNode.getNodeType() == Node.ELEMENT_NODE
-																	&& aNode.getNodeName().equals("corr")) {
-																correction = aNode.getTextContent();
-															}
-														}
-														System.out.println(
-																"CritApp: " + correction + " : " + origReading);
-														if (correction != "" && origReading != "") {
-															String addedValue = tmpCriticalApparatus != "" ? " | " : ""; 
-															tmpCriticalApparatus += addedValue + correction + " : " + origReading;
-														}
-													}
-												}
-
-											}
-											System.out.println(edChoiceNode.getTextContent());
-											reg.setText(edChoiceNode.getTextContent());
-											System.out.println(tmpCriticalApparatus);
-											reg.setCriticalApparatus(tmpCriticalApparatus);
-										}
-									}
-									if (orig != null) {
-										choice.setOrig(orig);
-									}
-									if (reg != null) {
-										choice.setReg(reg);
-									}
-								}
-							}
-						}
-						if (id != null) {
-							ContentItem item = new ContentItem();
-							item.setTextId(id);
-							item.setRelations(relationsList);
-							if (choice != null) {
-								item.setChoice(choice);
-							}
-							contentItems.add(item);
-						}
+						ContentItem item = new ContentItem();
+						item.setTextId(id);
+						item.setRelations(relationsList);
+						contentItems.add(item);
 					}
 				}
 			}
 		}
+
 		return contentItems;
 	}
 
