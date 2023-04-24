@@ -9,17 +9,13 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
 public class ContentItemChoice {
 	
-	/**@OneToOne(cascade = {CascadeType.ALL})
 	private Orig orig;
-	@OneToOne(cascade = {CascadeType.ALL})
+	
 	private Reg reg;
-	*/
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	
+	private ContentItem contentItem;
 
 	public void setReg(Reg reg) {
 		this.reg = reg;
@@ -35,15 +31,8 @@ public class ContentItemChoice {
 	
 	public Orig getOrig() {
 		return this.orig;
-	}*/
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
-	public int getId() {
-		return this.id;
-	}
 	
 	public ContentItem getContentItem() {
 		return contentItem;
@@ -52,8 +41,5 @@ public class ContentItemChoice {
 	public void setContentItem(ContentItem contentItem) {
 		this.contentItem = contentItem;
 		
-	}
-	
-	
-	
+	}	
 }

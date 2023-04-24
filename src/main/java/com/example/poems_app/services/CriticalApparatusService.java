@@ -2,6 +2,7 @@ package com.example.poems_app.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,35 +15,26 @@ import com.example.poems_app.xml.Reg;
 public class CriticalApparatusService {
 
 	@Autowired
-	private XmlPoemService xmlPoemService;
+	private ApophthegmTextExtractor apophthegmTextExtractor;
 
 	@Autowired
 	private CriticalApparatusGenerator generator;
 
-	public CriticalApparatus getCriticalApparatus(ContentItem ci) {
+	public CriticalApparatus getCriticalApparatus(ContentItem ci) throws Exception {
 
-		
-		
 		List<String> relations = ci.getRelations();
-		List<ContentItem> cis = new ArrayList<ContentItem>();
 
-		for (String s : relations) {
+		Reg reg = apophthegmTextExtractor.extractApophtegmText(ci.getTextId()).getReg();
+		List<Reg> regs = relations.stream().map(c -> {
 			try {
-				ContentItem tmpCi = xmlPoemService.getContentItemByTextId(s);
-				cis.add(tmpCi);
+				return apophthegmTextExtractor.extractApophtegmText(c).getReg();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return null;
 			}
-		}
+		}).filter(Objects::nonNull).collect(Collectors.toList());
 
-		List<Reg> regs = cis.stream().map(c -> c.getChoice().getReg()).collect(Collectors.toList());
+		return generator.generateCriticalApparatus(reg, regs);
 
-		return generator.generateCriticalApparatus(ci.getChoice().getReg(), regs);
-		
-		
-		
 	}
-
 
 }
