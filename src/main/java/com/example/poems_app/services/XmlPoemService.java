@@ -30,7 +30,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.example.poems_app.FileFormatHelper;
-import com.example.poems_app.repositories.ChoiceRepository;
 import com.example.poems_app.repositories.ContentItemRepository;
 import com.example.poems_app.repositories.XmlPoemRepository;
 import com.example.poems_app.xml.ContentItem;
@@ -51,18 +50,6 @@ public class XmlPoemService {
 	@Autowired
 	private ContentItemsExtractor ciExtractor;
 	
-	@Autowired
-	private ChoiceRepository choiceRepository;
-	
-	/**@Autowired
-	private OrigRepository origRepository;
-	
-	@Autowired
-	private RegRepository regRepository;
-		*/
-	public ContentItemChoice getChoiceById(int id) throws Exception {
-		return choiceRepository.findById(id).orElseThrow(Exception::new);
-	}
 	
 	public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
