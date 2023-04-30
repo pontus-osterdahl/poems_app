@@ -132,7 +132,10 @@ public class XmlPoemService {
 			filePath = null;
 		}
 		List<ContentItem> contentItemList = getContentItems(xmlFile);
-		
+		poem = xmlPoemRepository.save(poem);
+		for(ContentItem contentItem : contentItemList) {
+			contentItem.setXmlPoem(poem);
+		}
 		Iterable<ContentItem> ciList = contentItemRepository.saveAll(contentItemList);
 		HashSet<ContentItem> contentItemSet = new HashSet<ContentItem>((List)ciList);
 		poem.setContentItems(contentItemSet);

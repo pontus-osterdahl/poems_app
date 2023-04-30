@@ -1,21 +1,23 @@
-<div *ngIf="ci">
+<!--<div *ngIf="ci">
 <div class="contentItem">
-<p>{{ci.textId}}</p>
-<div class="text">{{ci.choice.orig.text}}</div>
-<div class="reg">{{ci.choice.reg.text}} <br/>
+<p>{{ci.textId}}</p>-->
+<div *ngIf="apophthegm">
+<p>{{apophthegm.id}}</p>
+<div class="text">{{apophthegm.orig.text}}</div>
+<div class="reg">{{apophthegm.reg.text}} <br/>
 =============================================
 <br/>
-    {{ci.choice.reg.criticalApparatus}}
+   {{apophthegm.reg.criticalApparatus}}
     </div>
 
-<div *ngIf="ci.relations.length > 0">
+<!--<div *ngIf="ci.relations.length > 0">
     <p>Is related to:</p>
+</div>-->
+
+<!--<div (click)="selectRelation(relation)" *ngFor="let relation of ci.relations" class="hidden">
+    {{relation}}
+</div>-->
 </div>
 
-<div (click)="selectRelation(relation)" *ngFor="let relation of ci.relations" class="hidden">
-    {{relation}}
-</div>
-</div>
-</div>
 
 

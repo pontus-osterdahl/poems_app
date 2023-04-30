@@ -12,16 +12,22 @@ export class XmlpoemsComponent implements OnInit {
   showItem : boolean = false;
   xmlpoems : Xmlnameid[] = []
 
-  show(): void {
-    console.log("hallo","hallo");
-    if (this.showItem == false) {
-      this.showItem = true;
-    }
-    else {
-      this.showItem = false;
-    }
+  shownpoems: number[] = []
 
-    //this.showItem = this.showItem == false ? true : false;
+
+  show(xmlnameid : number): void {
+    
+      const index = this.shownpoems.indexOf(xmlnameid, 0);
+      if (index > -1) {
+        this.shownpoems.splice(index, 1);
+      }
+      else {
+        this.shownpoems.push(xmlnameid);
+      }
+  }
+
+  tobeshown(xmlnameid : number): boolean {
+    return this.shownpoems.includes(xmlnameid);
   }
 
   constructor(private xmlpoemService : XmlpoemService) { }

@@ -1,6 +1,6 @@
 <div *ngFor="let x of xmlpoems">
-<button (click)="show()">{{x.name}}</button>
-<div *ngIf="showItem == true">
+<button (click)="show(x.id)">{{x.name}}</button>
+<div *ngIf="tobeshown(x.id)">
 <app-xmlpoem [id] = "x.id"></app-xmlpoem>
 </div>
 </div>

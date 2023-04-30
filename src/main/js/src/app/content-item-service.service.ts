@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ContentItem } from './content-item';
+import { Apophthegm } from './apophthegm';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -23,6 +25,12 @@ export class ContentItemServiceService {
 
   getContentItems() {
      return this.http.get<ContentItem[]>(this.contentItemsUrl);
+  }
+
+  url : String = "http://localhost:8080/contentItems/contentItemTextbyText";
+
+  getApophthegms(id : number) {
+   return this.http.get<Apophthegm[]>("http://localhost:8080/apophthegms/" + id);
   }
 
 }
