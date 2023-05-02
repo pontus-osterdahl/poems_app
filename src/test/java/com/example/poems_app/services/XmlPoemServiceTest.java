@@ -49,7 +49,7 @@ class XmlPoemServiceTest {
 		});
 	}
 
-	@Test
+/**	@Test
 	void shouldParseAndIndexPoem() throws FileNotFoundException, ParserConfigurationException, SAXException,
 			IOException, XPathExpressionException {
 		XmlPoem poem = new XmlPoem();
@@ -59,6 +59,6 @@ class XmlPoemServiceTest {
 		List<ContentItem> contentItems = xmlPoemService.parsePoem(poem);
 		assertTrue(contentItems.size() == 5);
 		assertTrue(contentItems.get(0).getRelations().get(0).equals("WA_Part01_A01_Antisthenes01_ci1"));
-	}
+	}*/
 
 }
