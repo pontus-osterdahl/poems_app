@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="tei_ms_saws.rng" type="xml"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="Cod_Vat_Gr_743">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Codex Test</title>
+            </titleStmt>
+            <publicationStmt><p>Test</p></publicationStmt>
+            <sourceDesc>
+                <msDesc>
+                    <msIdentifier>
+                        <country>Test</country>
+                        <settlement>Test</settlement>
+                        <repository>Test</repository>
+                        <idno>Test</idno>
+                    </msIdentifier>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <group>
+            <text xml:id="test_id">
+                <front>
+                    <titlePage type="cover">
+                        <docTitle>
+                            <titlePart>Test Codex</titlePart>
+                        </docTitle>                        
+                    </titlePage>
+                </front>
+                    <body>
+                        <div xml:id="Part01">
+                            <div xml:id="T01">
+                                <ab xml:id="Test01">
+                                    <seg type="descriptiveItem"><pb n="6r"/><lb n="9"/><hi>T</hi>est</seg>
+                                    <seg type="contentItem" xml:id="test_ci">
+                                        <choice>
+                                            <orig>This is <expan>or<ex>rig</ex>in</expan></orig>
+                                            <reg>This is <choice><sic>origin</sic><corr resp="bengt">diplomatic</corr></choice></reg>
+                                        </choice>
+                                    </seg>
+                                </ab>
+                            </div>
+                        </div>
+                    </body>
+             </text>
+        </group>
+    </text>
+    <div xml:id="Relations01">
+        <ab xml:id="TB01">
+            <relation ref="saws:isRelatedTo" active="test_ci" passive="other_test_ci"/>
+        </ab>
+    </div>
+</TEI>
