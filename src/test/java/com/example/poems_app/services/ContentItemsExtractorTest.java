@@ -11,20 +11,25 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.xml.sax.SAXException;
 
 import com.example.poems_app.xml.ContentItem;
 import com.example.poems_app.xml.XmlPoem;
 
+@SpringBootTest
 class ContentItemsExtractorTest {
 
+	@Autowired
+	private ContentItemsExtractor ciExtractor;
+	
 	@Test
-	void test() throws FileNotFoundException, XPathExpressionException, ParserConfigurationException, SAXException, IOException {
+	void shouldExtractContentItems() throws FileNotFoundException, XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		
-		ContentItemsExtractor xmlPoemService = new ContentItemsExtractor();
-		List<ContentItem> contentItems = xmlPoemService.getContentItems(new File("C:\\Users\\pontu\\test_5contentItems.xml"));
-		assertTrue(contentItems.size() == 5);
-		assertTrue(contentItems.get(0).getRelations().get(0).equals("WA_Part01_A01_Antisthenes01_ci1"));
+		List<ContentItem> contentItems = ciExtractor.getContentItems(new File("src/test/resources/test_poem.xml"));
+		assertTrue(contentItems.size() == 1);
+		assertTrue(contentItems.get(0).getRelations().get(0).equals("other_test_ci"));
 	}
 
 }
