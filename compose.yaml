@@ -1,0 +1,20 @@
+services:
+  poems_app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/poems_app_db?useUnicode=true&characterEncoding=UTF-8
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWOrD: root
+    ports:
+      - 8080:8080
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=poems_app_db
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL-USER=poems_user
+      - MYSQL_PASSWORD=poems_db
