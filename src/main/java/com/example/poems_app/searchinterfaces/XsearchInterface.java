@@ -86,7 +86,13 @@ public class XsearchInterface implements QueryInterface {
 		}
 		return list;
 	}
-
+	
+	public List<BibItem> performQuery(URL url) throws IOException {
+		String json = url.toString();
+		return parseQueryResult(new JSONObject(json));
+	}
+	
+	
 	@Override
 	public List<BibItem> performQuery(String host, String query, int nrRecords) {
 		URL url = null;
