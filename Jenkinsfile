@@ -1,14 +1,14 @@
 pipeline {
     agent any
     stages {
-          stage("test"){
+          stage("Build"){
             steps {
-                    sh "mvn test"
+                    sh "mvn compile"
             }
         }
         stage("Build"){
             steps {
-                    sh "mvn spring-boot:run -Dspring-boot.run.jvmArguments='-Dserver.port=8090'"
+                    sh "mvn test"
             }
         }
     }
