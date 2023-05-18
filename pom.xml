@@ -181,6 +181,14 @@
 					    <arguments>install --force start-server-and-test</arguments></configuration>
 					</execution>
 					<execution>
+					    <id>npm install xvfb</id>
+					    <goals>
+					        <goal>npm</goal>
+					    </goals>
+					    <configuration>
+					    <arguments>install --force xvfb</arguments></configuration>
+					</execution>
+					<execution>
 					    <id>npm install cypress</id>
 					    <goals>
 					        <goal>npm</goal>
