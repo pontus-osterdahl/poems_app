@@ -172,6 +172,21 @@
 							<arguments>run build</arguments>
 						</configuration>
 					</execution>
+					<execution>
+					    <id>npm install tool</id>
+					    <goals>
+					        <goal>npm</goal>
+					    </goals>
+					    <configuration>
+					    <arguments>install --force start-server-and-test</arguments></configuration>
+					</execution>
+					<execution>
+					    <id>npm test</id>
+					    <goals><goal>npm</goal></goals>
+					    <configuration>
+					        <arguments>test</arguments>
+					    </configuration>
+					</execution>
 				</executions>
 				</plugin>
 			<plugin>

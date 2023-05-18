@@ -6,7 +6,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,12 +50,12 @@ public class ApophthegmTextExtractor {
 		System.out.print(filePath);
 
 		if (filePath == null) {
-			throw new Exception("No file is aved for textid " + textId);
+			throw new Exception("No file is saved for textid " + textId);
 		}
 
 		File file = new File(filePath);
 		if (!file.exists()) {
-			throw new Exception("No file is aved for textid " + textId);
+			throw new Exception("No file is saved for textid " + textId);
 		}
 
 		return extractFromFile(textId, file);
@@ -138,7 +140,18 @@ public class ApophthegmTextExtractor {
 						}
 
 					}
-					apophthegms.add(a);
+					
+					
+					try{ 
+						ContentItem tmpCI = xmlPoemService.getContentItemByTextId(a.getTextId());
+						List<String> relations = Optional.ofNullable(tmpCI.getRelations()).orElse(Collections.emptyList());
+						a.setRelations(relations);					
+						apophthegms.add(a);
+					}
+					catch (Exception e) {
+						System.out.println("Apophthegm with ID " + a.getTextId() + " is not stored in database as CI");
+					}
+
 				}
 			}
 

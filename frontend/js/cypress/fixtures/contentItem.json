@@ -1,0 +1,7 @@
+{
+    "id" : "5",
+    "textId" : "aristarchus_01",
+    "relations" : [
+        "aristarchus_02", "aristarchus_03"
+    ]
+}
