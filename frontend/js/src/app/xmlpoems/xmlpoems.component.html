@@ -1,7 +1,8 @@
-<div *ngFor="let x of xmlpoems">
+<div data-cy="row">
+<div data-cy="tests" *ngFor="let x of xmlpoems">
 <button (click)="show(x.id)">{{x.name}}</button>
 <div *ngIf="tobeshown(x.id)">
 <app-xmlpoem [id] = "x.id"></app-xmlpoem>
 </div>
 </div>
-
+</div>
