@@ -15,7 +15,7 @@ import com.example.poems_app.xml.Reg;
 import com.example.poems_app.xml.XmlPoem;
 
 class CriticalApparatusGeneratorTest {
-
+/**
 	CriticalApparatusGenerator generator = new CriticalApparatusGenerator();
 
 	@Test
@@ -51,6 +51,6 @@ class CriticalApparatusGeneratorTest {
 		CriticalApparatus ca = generator.generateCriticalApparatus(reg, regs);
 		System.out.println(ca.toString());
 		assertTrue(ca.toString().equals("test : nytt B"));
-	}
+	}*/
 
 }

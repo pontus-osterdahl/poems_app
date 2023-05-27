@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -29,6 +30,28 @@ public class ContentItem {
 
 	public int getId() {
 		return this.id;
+	}
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Orig orig;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Reg reg;
+
+	public Orig getOrig() {
+		return orig;
+	}
+
+	public void setOrig(Orig orig) {
+		this.orig = orig;
+	}
+
+	public Reg getReg() {
+		return reg;
+	}
+
+	public void setReg(Reg reg) {
+		this.reg = reg;
 	}
 
 	public void setId(int id) {

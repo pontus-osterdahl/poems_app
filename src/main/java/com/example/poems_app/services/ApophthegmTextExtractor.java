@@ -63,9 +63,6 @@ public class ApophthegmTextExtractor {
 
 	public List<Apophthegm> extractApophthegmTexts(XmlPoem poem) throws Exception {
 		String filePath = poem.getFilepath();
-
-		System.out.print(filePath);
-
 		if (filePath == null) {
 			throw new Exception("No file exists");
 		}
@@ -140,15 +137,14 @@ public class ApophthegmTextExtractor {
 						}
 
 					}
-					
-					
-					try{ 
+
+					try {
 						ContentItem tmpCI = xmlPoemService.getContentItemByTextId(a.getTextId());
-						List<String> relations = Optional.ofNullable(tmpCI.getRelations()).orElse(Collections.emptyList());
-						a.setRelations(relations);					
+						List<String> relations = Optional.ofNullable(tmpCI.getRelations())
+								.orElse(Collections.emptyList());
+						a.setRelations(relations);
 						apophthegms.add(a);
-					}
-					catch (Exception e) {
+					} catch (Exception e) {
 						System.out.println("Apophthegm with ID " + a.getTextId() + " is not stored in database as CI");
 					}
 

@@ -50,6 +50,9 @@ public class XmlPoemService {
 	@Autowired
 	private ContentItemsExtractor ciExtractor;
 	
+	@Autowired
+	private XmlPoemParser xmlParser;
+	
 	
 	public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
@@ -67,7 +70,7 @@ public class XmlPoemService {
 		return xmlPoemRepository.findAll();
 	}
 	
-	public List<ContentItem> parsePoem(XmlPoem xmlPoem) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException, XPathExpressionException {
+/**	public List<ContentItem> parsePoem(XmlPoem xmlPoem) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		List<ContentItem> contentItems = new ArrayList<ContentItem>();
 		if(xmlPoem.getFilepath() == null) {
 			return contentItems;
@@ -77,12 +80,12 @@ public class XmlPoemService {
 			contentItems = getContentItems(file);
 		}
 		return contentItems;
-	}
+	}*/
 	
-	private List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException, XPathExpressionException {
+/**	private List<ContentItem> getContentItems(File file) throws ParserConfigurationException, FileNotFoundException, SAXException, IOException, XPathExpressionException {
 		List<ContentItem> contentItems = ciExtractor.getContentItems(file);
 		return contentItems;
-	}
+	}*/
 	
 	public void parseAndIndexPoem(XmlPoem xmlPoem) throws ParserConfigurationException, SAXException, IOException, SolrServerException {
 		File file = new File(xmlPoem.getFilepath());
@@ -120,7 +123,6 @@ public class XmlPoemService {
 		return xmlPoemRepository.save(poem);
 	}
 	
-	
 	public XmlPoem savePoemWithFile(XmlPoem poem, MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
 		
 		String filePath = FilenameUtils.concat(folder, poem.getName() + ".xml");
@@ -131,14 +133,8 @@ public class XmlPoemService {
 		catch(IOException e) {
 			filePath = null;
 		}
-		List<ContentItem> contentItemList = getContentItems(xmlFile);
-		poem = xmlPoemRepository.save(poem);
-		for(ContentItem contentItem : contentItemList) {
-			contentItem.setXmlPoem(poem);
-		}
-		Iterable<ContentItem> ciList = contentItemRepository.saveAll(contentItemList);
-		HashSet<ContentItem> contentItemSet = new HashSet<ContentItem>((List)ciList);
-		poem.setContentItems(contentItemSet);
+		poem = xmlParser.XmlPoem(xmlFile);
+		poem.setFilepath(filePath);
 		
 		return xmlPoemRepository.save(poem);
 	}
