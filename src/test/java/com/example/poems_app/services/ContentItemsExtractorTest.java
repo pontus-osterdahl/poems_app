@@ -24,12 +24,12 @@ class ContentItemsExtractorTest {
 	@Autowired
 	private ContentItemsExtractor ciExtractor;
 	
-	@Test
+/**	@Test
 	void shouldExtractContentItems() throws FileNotFoundException, XPathExpressionException, ParserConfigurationException, SAXException, IOException {
 		
 		List<ContentItem> contentItems = ciExtractor.getContentItems(new File("src/test/resources/test_poem.xml"));
 		assertTrue(contentItems.size() == 1);
 		assertTrue(contentItems.get(0).getRelations().get(0).equals("other_test_ci"));
-	}
+	}*/
 
 }

@@ -14,7 +14,7 @@ import com.example.poems_app.xml.Reg;
 
 public class CriticalApparatusService {
 
-	@Autowired
+	/**@Autowired
 	private ApophthegmTextExtractor apophthegmTextExtractor;
 
 	@Autowired
@@ -35,6 +35,6 @@ public class CriticalApparatusService {
 
 		return generator.generateCriticalApparatus(reg, regs);
 
-	}
+	}*/
 
 }
