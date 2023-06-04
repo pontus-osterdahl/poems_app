@@ -24,6 +24,7 @@ import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
 import { MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentItemComponentWrapperComponent } from './content-item-component-wrapper/content-item-component-wrapper.component';
+import { AddXmlPoemComponent } from './add-xml-poem/add-xml-poem.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { ContentItemComponentWrapperComponent } from './content-item-component-w
     XmlpoemComponent,
     XmlpoemsComponent,
     ContentItemComponent,
-    ContentItemComponentWrapperComponent
+    ContentItemComponentWrapperComponent,
+    AddXmlPoemComponent
   ],
   imports: [
     BrowserModule,
