@@ -1,8 +1,10 @@
+<p>Collections</p>
 <div data-cy="row">
-<div data-cy="tests" *ngFor="let x of xmlpoems">
-<button (click)="show(x.id)">{{x.name}}</button>
-<div *ngIf="tobeshown(x.id)">
-<app-xmlpoem [id] = "x.id"></app-xmlpoem>
-</div>
-</div>
+    <div data-cy="tests" *ngFor="let x of xmlpoems" class="cols">
+        <h4>{{x.name}}</h4>
+        <button (click)="show(x.id)">Show Apophthegms</button>
+        <div *ngIf="tobeshown(x.id)">
+            <app-xmlpoem [id] = "x.id"></app-xmlpoem>
+        </div>
+    </div>
 </div>

@@ -20,7 +20,8 @@ export class ContentItemServiceService {
   getContentItemByTextId(text : String) {
     console.log(1);
     console.log(this.contentItemsUrl + `/textId/${text}`);
-    return this.http.get<ContentItem>(this.contentItemsUrl + `/textId/${text}`);
+    //return this.http.get<ContentItem>(this.contentItemsUrl + `/textId/${text}`);
+    return this.http.get<Apophthegm>(this.contentItemsUrl + `/textId/${text}`);
   } 
 
   getContentItems() {
@@ -30,7 +31,8 @@ export class ContentItemServiceService {
   url : String = "http://localhost:8080/contentItems/contentItemTextbyText";
 
   getApophthegms(id : number) {
-   return this.http.get<Apophthegm[]>("http://localhost:8080/apophthegms/" + id);
+//   return this.http.get<Apophthegm[]>("http://localhost:8080/apophthegms/" + id);
+     return this.http.get<Apophthegm[]>("http://localhost:8080/contentItems/byXmlPoemId/" + id);
   }
 
 }

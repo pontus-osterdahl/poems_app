@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -32,6 +36,30 @@ class XmlPoemServiceTest {
 		int id = xmlPoem.getId();
 		XmlPoem fetchedPoem = service.getXmlPoemById(id);
 		assertThat(fetchedPoem.equals(xmlPoem));
+
+		service.deleteXmlPoemById(id);
+
+	}
+	
+	@Test
+	void shouldGetCotentItemByXmlPoemId() throws Exception {
+		XmlPoem xmlPoem = service.saveXmlPoem(new XmlPoem());
+
+		int id = xmlPoem.getId();
+		ContentItem ci1 = new ContentItem();
+		ci1.setTextId("ci1");
+		
+		ContentItem ci2 = new ContentItem();
+		ci2.setTextId("ci2");
+		
+		List<ContentItem> cis = Arrays.asList(ci1,ci2);
+
+		xmlPoem.setContentItems(new HashSet<>(cis));
+		service.saveXmlPoem(xmlPoem);
+		
+		List<ContentItem> fetchedCis = (List<ContentItem>) service.getContentItemsByXmlPoemId(id);
+		
+		assertThat(fetchedCis.get(0).getTextId().equals("ci1"));
 
 		service.deleteXmlPoemById(id);
 

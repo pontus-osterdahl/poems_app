@@ -2,5 +2,5 @@
     <p>{{poem.name}}</p>
 </div>
 <div data-cy="cis" *ngFor="let ci of apophthegms">
-    <app-content-item [apophthegm] = "ci" class="red"></app-content-item>
+    <app-content-item [apophthegm] = "ci" class="red" (relation)="selectRelation($event)"></app-content-item>    
 </div>

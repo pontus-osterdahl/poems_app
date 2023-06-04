@@ -16,11 +16,12 @@ export class ContentItemComponent implements OnInit {
   @Input() apophthegm? : Apophthegm;
  // @Input() ci? : ContentItem;
   @Output('relation')
-  ciEmitter = new EventEmitter<ContentItem>();
+  ciEmitter = new EventEmitter<String>();
 
-//  selectRelation(ci : ContentItem) {
-//    this.ciEmitter.emit(ci);
-//  }
+  selectRelation(ci : String) {
+    console.log("hallo")
+    this.ciEmitter.emit(ci);
+  }
 
   ngOnInit(): void {
   //  if(this.ci != null) {

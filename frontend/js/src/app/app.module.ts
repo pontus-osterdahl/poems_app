@@ -21,7 +21,9 @@ import { ContentItemComponent } from './content-item/content-item.component';
 import { TextPresentationComponent } from './text-presentation/text-presentation.component';
 import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
 import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
-
+import { MatDialogModule} from "@angular/material/dialog";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContentItemComponentWrapperComponent } from './content-item-component-wrapper/content-item-component-wrapper.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,15 +43,20 @@ import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
     ContentItemComponent,
     TextPresentationComponent,
     XmlpoemComponent,
-    XmlpoemsComponent
+    XmlpoemsComponent,
+    ContentItemComponent,
+    ContentItemComponentWrapperComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ContentItemComponent]
 })
 export class AppModule { }
