@@ -24,15 +24,12 @@ public class ApophthegmController {
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
-	@Autowired
-	private ApophthegmTextExtractor aptex;
-	
 	@CrossOrigin
 	@GetMapping("/apophthegms/{xmlid}")
-	public List<Apophthegm> getApophthegmsByXmlId(@PathVariable int xmlid) throws Exception {
+	public List<ContentItem> getApophthegmsByXmlId(@PathVariable int xmlid) throws Exception {
 		XmlPoem poem = xmlPoemService.getXmlPoemById(xmlid);
-		List<Apophthegm> as = aptex.extractApophthegmTexts(poem);
-		return as;
+		List<ContentItem> cis = List.copyOf(poem.getContentItems());
+		return cis;
 	}
 	
 }

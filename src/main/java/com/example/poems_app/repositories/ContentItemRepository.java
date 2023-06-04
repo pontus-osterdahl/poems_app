@@ -8,4 +8,6 @@ import com.example.poems_app.xml.ContentItem;
 
 public interface ContentItemRepository extends CrudRepository<ContentItem, Integer> {
     Optional<ContentItem> findByTextId(String textid);
+    
+    Iterable<ContentItem> findByXmlPoemId(int id);
 }

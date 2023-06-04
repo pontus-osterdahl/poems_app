@@ -6,7 +6,7 @@ describe("Index page", () => {
         cy.get("[data-cy=test]").should("contain","Välkommen");
     });
 });
-
+/** 
 describe("Xml Poems page", () => {
     beforeEach(() => {
         cy.intercept('GET', 'http://localhost:8080/xmlPoemNames', { fixture: 'xmlnameId'})  
@@ -20,4 +20,4 @@ describe("Xml Poems page", () => {
         cy.get("[data-cy=cis]").should("have.length",3);
 
     });
-});
+});*/

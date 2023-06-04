@@ -70,6 +70,10 @@ public class XmlPoemService {
 		return xmlPoemRepository.findAll();
 	}
 	
+	public Iterable<ContentItem> getContentItemsByXmlPoemId(int id) {
+		return contentItemRepository.findByXmlPoemId(id);
+	}
+	
 /**	public List<ContentItem> parsePoem(XmlPoem xmlPoem) throws FileNotFoundException, ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		List<ContentItem> contentItems = new ArrayList<ContentItem>();
 		if(xmlPoem.getFilepath() == null) {

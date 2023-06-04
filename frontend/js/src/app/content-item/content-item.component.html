@@ -1,6 +1,3 @@
-<!--<div *ngIf="ci">
-<div class="contentItem">
-<p>{{ci.textId}}</p>-->
 <div *ngIf="apophthegm">
 <p>{{apophthegm.id}}</p>
 <div class="text">{{apophthegm.orig.text}}</div>
@@ -10,13 +7,12 @@
    {{apophthegm.reg.criticalApparatus}}
     </div>
 
-<!--<div *ngIf="ci.relations.length > 0">
+<div *ngIf="apophthegm.relations.length > 0">
     <p>Is related to:</p>
-</div>-->
-
-<!--<div (click)="selectRelation(relation)" *ngFor="let relation of ci.relations" class="hidden">
-    {{relation}}
-</div>-->
+        <div *ngFor="let relation of apophthegm.relations" class="hidden">
+            <button (click)="selectRelation(relation)" >{{relation}}</button>
+        </div>
+    </div>
 </div>
 
 
