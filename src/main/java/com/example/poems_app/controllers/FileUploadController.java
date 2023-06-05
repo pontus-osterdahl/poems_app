@@ -34,9 +34,6 @@ public class FileUploadController {
 	
 	@Autowired
 	XmlPoemService xmlPoemService;
-	
-	@Autowired
-	XmlPoemService fileStorage;
 
 	@CrossOrigin
 	@PostMapping("/addPoemFromFile")
@@ -69,9 +66,4 @@ public class FileUploadController {
 		return null;
 	}
 	
-	@CrossOrigin
-	@PostMapping("/saveXmlPoem")
-	public XmlPoem addXmlPoem(@RequestPart XmlPoem xmlPoem, @RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
-	    return fileStorage.savePoemWithFile(xmlPoem, file);	
-	}	
 }

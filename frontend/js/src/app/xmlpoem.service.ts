@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { XmlPoem } from './xmlpoem';
 import { Xmlnameid } from './xmlnameid';
 import { Observable } from 'rxjs';
 
-@Injectable({
+@Injectable({;
   providedIn: 'root'
 })
 export class XmlpoemService {
@@ -22,6 +22,20 @@ export class XmlpoemService {
 
   getXmlNames() : Observable<Xmlnameid[]> {
     return this.httpClient.get<Xmlnameid[]>(this.poemnames_url);
+  }
+
+  saveXmlPoem(xmlpoem : XmlPoem, file : File) : void {
+
+    const formdata = new FormData();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    }
+    formdata.append("xmlpoem", "xmlpoem");
+    formdata.append("file", "file")
+
+    this.httpClient.post<XmlPoem>("http://localhost:8080/saveXmlPoem", formdata, httpOptions);
   }
 
 }
