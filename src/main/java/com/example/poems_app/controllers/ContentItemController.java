@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.poems_app.services.ApophthegmTextExtractor;
 import com.example.poems_app.services.XmlPoemService;
 import com.example.poems_app.xml.Apophthegm;
 import com.example.poems_app.xml.ApophthegmText;
@@ -20,9 +19,6 @@ public class ContentItemController {
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
-	@Autowired
-	private ApophthegmTextExtractor aptex;
-	
 	@CrossOrigin
     @GetMapping("/contentItems/xmlPoemId/{id}")
 	public XmlPoem getXmlPoemByContentItemId(@PathVariable int id) throws Exception {
@@ -33,12 +29,6 @@ public class ContentItemController {
     @GetMapping("/contentItems/textId/{textId}")
     public ContentItem getContentItemByTextId(@PathVariable String textId) throws Exception {
     	return xmlPoemService.getContentItemByTextId(textId);
-    }
-	
-	@CrossOrigin
-    @GetMapping("/contentItems/contentItemTextbyText/{textId}")
-    public Apophthegm getContentItemTextByTextId(@PathVariable String textId) throws Exception {
-		return aptex.extractApophtegmText(textId);
     }
     
 	@CrossOrigin
