@@ -11,13 +11,9 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@Entity
 public class Reg extends ApophthegmText {
-	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JsonBackReference
-	private ContentItemChoice contentItemChoice;
-	
-	
+		
 	private String criticalApparatus;
 	
 	public void setCriticalApparatus(String criticalApparatus) {
@@ -28,11 +24,5 @@ public class Reg extends ApophthegmText {
 		return this.criticalApparatus;
 	}
 	
-	public void setContentItemChoice(ContentItemChoice contentItemChoice) {
-		this.contentItemChoice = contentItemChoice;
-	}
-	
-	public ContentItemChoice getContentItemChoice() {
-		return this.contentItemChoice;
-	}
+
 }

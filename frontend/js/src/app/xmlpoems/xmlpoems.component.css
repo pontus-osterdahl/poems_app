@@ -1,0 +1,7 @@
+.cols {
+    display: inline-block;
+    max-width: 600px;
+    min-width: 550px;
+    background-color: yellow;
+    vertical-align: top
+}

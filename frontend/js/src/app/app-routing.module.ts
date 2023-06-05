@@ -12,6 +12,7 @@ import { ContentItemComponent } from './content-item/content-item.component';
 import { TextPresentationComponent } from './text-presentation/text-presentation.component';
 import { XmlpoemComponent } from './xmlpoem/xmlpoem.component';
 import { XmlpoemsComponent } from './xmlpoems/xmlpoems.component';
+import { AddXmlPoemComponent } from './add-xml-poem/add-xml-poem.component';
 
 const routes: Routes = [
   { path: 'poem', component: PoemComponent},
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'contentItem', component: ContentItemComponent},
   { path: 'contentItems', component: TextPresentationComponent},
   { path: 'xmlpoem', component: XmlpoemComponent},
-  { path: 'xmlpoems', component: XmlpoemsComponent}
+  { path: 'xmlpoems', component: XmlpoemsComponent},
+  { path: 'addxmlpoem', component: AddXmlPoemComponent}
 ];
 
 @NgModule({

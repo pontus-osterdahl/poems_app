@@ -13,10 +13,15 @@ p {
     max-width: 500px;
 }
 
+b {
+    max-width: 500px;
+}
+
 .reg {
     background-color: white;
     max-width: 500px;
     cursor: pointer;
+    display: none;
 }
 
 .hidden {
