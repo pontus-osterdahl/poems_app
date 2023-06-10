@@ -3,7 +3,7 @@
 describe("Index page", () => {
     it("should display something", () => {
         cy.visit("/");
-        cy.get("[data-cy=test]").should("contain","Välkommen");
+        cy.get("[data-cy=test]").should("contain","Welcome to Poems APP");
     });
 });
 /** 

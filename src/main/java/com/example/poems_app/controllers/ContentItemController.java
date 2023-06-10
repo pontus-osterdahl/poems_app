@@ -19,12 +19,6 @@ public class ContentItemController {
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
-<<<<<<< HEAD
-=======
-	//@Autowired
-	//private ApophthegmTextExtractor aptex;
-	
->>>>>>> 0d5548a92a133f0c65df0a1c928fe27b511d7903
 	@CrossOrigin
     @GetMapping("/contentItems/xmlPoemId/{id}")
 	public XmlPoem getXmlPoemByContentItemId(@PathVariable int id) throws Exception {
@@ -42,15 +36,6 @@ public class ContentItemController {
     public ContentItem getContentItemByTextId(@PathVariable String textId) throws Exception {
     	return xmlPoemService.getContentItemByTextId(textId);
     }
-<<<<<<< HEAD
-=======
-	
-/**	@CrossOrigin
-    @GetMapping("/contentItems/contentItemTextbyText/{textId}")
-    public Apophthegm getContentItemTextByTextId(@PathVariable String textId) throws Exception {
-		return aptex.extractApophtegmText(textId);
-    }*/
->>>>>>> 0d5548a92a133f0c65df0a1c928fe27b511d7903
     
 	@CrossOrigin
     @GetMapping("/contentItems")

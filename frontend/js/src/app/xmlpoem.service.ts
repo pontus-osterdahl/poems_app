@@ -4,11 +4,10 @@ import { XmlPoem } from './xmlpoem';
 import { Xmlnameid } from './xmlnameid';
 import { Observable } from 'rxjs';
 
-@Injectable({;
+@Injectable({
   providedIn: 'root'
 })
 export class XmlpoemService {
-
 
   poems_url = "http://localhost:8080/xmlPoem";
   poemnames_url = "http://localhost:8080/xmlPoemNames";
@@ -26,6 +25,7 @@ export class XmlpoemService {
 
   saveXmlPoem(xmlpoem : XmlPoem, file : File) : void {
 
+    console.log("hallo!!!");
     const formdata = new FormData();
     const httpOptions = {
       headers: new HttpHeaders({
