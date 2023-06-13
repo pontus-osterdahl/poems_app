@@ -11,6 +11,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,6 @@ import com.example.poems_app.xml.XmlPoemDTO;
 @RestController
 public class XmlPoemController {
 
-	//private final ModelMapper mapper = new ModelMapper();
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
@@ -51,12 +51,12 @@ public class XmlPoemController {
 	private XmlPoemDTO convertToXmlPoemDTO(XmlPoem xmlPoem) {
 		return mapper.map(xmlPoem,XmlPoemDTO.class);
 	}
-	
+
 	@CrossOrigin
-	@PostMapping("/saveXmlPoem") 
-	public XmlPoem addXmlPoem(@RequestPart XmlPoem xmlPoem, @RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, SolrServerException, XPathExpressionException {
-	    return xmlPoemService.savePoemWithFile(xmlPoem, file);	
-	}	
+	@PostMapping(value = "/saveXmlPoem", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
+	public XmlPoem addXmlPoem(@RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SolrServerException {
+	    return xmlPoemService.savePoemWithFile(file);
+    }
 	
 	@CrossOrigin
 	@GetMapping("/xmlPoemNames")
