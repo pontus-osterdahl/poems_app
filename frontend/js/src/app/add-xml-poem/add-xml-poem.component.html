@@ -1,10 +1,6 @@
-<p>add-xml-poem works!</p>
-<form [formGroup]="xmlpoemGroup" (ngSubmit)="onSubmit()">
-POEMNAME: <input type="text" formControlName="xmlpoemTitle">
+<p>Manuscript Upload</p>
+<form (ngSubmit)="onSubmit()">
+File: <input type="file" class="file-upload" (change)="onFileChange($event)">       
 <br>
-FILEPATH: <input type="text" formControlName="xmlpoemFilePath">
-<br>
-File:           <input type="file" formControlName="xmlpoemFile"/>
-<br>
-<button type="submit" [disabled]="!xmlpoemGroup.valid">Submit</button>
+<button type="submit">Submit</button>
 </form>
