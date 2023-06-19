@@ -15,7 +15,14 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -23,6 +30,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import com.example.poems_app.FileFormatHelper;
+import com.example.poems_app.XmlPoemCreatedMessage;
+import com.example.poems_app.XmlPoemCreationRequest;
 import com.example.poems_app.repositories.ContentItemRepository;
 import com.example.poems_app.repositories.XmlPoemRepository;
 import com.example.poems_app.xml.ContentItem;
@@ -86,8 +95,10 @@ public class XmlPoemService {
 	}
 
 	// TODO this should be read from a config file
-	private String folder = "C:\\Users\\pontu\\";
+	//private String folder = "C:\\Users\\pontu\\";
 
+	private String folder = "/usr/local/gus";
+	
 	public void deleteXmlPoemById(int id) {
 		xmlPoemRepository.deleteById(id);
 	}
@@ -101,21 +112,92 @@ public class XmlPoemService {
 
 		String filePath = FilenameUtils.concat(folder, poem.getName() + ".xml");
 		File xmlFile = new File(filePath);
-		try {
-			file.transferTo(xmlFile);
-		} catch (IOException e) {
-			filePath = null;
-		}
-		poem = xmlParser.XmlPoem(xmlFile);
-		poem.setFilepath(filePath);
 
-		return xmlPoemRepository.save(poem);
+		if (xmlFile.createNewFile()) {
+			try {
+				file.transferTo(xmlFile);
+			} catch (IOException e) {
+				filePath = null;
+			}
+			poem = xmlParser.XmlPoem(xmlFile);
+			poem.setFilepath(filePath);
+
+			return xmlPoemRepository.save(poem);
+		} else {
+			return null;
+		}
+	}
+
+	private static final String TEST_TOPIC = "quickstart-events";
+	private static final String CREATED_TOPIC = "created-poem";
+
+	@Autowired
+	private KafkaTemplate<String, XmlPoemCreationRequest> kafkaTemplate;
+
+	@Autowired
+	private KafkaTemplate<String, XmlPoemCreatedMessage> createdTemplate;
+
+	/**
+	 * 
+	 * 
+	 * @param file File to be parsed to poem
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	public void startSavePoem(MultipartFile file) throws IllegalStateException, IOException {
+		String filePath = FilenameUtils.concat(folder, file.getName());
+		File persistent_file = new File(filePath);
+		if (persistent_file.createNewFile()) {
+		    file.transferTo(persistent_file);
+		    sendMessage(persistent_file.getAbsolutePath());
+		}
+	}
+
+	// Test if a consumer can read the actions
+	@KafkaListener(topics = TEST_TOPIC, containerFactory = "xmlPoemCreationRequestKafkaListenerContainerFactory")
+	public void xmlPoemCreationRequestListener(XmlPoemCreationRequest request) throws XPathExpressionException,
+			ParserConfigurationException, SAXException, IOException, SolrServerException {
+		if (request.getFilePath() != null) {
+			try {
+				XmlPoem poem = savePoemFromFile(request.getFilePath());
+				sendXmlPoemCreatedMessage(request.getId(), poem);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private XmlPoemCreationRequest sendMessage(String filePath) {
+		XmlPoemCreationRequest request = new XmlPoemCreationRequest(filePath, 5);
+		kafkaTemplate.send(TEST_TOPIC, request);
+		return request;
+	}
+
+	private XmlPoemCreatedMessage sendXmlPoemCreatedMessage(int creationRequestId, XmlPoem poem) {
+		XmlPoemCreatedMessage createdMessage = new XmlPoemCreatedMessage(creationRequestId, poem.getId(),
+				poem.getFilepath(), poem.getName());
+		createdTemplate.send(CREATED_TOPIC, createdMessage);
+		return createdMessage;
+	}
+
+	public XmlPoem savePoemFromFile(String filepath) throws Exception {
+
+		File xmlFile = new File(filepath);
+
+		if (xmlFile.isFile()) {
+			XmlPoem poem = xmlParser.XmlPoem(xmlFile);
+			poem.setFilepath(filepath);
+			poem = xmlPoemRepository.save(poem);
+			return poem;
+		} else {
+			throw new Exception("File " + filepath + " could not be parsed to and saved as xmlpoem");
+		}
 	}
 
 	public XmlPoem savePoemWithFile(MultipartFile file) throws ParserConfigurationException, SAXException, IOException,
 			SolrServerException, XPathExpressionException {
 
-		String filePath = FilenameUtils.concat(folder, file.getName());
+		String filePath = FilenameUtils.concat(folder, "5");
 		File xmlFile = new File(filePath);
 		try {
 			file.transferTo(xmlFile);

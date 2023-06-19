@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class XmlpoemService {
 
-  savepoems_url = "http://localhost:8080/saveXmlPoem";
+  savepoems_url = "http://localhost:8080/save-poem";
   poems_url = "http://localhost:8080/xmlPoem";
   poemnames_url = "http://localhost:8080/xmlPoemNames";
 
