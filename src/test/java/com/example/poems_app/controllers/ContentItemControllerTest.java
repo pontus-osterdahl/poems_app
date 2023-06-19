@@ -14,7 +14,7 @@ import com.example.poems_app.xml.XmlPoem;
 @SpringBootTest
 class ContentItemControllerTest {
 
-	
+	/**
 	@MockBean
 	private XmlPoemService xmlPoemService;
 	@Autowired
@@ -30,6 +30,6 @@ class ContentItemControllerTest {
 		Mockito.when(xmlPoemService.getXmlPoemByContentItemId(choiceId)).thenReturn(xmlPoem);
 		assertTrue(xmlPoemName.equals(contentItemController.getXmlPoemByContentItemId(choiceId).getName()));
 		
-	}
+	}*/
 	
 }

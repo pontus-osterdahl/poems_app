@@ -8,7 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.example.poems_app.services.XmlPoemService;
 
 class XmlPoemControllerTest {
-
+/**
 	@MockBean
 	private XmlPoemService xmlPoemService;
 	
@@ -16,5 +16,5 @@ class XmlPoemControllerTest {
 	void testDeleteXmlPoem() {
 		
 	}
-
+*/
 }

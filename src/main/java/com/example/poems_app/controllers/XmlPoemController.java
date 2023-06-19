@@ -11,12 +11,15 @@ import javax.xml.xpath.XPathExpressionException;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,10 +55,22 @@ public class XmlPoemController {
 		return mapper.map(xmlPoem,XmlPoemDTO.class);
 	}
 
+	/**
+	 * 
+	 * @param file The XML file to parsed to poem
+	 * @throws IllegalStateException 
+	 * @throws IOException
+	 */
+	@PostMapping(value = "/save-poem", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	@CrossOrigin
+	public void sendMessage(@RequestPart MultipartFile file) throws IllegalStateException, IOException {
+		xmlPoemService.startSavePoem(file);
+	}
+	
 	@CrossOrigin
 	@PostMapping(value = "/saveXmlPoem", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
 	public XmlPoem addXmlPoem(@RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SolrServerException {
-	    return xmlPoemService.savePoemWithFile(file);
+		return xmlPoemService.savePoemWithFile(file);
     }
 	
 	@CrossOrigin
@@ -70,5 +85,8 @@ public class XmlPoemController {
 				.map(this::convertToXmlPoemDTO)
 				.collect(Collectors.toList());
 	}
+	
+	
+	
 
 }
