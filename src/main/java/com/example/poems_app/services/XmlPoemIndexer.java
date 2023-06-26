@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.poems_app.Indexer;
+import com.example.poems_app.xml.ContentItem;
 import com.example.poems_app.xml.XmlPoem;
 
 @Service
@@ -22,27 +23,19 @@ public class XmlPoemIndexer implements Indexer<XmlPoem> {
 	}
 	
 	@Autowired
-	ContentItemIndexer ciIndexer;
+	SolrDocumentCreator docCreator;
 	
 	@Override
 	public void index(XmlPoem item) {
 		
-	final SolrInputDocument doc = new SolrInputDocument();
-		
-		doc.addField("id", item.getId());
-		doc.addField("name", item.getName());
-		doc.addField("filePath", item.getFilepath());
-		
-		try {
+	    final SolrInputDocument doc = docCreator.getSolrInputDocument(item);
+     	try {
      		client.add("poems", doc);
-	    	client.commit("poems");
-		}
-		catch(Exception e)
+	        client.commit("poems");
+		}catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		ciIndexer.indexAll(item.getContentItems());
 	}
 
 	@Override
@@ -54,8 +47,12 @@ public class XmlPoemIndexer implements Indexer<XmlPoem> {
 
 	@Override
 	public void removeItem(XmlPoem item) throws SolrServerException, IOException {
-		// TODO Auto-generated method stub
-		
+		try {
+			client.deleteByQuery("poems", "id:" + item.getId());
+			client.commit("poems");
+		} catch (SolrServerException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
