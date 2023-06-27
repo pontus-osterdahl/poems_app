@@ -48,6 +48,9 @@ public class XmlPoemService {
 
 	@Autowired
 	private XmlPoemParser xmlParser;
+	
+	@Autowired
+	private XmlPoemIndexer xmlPoemIndexer;
 
 	public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
@@ -122,7 +125,10 @@ public class XmlPoemService {
 			poem = xmlParser.XmlPoem(xmlFile);
 			poem.setFilepath(filePath);
 
-			return xmlPoemRepository.save(poem);
+			poem = xmlPoemRepository.save(poem);
+			xmlPoemIndexer.index(poem);
+			
+			return poem;
 		} else {
 			return null;
 		}
@@ -188,6 +194,7 @@ public class XmlPoemService {
 			XmlPoem poem = xmlParser.XmlPoem(xmlFile);
 			poem.setFilepath(filepath);
 			poem = xmlPoemRepository.save(poem);
+			xmlPoemIndexer.index(poem);
 			return poem;
 		} else {
 			throw new Exception("File " + filepath + " could not be parsed to and saved as xmlpoem");
@@ -207,7 +214,10 @@ public class XmlPoemService {
 		XmlPoem poem = xmlParser.XmlPoem(xmlFile);
 		poem.setFilepath(filePath);
 
-		return xmlPoemRepository.save(poem);
+		poem = xmlPoemRepository.save(poem);
+		xmlPoemIndexer.index(poem);
+		
+		return poem;
 	}
 
 	public XmlPoem getXmlPoemById(int id) throws Exception {
