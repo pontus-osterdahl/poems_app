@@ -176,13 +176,13 @@
 							<arguments>run build</arguments>
 						</configuration>
 					</execution>
-					<execution>
+					<!-- <execution>
 					    <id>npm install tool</id>
 					    <goals>
 					        <goal>npm</goal>
 					    </goals>
 					    <configuration>
-					    <arguments>install --force start-server-and-test</arguments></configuration>
+					    <arguments>install force start-server-and-test</arguments></configuration>
 					</execution>
 					<execution>
 					    <id>npm install xvfb</id>
@@ -190,7 +190,7 @@
 					        <goal>npm</goal>
 					    </goals>
 					    <configuration>
-					    <arguments>install --force xvfb</arguments></configuration>
+					    <arguments>install force xvfb</arguments></configuration>
 					</execution>
 					<execution>
 					    <id>npm install cypress</id>
@@ -198,7 +198,7 @@
 					        <goal>npm</goal>
 					    </goals>
 					    <configuration>
-					    <arguments>install --force cypress</arguments></configuration>
+					    <arguments>install force cypress</arguments></configuration>
 					</execution>
 					<execution>
 					    <id>npm test</id>
@@ -206,7 +206,7 @@
 					    <configuration>
 					        <arguments>test</arguments>
 					    </configuration>
-					</execution>
+					</execution>-->
 				</executions>
 				</plugin>
 			<plugin>

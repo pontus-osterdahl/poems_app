@@ -144,7 +144,7 @@ public class XmlPoemService {
 	private KafkaTemplate<String, XmlPoemCreatedMessage> createdTemplate;
 
 	/**
-	 * 
+	 * Starts process to save Poem by sending message to kafka broker.
 	 * 
 	 * @param file File to be parsed to poem
 	 * @throws IllegalStateException

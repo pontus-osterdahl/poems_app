@@ -1,0 +1,20 @@
+<div class="search-wrapper">
+
+    <label for="searchReturn">Search in</label>
+    <select #selectCriteria (change)="onSelected(selectCriteria.value)">
+        <option *ngFor="let item of criteria">{{item}}</option>
+    </select>
+    <label for="searchCriteria">Search poem by:</label>
+    <select id ="searchCriteria" #selectCriteria (change)="onSelected(selectCriteria.value)">
+        <option *ngFor="let item of criteria" [formControl]="searchterm">{{item}}</option>
+    </select>
+
+    <label for="search">Search:</label>
+    <input id="search" type="text" [formControl]="searchterm">
+
+    <button (click)="search()" class="searchButton">Search poem</button>
+
+</div>
+
+    <div *ngFor="let poem of poems">
+</div>

@@ -1,28 +1,36 @@
-.text {
-    background-color: blue;
-    max-width: 500px;
-     
+.text,.reg, .criticalApparatus { 
+    text-align: left;  
+    margin: 5px;  
+    border: 1px solid green;
+    background-color: #E3F4F7
+}
+
+.ciWrapper:hover {
+    text-shadow: 2px 2px black;
 }
 
 .contentItem {
-    border: 5px solid red;
+    border: red;
+    text-align: left;
     max-width: 500px;
 }
 
-p {
-    max-width: 500px;
+/**.relations:hover {
+    opacity: 1;
+    z-index: 1; 
 }
 
-b {
-    max-width: 500px;
-}
-
-.reg {
-    background-color: white;
-    max-width: 500px;
-    cursor: pointer;
-    display: none;
-}
+.relations {
+    opacity: 0;
+    z-index: 1;
+}*/
+/**.reg {
+    background-color: white;*/
+   /** max-width: 500px;*/
+/**   width: 80%;
+   cursor: pointer;
+  */  /**display: none;*/
+/**}*/
 
 .hidden {
     width: 300px;

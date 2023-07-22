@@ -25,6 +25,9 @@ import { MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContentItemComponentWrapperComponent } from './content-item-component-wrapper/content-item-component-wrapper.component';
 import { AddXmlPoemComponent } from './add-xml-poem/add-xml-poem.component';
+import { XmlpoemsearchComponent } from './xmlpoemsearch/xmlpoemsearch.component';
+import { PlacesComponent } from './places/places.component';
+import { PersonsComponent } from './persons/persons.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +50,10 @@ import { AddXmlPoemComponent } from './add-xml-poem/add-xml-poem.component';
     XmlpoemsComponent,
     ContentItemComponent,
     ContentItemComponentWrapperComponent,
-    AddXmlPoemComponent
+    AddXmlPoemComponent,
+    XmlpoemsearchComponent,
+    PlacesComponent,
+    PersonsComponent
   ],
   imports: [
     BrowserModule,

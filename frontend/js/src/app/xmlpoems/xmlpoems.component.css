@@ -1,7 +1,8 @@
 .cols {
-    display: inline-block;
-    max-width: 600px;
+    text-align: left;
+    padding-left: 5%;
+    max-width: 800px;
     min-width: 550px;
-    background-color: yellow;
+    background-color: #9BB2CE;
     vertical-align: top
 }

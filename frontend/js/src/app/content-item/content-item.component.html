@@ -1,16 +1,14 @@
-<div *ngIf="apophthegm">
-<p>{{apophthegm.id}}</p>
-<div class="text">{{apophthegm.orig.text}}</div>
-<div class="reg">{{apophthegm.reg.text}} <br/>
-=============================================
-<br/>
-   {{apophthegm.reg.criticalApparatus}}
-    </div>
-
-<div *ngIf="apophthegm.relations.length > 0">
-    <p>Is related to:</p>
-        <div *ngFor="let relation of apophthegm.relations" class="hidden">
+<div *ngIf="apophthegm" class="ciWrapper">
+    <div class="reg">{{apophthegm.reg.text}}<br>
+    ======<br>{{apophthegm.reg.criticalApparatus}}</div>
+    <div class="text">{{apophthegm.orig.text}}</div>    
+    <div *ngIf="apophthegm.relations.length > 0">
+        <button (click)="toggleShowRelations()">Relations</button>
+        <div *ngIf="showRelations" class="relations">
+            <p>Is related to:</p>
+            <div *ngFor="let relation of apophthegm.relations" class="hidden">
             <button (click)="selectRelation(relation)" >{{relation}}</button>
+            </div>
         </div>
     </div>
 </div>

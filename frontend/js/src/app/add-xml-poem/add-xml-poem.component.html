@@ -1,6 +1,8 @@
 <p>Manuscript Upload</p>
-<form (ngSubmit)="onSubmit()">
-File: <input type="file" class="file-upload" (change)="onFileChange($event)">       
-<br>
-<button type="submit">Submit</button>
-</form>
+<div class="addManuscriptWrapper">
+<label for="fileupload">File:</label> 
+<input type="file" id="fileupload" class="file-upload" (change)="onFileChange($event)"> 
+<div class="buttonWrapper">      
+<button  (click)="onSubmit()">Submit</button>
+</div>
+</div>

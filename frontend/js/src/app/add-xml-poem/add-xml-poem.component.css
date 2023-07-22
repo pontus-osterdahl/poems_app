@@ -1,0 +1,17 @@
+.addManuscriptWrapper {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    border: solid thin #002F5F;
+}
+
+label, select  {
+    text-align: right;
+    float: left;
+    margin-left: 5%;
+}
+
+button {
+    margin: 0 auto;
+    text-align: right;
+    float: right;
+}

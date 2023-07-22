@@ -88,4 +88,10 @@ public class ContentItem {
 
 	@ElementCollection
 	private List<String> relations;
+	
+	/**
+	 * private Persons
+	 * 
+	 * private Places
+	 */
 }

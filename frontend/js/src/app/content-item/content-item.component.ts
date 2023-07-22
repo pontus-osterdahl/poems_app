@@ -11,16 +11,21 @@ import { Apophthegm } from '../apophthegm';
 })
 export class ContentItemComponent implements OnInit {
 
+  showRelations : boolean = false;
+
   constructor(private ciService : ContentItemServiceService) { }
 
   @Input() apophthegm? : Apophthegm;
- // @Input() ci? : ContentItem;
   @Output('relation')
   ciEmitter = new EventEmitter<String>();
 
   selectRelation(ci : String) {
     console.log("hallo")
     this.ciEmitter.emit(ci);
+  }
+
+  toggleShowRelations() {
+      this.showRelations = !this.showRelations;
   }
 
   ngOnInit(): void {

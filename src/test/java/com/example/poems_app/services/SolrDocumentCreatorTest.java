@@ -1,6 +1,6 @@
 package com.example.poems_app.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,8 +18,6 @@ import com.example.poems_app.xml.Orig;
 import com.example.poems_app.xml.Reg;
 import com.example.poems_app.xml.XmlPoem;
 
-import org.junit.Assert;
-
 
 class SolrDocumentCreatorTest {
 
@@ -34,7 +32,7 @@ class SolrDocumentCreatorTest {
 		xmlPoem.setName("TEST POEM");
 		xmlPoem.setContentItems(new HashSet<ContentItem>());
 		SolrInputDocument doc = documentCreator.getSolrInputDocument(xmlPoem);	
-		Assert.assertEquals(doc.jsonStr().replaceAll("\\s", ""),"{\"id\":\"id=1\",\"name\":\"name=TESTPOEM\",\"filePath\":\"filePath=TESTPATH\"}".replaceAll("\\s", ""));
+		assertEquals(doc.jsonStr().replaceAll("\\s", ""),"{\"id\":\"id=1\",\"name\":\"name=TESTPOEM\",\"filePath\":\"filePath=TESTPATH\"}".replaceAll("\\s", ""));
 	}
 	
 	@Test
@@ -53,7 +51,7 @@ class SolrDocumentCreatorTest {
 		contentItem.setId(1);
 		contentItem.setXmlPoem(xmlPoem);
 		SolrInputDocument doc = documentCreator.getSolrInputDocument(contentItem);
-		Assert.assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"xmlpoem_id\":\"xmlpoem_id=0\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
+		assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"xmlpoem_id\":\"xmlpoem_id=0\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
 	}
 
 }

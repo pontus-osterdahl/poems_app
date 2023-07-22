@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PoemService } from '../poem.service';
 import { Poem } from '../poem';
 
+
 @Component({
   selector: 'app-poem-search',
   templateUrl: './poem-search.component.html',
@@ -30,7 +31,7 @@ export class PoemSearchComponent implements OnInit {
  }
 
  search(): void {
-    this.poemService.getPoemsByWord(this.searchterm).subscribe(foundpoems => this.poems = foundpoems);
+    this.poemService.getPoemsByWord("hallo").subscribe(foundpoems => this.poems = foundpoems);
  }
 
   ngOnInit(): void {

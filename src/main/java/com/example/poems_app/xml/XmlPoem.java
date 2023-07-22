@@ -21,6 +21,12 @@ public class XmlPoem {
 	
 	private String name;
 	
+	/**
+	 * private PoemDescription
+	 * 
+	 * private Bibliography
+	 */
+	
 	public void setId(int id) {
 		this.id = id;
 	}

@@ -57,7 +57,7 @@ public class XmlPoemController {
 
 	/**
 	 * 
-	 * @param file The XML file to parsed to poem
+	 * @param file The XML file to  be parsed to poem
 	 * @throws IllegalStateException 
 	 * @throws IOException
 	 */
