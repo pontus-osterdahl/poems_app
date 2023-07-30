@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,7 +32,11 @@ import com.example.poems_app.XmlPoemCreatedMessage;
 import com.example.poems_app.XmlPoemCreationRequest;
 import com.example.poems_app.repositories.ContentItemRepository;
 import com.example.poems_app.repositories.XmlPoemRepository;
+import com.example.poems_app.xml.AuthorSection;
 import com.example.poems_app.xml.ContentItem;
+import com.example.poems_app.xml.Letter;
+import com.example.poems_app.xml.Part;
+import com.example.poems_app.xml.Seg;
 import com.example.poems_app.xml.XmlPoem;
 
 @Service
@@ -44,7 +50,7 @@ public class XmlPoemService {
 
 	@Autowired
 	private XmlPoemParser xmlParser;
-	
+
 	@Autowired
 	private XmlPoemIndexer xmlPoemIndexer;
 
@@ -64,8 +70,24 @@ public class XmlPoemService {
 		return xmlPoemRepository.findAll();
 	}
 
-	public Iterable<ContentItem> getContentItemsByXmlPoemId(int id) {
-		return contentItemRepository.findByXmlPoemId(id);
+	public List<Part> getPartsByXmlPoemId(int id) {
+		return xmlPoemRepository.findById(id).orElseThrow()
+				.getText().getGroup().getText().getBody().getParts();
+	}
+	
+	public List<Letter> getLettersByXmlPoemId(int id) {
+		List<Letter> letters = (List<Letter>) getPartsByXmlPoemId(id).stream().map(a -> a.getLetters());
+		return letters;
+	}
+	
+	public List<AuthorSection> getAuthorSectionsByXmlPoemId(int id) {
+		List<AuthorSection> authorSections = (List<AuthorSection>) getLettersByXmlPoemId(id).stream().map(a -> a.getAuthors());
+		return authorSections;
+	}
+	
+	public List<Seg> getContentItemsByXmlPoemId(int id) {   
+		List<Seg> segments = (List<Seg>) getAuthorSectionsByXmlPoemId(id).stream().map(a -> a.getSegments());
+		return segments;
 	}
 
 	public void parseAndIndexPoem(XmlPoem xmlPoem)
@@ -95,9 +117,9 @@ public class XmlPoemService {
 
 	// TODO this should be read from a config file
 
-    @Value(value = "${xml.storage.directory}")
+	@Value(value = "${xml.storage.directory}")
 	private String folder;
-	
+
 	public void deleteXmlPoemById(int id) {
 		xmlPoemRepository.deleteById(id);
 	}
@@ -123,7 +145,7 @@ public class XmlPoemService {
 
 			poem = xmlPoemRepository.save(poem);
 			xmlPoemIndexer.index(poem);
-			
+
 			return poem;
 		} else {
 			return null;
@@ -150,8 +172,8 @@ public class XmlPoemService {
 		String filePath = FilenameUtils.concat(folder, file.getName());
 		File persistent_file = new File(filePath);
 		if (persistent_file.createNewFile()) {
-		    file.transferTo(persistent_file);
-		    sendMessage(persistent_file.getAbsolutePath());
+			file.transferTo(persistent_file);
+			sendMessage(persistent_file.getAbsolutePath());
 		}
 	}
 
@@ -211,7 +233,7 @@ public class XmlPoemService {
 
 		poem = xmlPoemRepository.save(poem);
 		xmlPoemIndexer.index(poem);
-		
+
 		return poem;
 	}
 

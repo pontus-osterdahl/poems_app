@@ -8,22 +8,23 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-public class Seg {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Seg {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
-	@ManyToOne(cascade = {CascadeType.ALL})
-	@JsonBackReference
-	private XmlPoem xmlPoem;
 
 	public int getId() {
 		return this.id;
@@ -59,14 +60,6 @@ public class Seg {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public void setXmlPoem(XmlPoem xmlPoem) {
-		this.xmlPoem = xmlPoem;
-	}
-
-	public XmlPoem getXmlPoem() {
-		return this.xmlPoem;
 	}
 
 	public void setRelations(List<String> relations) {
@@ -105,13 +98,9 @@ public class Seg {
 		this.placenames.add(placename);
 	}
 	
-	public String getTextId() {
-		return "";
-	}
+	public abstract String getTextId();
 
-	public void setTextId(String textId) {
-		
-	}
+	public abstract void setTextId(String textId);
 	
 	@ElementCollection
 	private List<String> relations;
@@ -120,6 +109,5 @@ public class Seg {
 	private Set<String> persons;
 	
 	@ElementCollection
-	private Set<String> placenames;
-	
+	private Set<String> placenames;	
 }

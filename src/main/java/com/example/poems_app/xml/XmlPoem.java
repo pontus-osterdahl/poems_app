@@ -21,8 +21,10 @@ public class XmlPoem {
 	
 	private String name;
 	
+	@OneToOne
 	private Text text;
 	
+	@OneToOne
 	private TeiHeader teiHeader;
 	
 	/**
@@ -55,6 +57,22 @@ public class XmlPoem {
 	}
 	public String getName() {
 		return this.name;
+	}
+
+	public Text getText() {
+		return text;
+	}
+
+	public void setText(Text text) {
+		this.text = text;
+	}
+
+	public TeiHeader getTeiHeader() {
+		return teiHeader;
+	}
+
+	public void setTeiHeader(TeiHeader teiHeader) {
+		this.teiHeader = teiHeader;
 	}
 	
 	/**public void setContentItems(Set<ContentItem> contentItems) {

@@ -13,6 +13,7 @@ import com.example.poems_app.services.XmlPoemService;
 import com.example.poems_app.xml.Apophthegm;
 import com.example.poems_app.xml.ApophthegmText;
 import com.example.poems_app.xml.ContentItem;
+import com.example.poems_app.xml.Seg;
 import com.example.poems_app.xml.XmlPoem;
 
 @RestController
@@ -29,7 +30,7 @@ public class ContentItemController {
 	
 	@CrossOrigin
 	@GetMapping("/contentItems/byXmlPoemId/{id}")
-	public Iterable<ContentItem> getContentItemsByXmlPoemId(@PathVariable int id) throws Exception {
+	public List<Seg> getContentItemsByXmlPoemId(@PathVariable int id) throws Exception {
 		return xmlPoemService.getContentItemsByXmlPoemId(id);
     	
     }

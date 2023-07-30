@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * Enttity to store segments of one specific author. 
+ * Entity to store segments of one specific author. 
  *
  */
 
@@ -21,5 +21,29 @@ public class AuthorSection {
 	
 	@OneToMany
 	private List<Seg> segments;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(String authorId) {
+		this.authorId = authorId;
+	}
+
+	public List<Seg> getSegments() {
+		return segments;
+	}
+
+	public void setSegments(List<Seg> segments) {
+		this.segments = segments;
+	}
 	
 }

@@ -16,6 +16,32 @@ public class Letter {
 	@Id
 	private int id;
 	
+	private String xmlId;
+	
 	@OneToMany
 	private List<AuthorSection> authors;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getXmlId() {
+		return xmlId;
+	}
+
+	public void setXmlId(String xmlId) {
+		this.xmlId = xmlId;
+	}
+
+	public List<AuthorSection> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(List<AuthorSection> authors) {
+		this.authors = authors;
+	}
 }
