@@ -15,14 +15,10 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -98,9 +94,9 @@ public class XmlPoemService {
 	}
 
 	// TODO this should be read from a config file
-	//private String folder = "C:\\Users\\pontu\\";
 
-	private String folder = "/usr/local/gus";
+    @Value(value = "${xml.storage.directory}")
+	private String folder;
 	
 	public void deleteXmlPoemById(int id) {
 		xmlPoemRepository.deleteById(id);
@@ -159,7 +155,6 @@ public class XmlPoemService {
 		}
 	}
 
-	// Test if a consumer can read the actions
 	@KafkaListener(topics = TEST_TOPIC, containerFactory = "xmlPoemCreationRequestKafkaListenerContainerFactory")
 	public void xmlPoemCreationRequestListener(XmlPoemCreationRequest request) throws XPathExpressionException,
 			ParserConfigurationException, SAXException, IOException, SolrServerException {

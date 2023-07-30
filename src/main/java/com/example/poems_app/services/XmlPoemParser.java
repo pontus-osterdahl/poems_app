@@ -26,6 +26,9 @@ import org.xml.sax.SAXException;
 
 import com.example.poems_app.FileFormatHelper;
 import com.example.poems_app.xml.ContentItem;
+import com.example.poems_app.xml.Seg;
+import com.example.poems_app.xml.TeiHeader;
+import com.example.poems_app.xml.Text;
 import com.example.poems_app.xml.XmlPoem;
 
 @Service
@@ -33,6 +36,12 @@ public class XmlPoemParser {
 
 	@Autowired
 	private ContentItemsExtractor ciExtractor;
+	
+	@Autowired
+	private TeiHeaderExtractor teiHeaderExtractor;
+
+	@Autowired
+	private TextExtractor textExtractor;
 
 	private String getTitle(NodeList titleStatements) {
 		for (int i = 0; i < titleStatements.getLength(); i++) {
@@ -56,13 +65,20 @@ public class XmlPoemParser {
 			ParserConfigurationException, SAXException, IOException {
 		XmlPoem poem = new XmlPoem();
 		if (FileFormatHelper.hasXMLFormat(file)) {
+			
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = builder.parse(new BufferedInputStream(new FileInputStream(file)));
-			NodeList titleStatements = doc.getElementsByTagName("titleStmt");
-			String title = getTitle(titleStatements);
-			poem.setName(title);
+			
+			NodeList teiHeaders = doc.getElementsByTagName("teiHeader");
+			TeiHeader teiHeader = teiHeaderExtractor.getTeiHeader(doc, teiHeaders);
+			
+			NodeList textNodes = doc.getElementsByTagName("text");
+			Text text = textExtractor.getText(doc, textNodes);
+			
+			poem.setName(teiHeader.getFileDescription().getTitleStatement().getTitle());
 			NodeList cis = doc.getElementsByTagName("seg");
-			List<ContentItem> contentItems = ciExtractor.getContentItems(doc, cis);
+			
+			List<Seg> contentItems = ciExtractor.getContentItems(doc, cis);
 			poem.setContentItems(new HashSet<ContentItem>(contentItems));
 			//Synchronization
 			poem.getContentItems().forEach(ci -> ci.setXmlPoem(poem));

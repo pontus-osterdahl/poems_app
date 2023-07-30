@@ -1,5 +1,7 @@
 package com.example.poems_app.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +30,8 @@ public class ContentItemController {
 	@CrossOrigin
 	@GetMapping("/contentItems/byXmlPoemId/{id}")
 	public Iterable<ContentItem> getContentItemsByXmlPoemId(@PathVariable int id) throws Exception {
-    	return xmlPoemService.getContentItemsByXmlPoemId(id);
+		return xmlPoemService.getContentItemsByXmlPoemId(id);
+    	
     }
     
 	@CrossOrigin

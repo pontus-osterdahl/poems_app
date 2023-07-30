@@ -51,7 +51,7 @@ class SolrDocumentCreatorTest {
 		contentItem.setId(1);
 		contentItem.setXmlPoem(xmlPoem);
 		SolrInputDocument doc = documentCreator.getSolrInputDocument(contentItem);
-		assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"xmlpoem_id\":\"xmlpoem_id=0\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
+		assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"xmlpoem_id\":\"xmlpoem_id=0\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"persons\":\"persons=[]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
 	}
 
 }

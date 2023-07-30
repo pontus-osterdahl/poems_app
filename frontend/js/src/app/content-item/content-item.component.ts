@@ -20,7 +20,6 @@ export class ContentItemComponent implements OnInit {
   ciEmitter = new EventEmitter<String>();
 
   selectRelation(ci : String) {
-    console.log("hallo")
     this.ciEmitter.emit(ci);
   }
 

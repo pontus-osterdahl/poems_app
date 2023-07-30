@@ -46,6 +46,7 @@ public class SolrDocumentCreator {
 		doc.addField("id", item.getId());
 		doc.addField("xmlpoem_id", item.getXmlPoem().getId());
 		doc.addField("relations", item.getRelations());
+		doc.addField("persons", item.getPersons());
 		doc.addField("text_id", item.getTextId());
 		if (Objects.nonNull(item.getOrig())) {
 			doc.addField("orig_text",item.getOrig().getText());
