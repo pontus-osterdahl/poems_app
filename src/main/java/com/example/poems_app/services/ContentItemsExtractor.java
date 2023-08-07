@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 
 import com.example.poems_app.repositories.ContentItemRepository;
 import com.example.poems_app.xml.ContentItem;
+import com.example.poems_app.xml.DescriptiveItem;
 import com.example.poems_app.xml.Orig;
 import com.example.poems_app.xml.Reg;
 import com.example.poems_app.xml.Seg;
@@ -28,8 +29,8 @@ import com.example.poems_app.xml.Seg;
 @Service
 public class ContentItemsExtractor {
 
-	@Autowired
-	private ContentItemRepository ciRepository;
+	//@Autowired
+	//private ContentItemRepository ciRepository;
 
 	public List<Seg> getContentItems(Document doc, NodeList cis) throws ParserConfigurationException,
 			FileNotFoundException, SAXException, IOException, XPathExpressionException {
@@ -55,7 +56,7 @@ public class ContentItemsExtractor {
 					}
 					item.setRelations(relationsList);
 				} else {
-					item = new Seg();
+					item = new DescriptiveItem();
 				}
 
 				Node node = cis.item(i);

@@ -2,7 +2,10 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -14,11 +17,12 @@ import javax.persistence.OneToMany;
 public class Letter {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String xmlId;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<AuthorSection> authors;
 
 	public int getId() {

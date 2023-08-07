@@ -2,9 +2,13 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Entity to store sections of letters within one part of manuscript.
@@ -15,11 +19,12 @@ import javax.persistence.OneToMany;
 public class Part {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String xmlId;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Letter> letters;
 	
 	public int getId() {

@@ -30,7 +30,7 @@ class SolrDocumentCreatorTest {
 		xmlPoem.setFilepath("TEST PATH");
 		xmlPoem.setId(1);
 		xmlPoem.setName("TEST POEM");
-		xmlPoem.setContentItems(new HashSet<ContentItem>());
+		//xmlPoem.setContentItems(new HashSet<ContentItem>());
 		SolrInputDocument doc = documentCreator.getSolrInputDocument(xmlPoem);	
 		assertEquals(doc.jsonStr().replaceAll("\\s", ""),"{\"id\":\"id=1\",\"name\":\"name=TESTPOEM\",\"filePath\":\"filePath=TESTPATH\"}".replaceAll("\\s", ""));
 	}
@@ -49,9 +49,9 @@ class SolrDocumentCreatorTest {
 		contentItem.setOrig(orig);
 		contentItem.setReg(reg);
 		contentItem.setId(1);
-		contentItem.setXmlPoem(xmlPoem);
+		//contentItem.setXmlPoem(xmlPoem);
 		SolrInputDocument doc = documentCreator.getSolrInputDocument(contentItem);
-		assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"xmlpoem_id\":\"xmlpoem_id=0\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"persons\":\"persons=[]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
+		assertEquals(doc.jsonStr().replaceAll("\\s",  ""),"{\"id\":\"id=1\",\"relations\":\"relations=[Aristophanes_2, Aristohanes_3]\",\"persons\":\"persons=[]\",\"text_id\":\"text_id=Aristophanes_1\",\"orig_text\":\"orig_text=TEST TEXT\",\"reg_text\":\"reg_text=TEST TEXT\"}".replaceAll("\\s", ""));
 	}
 
 }

@@ -1,8 +1,22 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class ObjectDescription {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
+	@OneToOne
 	private SupportDescription supportDescription;
+	
+	@OneToOne
 	private LayoutDescription layoutDescription;
 	
 	public void setSupportDescription(SupportDescription supportDescription) {
@@ -20,17 +34,13 @@ public class ObjectDescription {
 	public void setLayoutDescription(LayoutDescription layoutDescription) {
 		this.layoutDescription = layoutDescription;
 	}
-	
-	/**
-	 *     <supportDesc>
-        <support>Paper</support>
-        <extent>II + 108 (+ 6a, 95a)
-            <dimensions>
-                <height>200</height>
-                <width>135</width>
-            </dimensions>
-        </extent>
-    </supportDesc>
-	 */
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }

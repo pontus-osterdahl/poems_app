@@ -25,10 +25,10 @@ public class SolrDocumentCreator {
 		doc.addField("name", item.getName());
 		doc.addField("filePath", item.getFilepath());
 		
-		for (ContentItem ci: item.getContentItems()) {
+		/**for (ContentItem ci: item.getContentItems()) {
 			doc.addChildDocument(getSolrInputDocument(ci));
 			doc.addChildDocument(doc);
-		}
+		}*/
 		
 		return doc;
 	}
@@ -44,7 +44,7 @@ public class SolrDocumentCreator {
         final SolrInputDocument doc = new SolrInputDocument();
 		
 		doc.addField("id", item.getId());
-		doc.addField("xmlpoem_id", item.getXmlPoem().getId());
+		/**doc.addField("xmlpoem_id", item.getXmlPoem().getId());*/
 		doc.addField("relations", item.getRelations());
 		doc.addField("persons", item.getPersons());
 		doc.addField("text_id", item.getTextId());

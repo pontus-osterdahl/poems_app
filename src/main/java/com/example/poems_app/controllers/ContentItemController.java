@@ -22,18 +22,17 @@ public class ContentItemController {
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
-	@CrossOrigin
+/**	@CrossOrigin
     @GetMapping("/contentItems/xmlPoemId/{id}")
 	public XmlPoem getXmlPoemByContentItemId(@PathVariable int id) throws Exception {
     	return xmlPoemService.getXmlPoemByContentItemId(id);
-    }
+    }*/
 	
-	@CrossOrigin
+/**	@CrossOrigin
 	@GetMapping("/contentItems/byXmlPoemId/{id}")
 	public List<Seg> getContentItemsByXmlPoemId(@PathVariable int id) throws Exception {
 		return xmlPoemService.getContentItemsByXmlPoemId(id);
-    	
-    }
+    }*/
     
 	@CrossOrigin
     @GetMapping("/contentItems/textId/{textId}")

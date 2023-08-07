@@ -35,9 +35,6 @@ import com.example.poems_app.xml.XmlPoem;
 public class XmlPoemParser {
 
 	@Autowired
-	private ContentItemsExtractor ciExtractor;
-	
-	@Autowired
 	private TeiHeaderExtractor teiHeaderExtractor;
 
 	@Autowired
@@ -72,16 +69,20 @@ public class XmlPoemParser {
 			NodeList teiHeaders = doc.getElementsByTagName("teiHeader");
 			TeiHeader teiHeader = teiHeaderExtractor.getTeiHeader(doc, teiHeaders);
 			
-			NodeList textNodes = doc.getElementsByTagName("text");
-			Text text = textExtractor.getText(doc, textNodes);
+//			NodeList textNodes = doc.getElementsByTagName("text");
+//			Text text = textExtractor.getText(doc, textNodes);
 			
-			poem.setName(teiHeader.getFileDescription().getTitleStatement().getTitle());
+			Text text = textExtractor.getText(doc);
+			
+			poem.setTeiHeader(teiHeader);
+			poem.setText(text);
+/**			poem.setName(teiHeader.getFileDescription().getTitleStatement().getTitle());
 			NodeList cis = doc.getElementsByTagName("seg");
 			
 			List<Seg> contentItems = ciExtractor.getContentItems(doc, cis);
 			poem.setContentItems(new HashSet<ContentItem>(contentItems));
 			//Synchronization
-			poem.getContentItems().forEach(ci -> ci.setXmlPoem(poem));
+			poem.getContentItems().forEach(ci -> ci.setXmlPoem(poem));*/
 		}
 		return poem;
 	}

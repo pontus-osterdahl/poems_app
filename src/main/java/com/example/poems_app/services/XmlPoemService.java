@@ -54,9 +54,9 @@ public class XmlPoemService {
 	@Autowired
 	private XmlPoemIndexer xmlPoemIndexer;
 
-	public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
+	/**public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
-	}
+	}*/
 
 	public ContentItem getContentItemByTextId(String textId) throws Exception {
 		return contentItemRepository.findByTextId(textId).orElseThrow(Exception::new);
@@ -72,7 +72,7 @@ public class XmlPoemService {
 
 	public List<Part> getPartsByXmlPoemId(int id) {
 		return xmlPoemRepository.findById(id).orElseThrow()
-				.getText().getGroup().getText().getBody().getParts();
+				.getText().getGroup().getInnerText().getBody().getParts();
 	}
 	
 	public List<Letter> getLettersByXmlPoemId(int id) {
@@ -208,6 +208,7 @@ public class XmlPoemService {
 		File xmlFile = new File(filepath);
 
 		if (xmlFile.isFile()) {
+			System.out.println("HALLO");
 			XmlPoem poem = xmlParser.XmlPoem(xmlFile);
 			poem.setFilepath(filepath);
 			poem = xmlPoemRepository.save(poem);

@@ -1,7 +1,19 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class SourceDescription {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
+	@OneToOne
 	ManuscriptDescription manusciptDescription;
 
 	public ManuscriptDescription getManusciptDescription() {
@@ -10,6 +22,14 @@ public class SourceDescription {
 
 	public void setManusciptDescription(ManuscriptDescription manusciptDescription) {
 		this.manusciptDescription = manusciptDescription;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

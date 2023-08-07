@@ -21,10 +21,11 @@ public class XmlPoem {
 	
 	private String name;
 	
-	@OneToOne
+	
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Text text;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private TeiHeader teiHeader;
 	
 	/**
@@ -32,14 +33,17 @@ public class XmlPoem {
 	 * 
 	 * private Bibliography
 	 */
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	
 	/**
 	@OneToMany(cascade = {CascadeType.ALL})
 	private Set<ContentItem> contentItems;
 	*/
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getId() {
 		return this.id;
 	}

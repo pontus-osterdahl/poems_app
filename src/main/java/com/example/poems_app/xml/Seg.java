@@ -36,6 +36,9 @@ public abstract class Seg {
 		placenames = new HashSet<String>();
 	}
 	
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private AuthorSection authorSection;
+	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Orig orig;
 	
@@ -109,5 +112,13 @@ public abstract class Seg {
 	private Set<String> persons;
 	
 	@ElementCollection
-	private Set<String> placenames;	
+	private Set<String> placenames;
+
+	public AuthorSection getAuthorSection() {
+		return authorSection;
+	}
+
+	public void setAuthorSection(AuthorSection authorSection) {
+		this.authorSection = authorSection;
+	}	
 }

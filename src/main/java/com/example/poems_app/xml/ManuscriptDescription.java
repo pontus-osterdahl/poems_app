@@ -2,12 +2,33 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class ManuscriptDescription {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
+	@OneToMany
 	private List<MsItemStruct> msContent;
+	
+	@OneToOne
 	private MsIdentifier msIdentifier;
-    private History history;
+    
+	@OneToOne
+	private History history;
+    
+    @OneToOne
     private Additional additional;
+    
+    @OneToOne
     private PhysDescription physicalDescription;
     
 	public List<MsItemStruct> getMsContent() {
@@ -39,6 +60,12 @@ public class ManuscriptDescription {
 	}
 	public void setPhysicalDescription(PhysDescription physicalDescription) {
 		this.physicalDescription = physicalDescription;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
  
 }

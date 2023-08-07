@@ -1,7 +1,17 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class MsItemStruct {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
     
     public MsItemStruct(Locus locus, String author, String title, String note, String textLang) {
 		this.locus = locus;
@@ -10,10 +20,48 @@ public class MsItemStruct {
 		this.note = note;
 		this.textLang = textLang;
 	}
+    @OneToOne
 	private Locus locus;
     private String author;
     private String title;
     private String note;
     private String textLang;
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Locus getLocus() {
+		return locus;
+	}
+	public void setLocus(Locus locus) {
+		this.locus = locus;
+	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
+	public String getTextLang() {
+		return textLang;
+	}
+	public void setTextLang(String textLang) {
+		this.textLang = textLang;
+	}
 	
 }

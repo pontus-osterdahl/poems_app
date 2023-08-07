@@ -149,8 +149,8 @@ public class TeiHeaderExtractor {
 				String from = item.getAttributes().getNamedItem("from").getTextContent();
 				String to = item.getAttributes().getNamedItem("to").getTextContent();
 				locus.setContent(textContent);
-				locus.setFrom(from);
-				locus.setTo(to);
+				locus.setFromPage(from);
+				locus.setToPage(to);
 			} else if (localName.equals("author")) {
 				author = textContent;
 			} else if (localName.equals("title")) {

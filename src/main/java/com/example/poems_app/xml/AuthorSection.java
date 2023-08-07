@@ -2,7 +2,10 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -15,11 +18,12 @@ import javax.persistence.OneToMany;
 public class AuthorSection {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String authorId;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Seg> segments;
 
 	public int getId() {

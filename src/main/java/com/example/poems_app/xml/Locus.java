@@ -1,21 +1,38 @@
 package com.example.poems_app.xml;
 
-public class Locus {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-	private String from;
-	private String to;
+@Entity
+public class Locus {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	private String fromPage;
+	private String toPage;
 	private String content;
-	public String getFrom() {
-		return from;
+	public String getFromPage() {
+		return fromPage;
 	}
-	public void setFrom(String from) {
-		this.from = from;
+	public void setFromPage(String fromPage) {
+		this.fromPage = fromPage;
 	}
-	public String getTo() {
-		return to;
+	public String getToPage() {
+		return toPage;
 	}
-	public void setTo(String to) {
-		this.to = to;
+	public void setToPage(String toPage) {
+		this.toPage = toPage;
 	}
 	public String getContent() {
 		return content;
@@ -23,4 +40,5 @@ public class Locus {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 }

@@ -1,7 +1,17 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class History {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+	
 	String origin;
 	
 	String provenance;
@@ -21,11 +31,13 @@ public class History {
 	public void setProvenance(String provenance) {
 		this.provenance = provenance;
 	}
-	
 
-/**    <history>
-        <origin>Created in the <origDate notBefore="1500" notAfter="1600">16th century</origDate> at an <origPlace>unkown</origPlace> location</origin>
-        <provenance>"F. I index saec. XVIII; f. II syllabus anno 1550 posterior: Demophili pitagorici | sententiae. | . 1009; notulae A. Mai in ff. 57. 57v. 66; sigillum Bibl. Nat. Paris. in ff. 1 et 106v" - "in dorso tesserae gentiliciae Pii IX et Ioh.-Bapt. Pitra card. bibliothecarii."</provenance>
-    </history> */
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 }
