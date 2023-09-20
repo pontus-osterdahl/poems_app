@@ -42,5 +42,9 @@ public class BibItemService implements BeanService<BibItem> {
 		// TODO Auto-generated method stub
 		return bibItemRepository.saveAll(items);
 	}
+	
+	public Optional<BibItem> getByIdentifier(String identifier) {
+		return bibItemRepository.findByIdentifier(identifier);
+	}
 
 }

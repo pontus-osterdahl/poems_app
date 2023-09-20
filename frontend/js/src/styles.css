@@ -1,7 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 
-body { background-color: grey; 
+body { background-color:  #ACDEE6;; 
     background-repeat: no-repeat;
-    background-position: center top;  }
+    background-position: center top;  
+    font-family: Sans-Serif;
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.sidebar {
+    float: left;
+}
+
+.wrapper {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.top_banner {
+    text-align: top;
+    background-color: #002F5F;
+    height: 50px;
+    font-size: x-large;
+    font-family: Sans-Serif;
+    color: white;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    border-bottom: 5px solid #EB7125;
+}

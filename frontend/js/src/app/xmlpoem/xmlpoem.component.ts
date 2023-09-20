@@ -23,17 +23,17 @@ export class XmlpoemComponent implements OnInit {
   showOrig : boolean = true;
   showReg : boolean = true;
 
-  selectRelation(contentItem: String) {
-      console.log(contentItem);
+  showOnHover() {
       
-      const dialogConfig = new MatDialogConfig();
+  }
 
+  selectRelation(contentItem: String) {
+      const dialogConfig = new MatDialogConfig();
       let dialogRef = this.dialog.open(ContentItemComponentWrapperComponent, {
         height: '400px',
         width: '600px',
         data : { id: "GV_Part01_Ch01_Chilo01_ci5" },
       });
-
       this.dialog.open(ContentItemComponentWrapperComponent,dialogConfig);
   }
 

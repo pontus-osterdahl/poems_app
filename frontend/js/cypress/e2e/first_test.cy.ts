@@ -3,7 +3,7 @@
 describe("Index page", () => {
     it("should display something", () => {
         cy.visit("/");
-        cy.get("[data-cy=test]").should("contain","Welcome to Poems APP");
+        cy.get(".top_banner").should("contain","Welcome to the new SAWS-Edition");
     });
 });
 /** 

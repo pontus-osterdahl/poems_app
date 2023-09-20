@@ -4,7 +4,7 @@ Search poem by:
 <select #selectCriteria (change)="onSelected(selectCriteria.value)">
     <option *ngFor="let item of criteria">{{item}}</option>
 </select>
-<br/>
+z
 <input [(ngModel)]="searchterm">
 
     <button (click)="search()">Search poem</button>

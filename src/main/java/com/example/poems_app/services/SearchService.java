@@ -15,10 +15,14 @@ import org.apache.solr.common.SolrException;
 import org.springframework.stereotype.Service;
 
 import com.example.poems_app.Poem;
+import com.example.poems_app.SearchRequest;
+import com.example.poems_app.SearchType;
 
 public interface SearchService<T> {
     public List<T> search(String queryItem) throws SolrServerException, IOException;
     public List<T> getAll() throws SolrServerException, IOException;
+    public SearchType[] getSearchTypes();
+    public List<T> search(SearchRequest searchRequest) throws SolrServerException, IOException;
 }
 
 

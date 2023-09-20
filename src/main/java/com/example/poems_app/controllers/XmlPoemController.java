@@ -2,6 +2,7 @@ package com.example.poems_app.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -25,10 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.xml.sax.SAXException;
 
+import com.example.poems_app.services.XmlPoemIndexer;
 import com.example.poems_app.services.XmlPoemService;
+import com.example.poems_app.xml.TeiHeader;
 import com.example.poems_app.xml.XmlPoem;
 import com.example.poems_app.xml.XmlPoemDTO;
-
 
 @RestController
 public class XmlPoemController {
@@ -38,6 +40,9 @@ public class XmlPoemController {
 	
 	@Autowired
 	ModelMapper mapper;
+	
+	@Autowired
+	XmlPoemIndexer xmlPoemIndexer;
 	
 	@CrossOrigin
 	@DeleteMapping("/xmlPoem/{id}")
@@ -57,7 +62,7 @@ public class XmlPoemController {
 
 	/**
 	 * 
-	 * @param file The XML file to parsed to poem
+	 * @param file The XML file to  be parsed to poem
 	 * @throws IllegalStateException 
 	 * @throws IOException
 	 */
@@ -70,7 +75,11 @@ public class XmlPoemController {
 	@CrossOrigin
 	@PostMapping(value = "/saveXmlPoem", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
 	public XmlPoem addXmlPoem(@RequestPart MultipartFile file) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SolrServerException {
-		return xmlPoemService.savePoemWithFile(file);
+		XmlPoem poem = xmlPoemService.savePoemWithFile(file);
+		if (Objects.nonNull(poem)) {
+			xmlPoemIndexer.index(poem);
+		}
+		return poem;
     }
 	
 	@CrossOrigin
@@ -86,7 +95,11 @@ public class XmlPoemController {
 				.collect(Collectors.toList());
 	}
 	
+	@CrossOrigin
+	@GetMapping("/xmlPoemTeiHeader/{id}")
+	public TeiHeader getXmlPoemTeiHeader(@PathVariable int id) throws Exception {
+		XmlPoem xmlPoem = xmlPoemService.getXmlPoemById(id);	
+		return xmlPoem.getTeiHeader();
+	}
 	
-	
-
 }

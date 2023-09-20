@@ -14,6 +14,8 @@ import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Service;
 
 import com.example.poems_app.Poem;
+import com.example.poems_app.SearchRequest;
+import com.example.poems_app.SearchType;
 
 @Service
 public class PoemSearchService implements SearchService<Poem>{
@@ -96,5 +98,18 @@ public class PoemSearchService implements SearchService<Poem>{
 	protected SolrClient getSolrClient() {
 		return new ConcurrentUpdateSolrClient.Builder("http://localhost:8983/solr").build();
 	}
+
+	@Override
+	public SearchType[] getSearchTypes() {
+		return new SearchType[] {SearchType.ALL, SearchType.TITLE, SearchType.WORD};
+	}
+
+	@Override
+	public List<Poem> search(SearchRequest searchRequest) throws SolrServerException, IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 }

@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,14 +17,10 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -34,7 +32,11 @@ import com.example.poems_app.XmlPoemCreatedMessage;
 import com.example.poems_app.XmlPoemCreationRequest;
 import com.example.poems_app.repositories.ContentItemRepository;
 import com.example.poems_app.repositories.XmlPoemRepository;
+import com.example.poems_app.xml.AuthorSection;
 import com.example.poems_app.xml.ContentItem;
+import com.example.poems_app.xml.Letter;
+import com.example.poems_app.xml.Part;
+import com.example.poems_app.xml.Seg;
 import com.example.poems_app.xml.XmlPoem;
 
 @Service
@@ -48,13 +50,16 @@ public class XmlPoemService {
 
 	@Autowired
 	private XmlPoemParser xmlParser;
-	
+
 	@Autowired
 	private XmlPoemIndexer xmlPoemIndexer;
-
-	public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
+	
+	/**@Autowired
+	private SegIndexer segIndexer;
+*/
+	/**public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
-	}
+	}*/
 
 	public ContentItem getContentItemByTextId(String textId) throws Exception {
 		return contentItemRepository.findByTextId(textId).orElseThrow(Exception::new);
@@ -68,8 +73,24 @@ public class XmlPoemService {
 		return xmlPoemRepository.findAll();
 	}
 
-	public Iterable<ContentItem> getContentItemsByXmlPoemId(int id) {
-		return contentItemRepository.findByXmlPoemId(id);
+	public List<Part> getPartsByXmlPoemId(int id) {
+		return xmlPoemRepository.findById(id).orElseThrow()
+				.getText().getGroup().getInnerText().getBody().getParts();
+	}
+	
+	public List<Letter> getLettersByXmlPoemId(int id) {
+		List<Letter> letters = getPartsByXmlPoemId(id).stream().map(a -> a.getLetters()).flatMap(List::stream).collect(Collectors.toList());
+		return letters;
+	}
+	
+	public List<AuthorSection> getAuthorSectionsByXmlPoemId(int id) {
+		List<AuthorSection> authorSections = getLettersByXmlPoemId(id).stream().map(a -> a.getAuthors()).flatMap(List::stream).collect(Collectors.toList());
+		return authorSections;
+	}
+	
+	public List<Seg> getContentItemsByXmlPoemId(int id) {   
+		List<Seg> segments = getAuthorSectionsByXmlPoemId(id).stream().map(a -> a.getSegments()).flatMap(List::stream).collect(Collectors.toList());
+		return segments;
 	}
 
 	public void parseAndIndexPoem(XmlPoem xmlPoem)
@@ -98,10 +119,10 @@ public class XmlPoemService {
 	}
 
 	// TODO this should be read from a config file
-	//private String folder = "C:\\Users\\pontu\\";
 
-	private String folder = "/usr/local/gus";
-	
+	@Value(value = "${xml.storage.directory}")
+	private String folder;
+
 	public void deleteXmlPoemById(int id) {
 		xmlPoemRepository.deleteById(id);
 	}
@@ -128,6 +149,12 @@ public class XmlPoemService {
 			poem = xmlPoemRepository.save(poem);
 			xmlPoemIndexer.index(poem);
 			
+			List<Seg> segs = getContentItemsByXmlPoemId(poem.getId());
+			/**for (Seg seg : segs) {
+				segIndexer.index(seg);
+			}*/
+//			segIndexer.indexAll(segs);
+
 			return poem;
 		} else {
 			return null;
@@ -144,7 +171,7 @@ public class XmlPoemService {
 	private KafkaTemplate<String, XmlPoemCreatedMessage> createdTemplate;
 
 	/**
-	 * 
+	 * Starts process to save Poem by sending message to kafka broker.
 	 * 
 	 * @param file File to be parsed to poem
 	 * @throws IllegalStateException
@@ -154,12 +181,11 @@ public class XmlPoemService {
 		String filePath = FilenameUtils.concat(folder, file.getName());
 		File persistent_file = new File(filePath);
 		if (persistent_file.createNewFile()) {
-		    file.transferTo(persistent_file);
-		    sendMessage(persistent_file.getAbsolutePath());
+			file.transferTo(persistent_file);
+			sendMessage(persistent_file.getAbsolutePath());
 		}
 	}
 
-	// Test if a consumer can read the actions
 	@KafkaListener(topics = TEST_TOPIC, containerFactory = "xmlPoemCreationRequestKafkaListenerContainerFactory")
 	public void xmlPoemCreationRequestListener(XmlPoemCreationRequest request) throws XPathExpressionException,
 			ParserConfigurationException, SAXException, IOException, SolrServerException {
@@ -191,6 +217,7 @@ public class XmlPoemService {
 		File xmlFile = new File(filepath);
 
 		if (xmlFile.isFile()) {
+			System.out.println("HALLO");
 			XmlPoem poem = xmlParser.XmlPoem(xmlFile);
 			poem.setFilepath(filepath);
 			poem = xmlPoemRepository.save(poem);
@@ -216,7 +243,7 @@ public class XmlPoemService {
 
 		poem = xmlPoemRepository.save(poem);
 		xmlPoemIndexer.index(poem);
-		
+
 		return poem;
 	}
 

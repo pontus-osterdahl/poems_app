@@ -1,10 +1,14 @@
-<p>Collections</p>
 <div data-cy="row">
     <div data-cy="tests" *ngFor="let x of xmlpoems" class="cols">
         <h4>{{x.name}}</h4>
+        <button (click)="showInfo(x.id)">Show Info</button>
+        <div *ngIf="infotobeshown(x.id)">
+            <app-teiheader [xmlid] = "x.id"></app-teiheader>
+        </div>
         <button (click)="show(x.id)">Show Apophthegms</button>
         <div *ngIf="tobeshown(x.id)">
             <app-xmlpoem [id] = "x.id"></app-xmlpoem>
         </div>
+        <button (click)="delete(x.id)">Delete Manuscript</button>
     </div>
 </div>

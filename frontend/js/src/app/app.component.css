@@ -7,11 +7,25 @@
 
 .content{
    text-align: center;
+   display: block;
+
+   /**display: grid;
+   grid-template-columns: [a] 100 px [b] 200px;
+   grid-template-areas:
+   "a b"*/
 }
 
+.left {
+    grid-area: a;
+    text-align: left;
+}
+
+.right {
+    grid-area: b;
+    text-align: left;
+}
 
 nav {
-
     font-size: 20pt;
 }
 
@@ -20,7 +34,6 @@ a {
 }
 
 .app_component_back {
-    text-align: center;
-    background-color: green;
-    
+/**    padding-top: 20px;*/
+
 }
