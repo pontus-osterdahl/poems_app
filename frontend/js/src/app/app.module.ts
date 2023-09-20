@@ -28,6 +28,8 @@ import { AddXmlPoemComponent } from './add-xml-poem/add-xml-poem.component';
 import { XmlpoemsearchComponent } from './xmlpoemsearch/xmlpoemsearch.component';
 import { PlacesComponent } from './places/places.component';
 import { PersonsComponent } from './persons/persons.component';
+import { DeleteXmlpoemComponent } from './delete-xmlpoem/delete-xmlpoem.component';
+import { TeiheaderComponent } from './teiheader/teiheader.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,9 @@ import { PersonsComponent } from './persons/persons.component';
     AddXmlPoemComponent,
     XmlpoemsearchComponent,
     PlacesComponent,
-    PersonsComponent
+    PersonsComponent,
+    DeleteXmlpoemComponent,
+    TeiheaderComponent
   ],
   imports: [
     BrowserModule,

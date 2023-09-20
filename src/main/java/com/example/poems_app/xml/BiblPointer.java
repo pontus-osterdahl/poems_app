@@ -1,5 +1,6 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class BiblPointer {
 		this.biblScope = biblScope;
 	}
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	BibItem bibItem;
 
 	String biblScope;

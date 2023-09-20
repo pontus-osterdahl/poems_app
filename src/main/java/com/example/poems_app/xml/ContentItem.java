@@ -16,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.apache.solr.common.SolrInputDocument;
+
+import com.example.poems_app.services.SolrDocumentCreator;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity

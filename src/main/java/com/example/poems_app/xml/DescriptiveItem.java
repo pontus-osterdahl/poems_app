@@ -2,6 +2,10 @@ package com.example.poems_app.xml;
 
 import javax.persistence.Entity;
 
+import org.apache.solr.common.SolrInputDocument;
+
+import com.example.poems_app.services.SolrDocumentCreator;
+
 @Entity
 public class DescriptiveItem extends Seg {
 

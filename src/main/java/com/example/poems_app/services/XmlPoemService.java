@@ -53,7 +53,10 @@ public class XmlPoemService {
 
 	@Autowired
 	private XmlPoemIndexer xmlPoemIndexer;
-
+	
+	/**@Autowired
+	private SegIndexer segIndexer;
+*/
 	/**public XmlPoem getXmlPoemByContentItemId(int id) throws Exception {
 		return xmlPoemRepository.findByContentItems_id(id).orElseThrow(Exception::new);
 	}*/
@@ -76,17 +79,17 @@ public class XmlPoemService {
 	}
 	
 	public List<Letter> getLettersByXmlPoemId(int id) {
-		List<Letter> letters = (List<Letter>) getPartsByXmlPoemId(id).stream().map(a -> a.getLetters());
+		List<Letter> letters = getPartsByXmlPoemId(id).stream().map(a -> a.getLetters()).flatMap(List::stream).collect(Collectors.toList());
 		return letters;
 	}
 	
 	public List<AuthorSection> getAuthorSectionsByXmlPoemId(int id) {
-		List<AuthorSection> authorSections = (List<AuthorSection>) getLettersByXmlPoemId(id).stream().map(a -> a.getAuthors());
+		List<AuthorSection> authorSections = getLettersByXmlPoemId(id).stream().map(a -> a.getAuthors()).flatMap(List::stream).collect(Collectors.toList());
 		return authorSections;
 	}
 	
 	public List<Seg> getContentItemsByXmlPoemId(int id) {   
-		List<Seg> segments = (List<Seg>) getAuthorSectionsByXmlPoemId(id).stream().map(a -> a.getSegments());
+		List<Seg> segments = getAuthorSectionsByXmlPoemId(id).stream().map(a -> a.getSegments()).flatMap(List::stream).collect(Collectors.toList());
 		return segments;
 	}
 
@@ -145,6 +148,12 @@ public class XmlPoemService {
 
 			poem = xmlPoemRepository.save(poem);
 			xmlPoemIndexer.index(poem);
+			
+			List<Seg> segs = getContentItemsByXmlPoemId(poem.getId());
+			/**for (Seg seg : segs) {
+				segIndexer.index(seg);
+			}*/
+//			segIndexer.indexAll(segs);
 
 			return poem;
 		} else {

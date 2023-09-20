@@ -1,5 +1,6 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,7 @@ public class SourceDescription {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	ManuscriptDescription manusciptDescription;
 
 	public ManuscriptDescription getManusciptDescription() {
@@ -30,7 +31,6 @@ public class SourceDescription {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-	
+	}	
 	
 }

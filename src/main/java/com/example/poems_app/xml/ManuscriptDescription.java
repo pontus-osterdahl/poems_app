@@ -2,6 +2,7 @@ package com.example.poems_app.xml;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,19 +17,19 @@ public class ManuscriptDescription {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<MsItemStruct> msContent;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private MsIdentifier msIdentifier;
     
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private History history;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Additional additional;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private PhysDescription physicalDescription;
     
 	public List<MsItemStruct> getMsContent() {

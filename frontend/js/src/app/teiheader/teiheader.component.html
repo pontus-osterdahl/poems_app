@@ -1,0 +1,29 @@
+<p>teiheader works!</p>
+<div *ngIf="teiHeader">
+    <div *ngIf="teiHeader.fileDescription.titleStatement">
+        Title : {{teiHeader.fileDescription.titleStatement.title}}
+    </div>
+    <div *ngIf="teiHeader.fileDescription">
+        Publication Statement : {{teiHeader.fileDescription.publicationStatement}}
+    </div>
+    <div *ngIf="teiHeader.fileDescription.sourceDescription.manusciptDescription as msDesc">
+        
+        <div *ngIf="msDesc.msIdentifier as msIdentifier">
+        Country : {{msIdentifier.country}} <br/>
+        Settlement : {{msIdentifier.settlement}} <br/>
+        Repository : {{msIdentifier.repository }} <br/>
+        No : {{msIdentifier.idno}} <br/>
+        </div>
+
+        <div *ngIf="msDesc.msContent">
+            Contents
+            <div *ngFor="let msCont of msDesc.msContent">
+                {{msCont.author}} <br/>
+                {{msCont.title}} <br/>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

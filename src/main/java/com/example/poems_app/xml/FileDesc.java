@@ -19,7 +19,7 @@ public class FileDesc {
 	
 	private String publicationStatement;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private SourceDescription sourceDescription;
 
 	public TitleStatement getTitleStatement() {

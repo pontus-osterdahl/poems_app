@@ -42,21 +42,21 @@ public class TeiHeaderExtractor {
 		PhysDescription physDesc = new PhysDescription();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node objectDesc = nl.item(i);
-			if (objectDesc.getLocalName().equals("objectDesc")) {
+			if (objectDesc.getNodeName().equals("objectDesc")) {
 				ObjectDescription objDesc = new ObjectDescription();
 				NodeList objectDescChildren = objectDesc.getChildNodes();
 				for (int y = 0; y < objectDescChildren.getLength(); y++) {
 					Node item = objectDescChildren.item(y);
-					if (item.getLocalName().equals("supportDesc")) {
+					if (item.getNodeName().equals("supportDesc")) {
 						SupportDescription supportDesc = new SupportDescription();
 						NodeList supportDescChildren = item.getChildNodes();
 						String support = "";
 						String extent = "";
 						for (int a = 0; a < supportDescChildren.getLength(); a++) {
 							Node supportDescItem = supportDescChildren.item(a);
-							if (supportDescItem.getLocalName().equals("support")) {
+							if (supportDescItem.getNodeName().equals("support")) {
 								support = supportDescItem.getTextContent();
-							} else if (supportDescItem.getLocalName().equals("extent")) {
+							} else if (supportDescItem.getNodeName().equals("extent")) {
 								extent = supportDescItem.getTextContent();
 								// TODO ensure that dimensions are handled
 							}
@@ -65,11 +65,11 @@ public class TeiHeaderExtractor {
 						supportDesc.setSupport(support);
 						objDesc.setSupportDescription(supportDesc);
 
-					} else if (item.getLocalName().equals("layoutDesc")) {
+					} else if (item.getNodeName().equals("layoutDesc")) {
 						LayoutDescription layoutDesc = new LayoutDescription();
 						NodeList nl1 = item.getChildNodes();
 						for (int x = 0; x < nl1.getLength(); x++) {
-							if (nl1.item(x).getLocalName().equals("layout")) {
+							if (nl1.item(x).getNodeName().equals("layout")) {
 								Node layoutItem = nl1.item(x);
 								int columns = Integer
 										.parseInt(layoutItem.getAttributes().getNamedItem("columns").getTextContent());
@@ -95,15 +95,15 @@ public class TeiHeaderExtractor {
 		NodeList bibls = listBibl.getChildNodes();
 		List<BiblPointer> biblPointers = new ArrayList<BiblPointer>();
 		for (int i = 0; i < bibls.getLength(); i++) {
-			if (bibls.item(0).getLocalName().equals("bibl")) {
+			if (bibls.item(0).getNodeName().equals("bibl")) {
 				String target = "";
 				String biblScope = "";
 				NodeList biblValues = bibls.item(0).getChildNodes();
 				for (int y = 0; y < biblValues.getLength(); y++) {
 					Node n = biblValues.item(y);
-					if (n.getLocalName().equals("ptr")) {
+					if (n.getNodeName().equals("ptr")) {
 						target = n.getAttributes().getNamedItem("target").getTextContent();
-					} else if (n.getLocalName().equals("biblScope")) {
+					} else if (n.getNodeName().equals("biblScope")) {
 						biblScope = n.getTextContent();
 					}
 				}
@@ -121,7 +121,7 @@ public class TeiHeaderExtractor {
 		History hist = new History();
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
-			String localName = item.getLocalName();
+			String localName = item.getNodeName();
 			String textContent = item.getTextContent();
 			if (localName.equals("origin")) {
 				hist.setOrigin(textContent);
@@ -143,7 +143,7 @@ public class TeiHeaderExtractor {
 
 		for (int i = 0; i < nl.getLength(); i++) {
 			Node item = nl.item(i);
-			String localName = item.getLocalName();
+			String localName = item.getNodeName();
 			String textContent = item.getTextContent();
 			if (localName.equals("locus")) {
 				String from = item.getAttributes().getNamedItem("from").getTextContent();
@@ -175,14 +175,14 @@ public class TeiHeaderExtractor {
 
 			for (int y = 0; y < fileDescriptionChildren.getLength(); y++) {
 				Node item = fileDescriptionChildren.item(y);
-				String localName = item.getLocalName();
+				String localName = item.getNodeName();
 
 				if ("titleStmt".equals(localName)) {
 					TitleStatement titleStmt = new TitleStatement();
 					NodeList titleChildNodes = item.getChildNodes();
 
 					for (int x = 0; x < titleChildNodes.getLength(); x++) {
-						if (titleChildNodes.item(x).getLocalName().equals("title")) {
+						if (titleChildNodes.item(x).getNodeName().equals("title")) {
 							String title = titleChildNodes.item(x).getTextContent();
 							titleStmt.setTitle(title);
 							break;
@@ -193,57 +193,62 @@ public class TeiHeaderExtractor {
 
 				else if ("publicationStmt".equals(localName)) {
 					fileDesc.setPublicationStatement(item.getTextContent());
-				}
-				else if ("sourceDesc".equals(localName)) {
+				} else if ("sourceDesc".equals(localName)) {
 					SourceDescription sourceDesc = new SourceDescription();
-					Node n = item.getFirstChild();
-					if (n.getLocalName().equals("msDesc")) {
-						NodeList msDescNodes = n.getChildNodes();
-						ManuscriptDescription msDesc = new ManuscriptDescription();
-						for (int a = 0; a < msDescNodes.getLength(); a++) {
-							Node tmpNode = msDescNodes.item(a);
-							if (tmpNode.getLocalName().equals("msIdentifier")) {
-								NodeList msIdentifierNodes = tmpNode.getChildNodes();
-								MsIdentifier ms = new MsIdentifier();
-								for (int b = 0; b < msIdentifierNodes.getLength(); b++) {
-									Node msIdentifierNode = msIdentifierNodes.item(b);
-									String name = msIdentifierNode.getLocalName();
-									String textContent = msIdentifierNode.getTextContent();
-									if ("country".equals(name)) {
-										ms.setCountry(textContent);
-									} else if (("settlement").equals(name)) {
-										ms.setSettlement(textContent);
-									} else if (("repository").equals(name)) {
-										ms.setRepository(textContent);
-									} else if (("idno").equals(name)) {
-										ms.setIdno(textContent);
+					NodeList nodeLists = item.getChildNodes();
+
+					// Node n = item.getFirstChild();
+					for (int u = 0; u < nodeLists.getLength(); u++) {
+						Node n = nodeLists.item(u);
+						if (n.getNodeName().equals("msDesc")) {
+							NodeList msDescNodes = n.getChildNodes();
+							ManuscriptDescription msDesc = new ManuscriptDescription();
+							for (int a = 0; a < msDescNodes.getLength(); a++) {
+								Node tmpNode = msDescNodes.item(a);
+								if (tmpNode.getNodeName().equals("msIdentifier")) {
+									NodeList msIdentifierNodes = tmpNode.getChildNodes();
+									MsIdentifier ms = new MsIdentifier();
+									for (int b = 0; b < msIdentifierNodes.getLength(); b++) {
+										Node msIdentifierNode = msIdentifierNodes.item(b);
+										String name = msIdentifierNode.getNodeName();
+										String textContent = msIdentifierNode.getTextContent();
+										if ("country".equals(name)) {
+											ms.setCountry(textContent);
+										} else if (("settlement").equals(name)) {
+											ms.setSettlement(textContent);
+										} else if (("repository").equals(name)) {
+											ms.setRepository(textContent);
+										} else if (("idno").equals(name)) {
+											ms.setIdno(textContent);
+										}
 									}
-								}
-								msDesc.setMsIdentifier(ms);
-							} else if (tmpNode.getLocalName().equals("msContents")) {
-								List<MsItemStruct> itemStructs = new ArrayList<MsItemStruct>();
-								NodeList msIdentifierNodes = tmpNode.getChildNodes();
-								for (int b = 0; b < msIdentifierNodes.getLength(); b++) {
-									Node msContentNode = msIdentifierNodes.item(b);
-									String name = msContentNode.getLocalName();
-									if ("msItemStruct".equals(name)) {
-										MsItemStruct itemStruct = extractMsItemStruct(msContentNode.getChildNodes());
-										itemStructs.add(itemStruct);
+									msDesc.setMsIdentifier(ms);
+								} else if (tmpNode.getNodeName().equals("msContents")) {
+									List<MsItemStruct> itemStructs = new ArrayList<MsItemStruct>();
+									NodeList msIdentifierNodes = tmpNode.getChildNodes();
+									for (int b = 0; b < msIdentifierNodes.getLength(); b++) {
+										Node msContentNode = msIdentifierNodes.item(b);
+										String name = msContentNode.getNodeName();
+										if ("msItemStruct".equals(name)) {
+											MsItemStruct itemStruct = extractMsItemStruct(
+													msContentNode.getChildNodes());
+											itemStructs.add(itemStruct);
+										}
 									}
+									msDesc.setMsContent(itemStructs);
+								} else if (tmpNode.getNodeName().equals("physDesc")) {
+									PhysDescription physDesc = extractPhysDesc(tmpNode.getChildNodes());
+									msDesc.setPhysicalDescription(physDesc);
+								} else if (tmpNode.getNodeName().equals("history")) {
+									History history = extractHistory(tmpNode.getChildNodes());
+									msDesc.setHistory(history);
+								} else if (tmpNode.getNodeName().equals("additional")) {
+									Additional additional = extractAdditional(tmpNode);
+									msDesc.setAdditional(additional);
 								}
-								msDesc.setMsContent(itemStructs);
-							} else if (tmpNode.getLocalName().equals("physDesc")) {
-								PhysDescription physDesc = extractPhysDesc(tmpNode.getChildNodes());
-								msDesc.setPhysicalDescription(physDesc);
-							} else if (tmpNode.getLocalName().equals("history")) {
-								History history = extractHistory(tmpNode.getChildNodes());
-								msDesc.setHistory(history);
-							} else if (tmpNode.getLocalName().equals("additional")) {
-								Additional additional = extractAdditional(tmpNode);
-								msDesc.setAdditional(additional);
 							}
+							sourceDesc.setManusciptDescription(msDesc);
 						}
-						sourceDesc.setManusciptDescription(msDesc);
 					}
 					fileDesc.setSourceDescription(sourceDesc);
 				}

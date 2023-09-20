@@ -13,7 +13,23 @@ export class XmlpoemsComponent implements OnInit {
   xmlpoems : Xmlnameid[] = []
 
   shownpoems: number[] = []
+  showinfopoems: number[] = []
 
+
+  showInfo(xmlnameid : number): void {
+    
+    const index = this.showinfopoems.indexOf(xmlnameid, 0);
+    if (index > -1) {
+      this.showinfopoems.splice(index, 1);
+    }
+    else {
+      this.showinfopoems.push(xmlnameid);
+    }
+}
+
+infotobeshown(xmlnameid : number): boolean {
+  return this.showinfopoems.includes(xmlnameid);
+}
 
   show(xmlnameid : number): void {
     
@@ -26,14 +42,23 @@ export class XmlpoemsComponent implements OnInit {
       }
   }
 
+  delete(xmlnameid : number): void {
+    this.xmlpoemService.deleteXmlPoem(xmlnameid).subscribe(p => this.getXmlNames());
+  }
+
   tobeshown(xmlnameid : number): boolean {
     return this.shownpoems.includes(xmlnameid);
   }
 
   constructor(private xmlpoemService : XmlpoemService) { }
 
-  ngOnInit(): void {
+  getXmlNames(): void {
     this.xmlpoemService.getXmlNames().subscribe(name => this.xmlpoems = name);
+
+  }
+
+  ngOnInit(): void {
+    this.getXmlNames();
   }
 
 }

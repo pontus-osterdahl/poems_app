@@ -1,5 +1,6 @@
 package com.example.poems_app.xml;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,10 @@ public class ObjectDescription {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private SupportDescription supportDescription;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private LayoutDescription layoutDescription;
 	
 	public void setSupportDescription(SupportDescription supportDescription) {

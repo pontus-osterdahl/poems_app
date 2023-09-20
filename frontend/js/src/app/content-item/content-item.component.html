@@ -1,6 +1,6 @@
 <div *ngIf="apophthegm" class="ciWrapper">
     <div class="reg">{{apophthegm.reg.text}}<br>
-    ======<br>{{apophthegm.reg.criticalApparatus}}</div>
+    <div *ngIf="apophthegm.reg.criticalApparatus">======<br>{{apophthegm.reg.criticalApparatus}}</div></div>
     <div class="text">{{apophthegm.orig.text}}</div>    
     <div *ngIf="apophthegm.relations.length > 0">
         <button (click)="toggleShowRelations()">Relations</button>

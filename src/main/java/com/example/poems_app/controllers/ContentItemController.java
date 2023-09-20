@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.poems_app.services.SegmentService;
 import com.example.poems_app.services.XmlPoemService;
 import com.example.poems_app.xml.Apophthegm;
 import com.example.poems_app.xml.ApophthegmText;
@@ -22,17 +23,20 @@ public class ContentItemController {
 	@Autowired
 	private XmlPoemService xmlPoemService;
 	
+	@Autowired
+	private SegmentService segmentService;
+	
 /**	@CrossOrigin
     @GetMapping("/contentItems/xmlPoemId/{id}")
 	public XmlPoem getXmlPoemByContentItemId(@PathVariable int id) throws Exception {
     	return xmlPoemService.getXmlPoemByContentItemId(id);
     }*/
 	
-/**	@CrossOrigin
+	@CrossOrigin
 	@GetMapping("/contentItems/byXmlPoemId/{id}")
 	public List<Seg> getContentItemsByXmlPoemId(@PathVariable int id) throws Exception {
 		return xmlPoemService.getContentItemsByXmlPoemId(id);
-    }*/
+    }
     
 	@CrossOrigin
     @GetMapping("/contentItems/textId/{textId}")
@@ -45,6 +49,12 @@ public class ContentItemController {
     public Iterable<ContentItem> getContentItems() {
     	return xmlPoemService.getContentItems();
     }
+	
+	@CrossOrigin
+	@GetMapping("/segs")
+	public Iterable<Seg> getSegs() {
+		return segmentService.getAllSegs();
+	}
 	
 /**	@CrossOrigin
     @GetMapping("/contentItems")

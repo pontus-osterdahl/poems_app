@@ -29,12 +29,9 @@ import com.example.poems_app.xml.Seg;
 @Service
 public class ContentItemsExtractor {
 
-	//@Autowired
-	//private ContentItemRepository ciRepository;
-
 	public List<Seg> getContentItems(Document doc, NodeList cis) throws ParserConfigurationException,
 			FileNotFoundException, SAXException, IOException, XPathExpressionException {
-		List<Seg> contentItems = new ArrayList<Seg>();
+		List<Seg> segs = new ArrayList<Seg>();
 		XPath xPath = XPathFactory.newInstance().newXPath();
 
 		for (int i = 0; i < cis.getLength(); i++) {
@@ -44,8 +41,8 @@ public class ContentItemsExtractor {
 				if (current.getAttributes().getNamedItem("type").getTextContent().equals("contentItem")) {
 					item = new ContentItem();
 					List<String> relationsList = new ArrayList<String>();
-					String id = current.getAttributes().getNamedItem("xml:id").getNodeValue();
-					NodeList relations = (NodeList) xPath.compile("//relation[@active=" + "'" + id + "'" + "]")
+					String textId = current.getAttributes().getNamedItem("xml:id").getNodeValue();
+					NodeList relations = (NodeList) xPath.compile("//relation[@active=" + "'" + textId + "'" + "]")
 							.evaluate(doc, XPathConstants.NODESET);
 					for (int n = 0; n < relations.getLength(); n++) {
 						Node relation = relations.item(n);
@@ -55,6 +52,7 @@ public class ContentItemsExtractor {
 						}
 					}
 					item.setRelations(relationsList);
+					item.setTextId(textId);
 				} else {
 					item = new DescriptiveItem();
 				}
@@ -104,6 +102,13 @@ public class ContentItemsExtractor {
 										item.addPerson(persname);
 									}
 								}
+								else if (withinOrigNode.getNodeName().equals("placecName")) {
+									if (withinOrigNode.getAttributes().getNamedItem("key") != null) {
+										String placeName = withinOrigNode.getAttributes().getNamedItem("key")
+												.getTextContent();
+										item.addPlacename(placeName);
+									}
+								}
 							}
 						}
 						reg.setText(nodes.item(o_i).getTextContent());
@@ -111,9 +116,9 @@ public class ContentItemsExtractor {
 						item.setReg(reg);
 					}
 				}
-				contentItems.add(item);
+				segs.add(item);
 			}
 		}
-		return contentItems;
+		return segs;
 	}
 }

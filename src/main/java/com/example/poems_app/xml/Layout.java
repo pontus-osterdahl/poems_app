@@ -12,6 +12,10 @@ public class Layout {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	public Layout() {
+		
+	}
+	
 	public Layout(int columns, int ruledLines, String content) {
 		super();
 		this.columns = columns;

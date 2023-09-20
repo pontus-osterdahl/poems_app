@@ -17,6 +17,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.example.poems_app.Indexable;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity

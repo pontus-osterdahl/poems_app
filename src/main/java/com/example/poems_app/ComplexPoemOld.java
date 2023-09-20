@@ -17,6 +17,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.apache.solr.common.SolrInputDocument;
+
+import com.example.poems_app.services.SolrDocumentCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @XmlRootElement(name="poem")

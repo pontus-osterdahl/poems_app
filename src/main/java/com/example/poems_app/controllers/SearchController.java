@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.poems_app.SearchRequest;
 import com.example.poems_app.SearchType;
+import com.example.poems_app.services.SegmentSearchService;
 import com.example.poems_app.services.XmlPoemSearchService;
+import com.example.poems_app.xml.Seg;
 import com.example.poems_app.xml.XmlPoem;
 
 @RestController
@@ -20,6 +22,9 @@ public class SearchController {
 	
 	@Autowired
 	XmlPoemSearchService xmlPoemSearchService;
+	
+	@Autowired
+	SegmentSearchService segmentSearchService;
 	
 	@CrossOrigin
 	@GetMapping("/getSearchTypes")
@@ -43,7 +48,24 @@ public class SearchController {
 	 */
 	@CrossOrigin
 	@GetMapping("/getXmlPoemByWord")
-	public List<XmlPoem> searchBySearchRequest(@RequestParam SearchType searchType, @RequestParam String lemma) throws SolrServerException, IOException {
+	public List<XmlPoem> searchXmlPoemBySearchRequest(@RequestParam SearchType searchType, @RequestParam String lemma) throws SolrServerException, IOException {
 		return xmlPoemSearchService.search(new SearchRequest(lemma,searchType,""));
 	}
+	
+	/**
+	 * Returns a list of XmlPoems found by the searchrequest.
+	 * @param searchType The type of search.
+	 * @param lemma The actual search term
+	 * @return The list of found XmlPoems
+	 * @throws SolrServerException Thrown if Solr could not be correctly connected to
+	 * @throws IOExceptions
+	 */
+	@CrossOrigin
+	@GetMapping("/getSegmentsByWord")
+	public List<Seg> searchSegmentsBySearchRequest(@RequestParam SearchType searchType, @RequestParam String lemma) throws SolrServerException, IOException {
+		return segmentSearchService.search(new SearchRequest(lemma,searchType,""));
+	}
+	
+	
+	
 }
