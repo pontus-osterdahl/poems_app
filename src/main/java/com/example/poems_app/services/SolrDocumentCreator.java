@@ -7,9 +7,11 @@ import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.poems_app.xml.Break;
 import com.example.poems_app.xml.ContentItem;
 import com.example.poems_app.xml.DescriptiveItem;
 import com.example.poems_app.xml.Seg;
+import com.example.poems_app.xml.TextWrapper;
 import com.example.poems_app.xml.XmlPoem;
 
 @Service
@@ -55,7 +57,13 @@ public class SolrDocumentCreator {
 		}
 
 		if (Objects.nonNull(item.getOrig())) {
-			doc.addField("orig_text",item.getOrig().getText());
+			String text = ""; 
+			for (Break b : item.getOrig().getBreaks()) {
+				if (b instanceof TextWrapper ) {
+					text += b.getText();
+				}
+			}
+			doc.addField("orig_text",text);
 		}
 		
 		if (Objects.nonNull(item.getReg())) {

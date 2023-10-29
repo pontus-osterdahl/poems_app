@@ -29,6 +29,10 @@ import com.example.poems_app.xml.Seg;
 @Service
 public class ContentItemsExtractor {
 
+	@Autowired
+	private OrigExtractor origExtractor;
+	
+	
 	public List<Seg> getContentItems(Document doc, NodeList cis) throws ParserConfigurationException,
 			FileNotFoundException, SAXException, IOException, XPathExpressionException {
 		List<Seg> segs = new ArrayList<Seg>();
@@ -63,15 +67,15 @@ public class ContentItemsExtractor {
 
 					NodeList nodes = e.getElementsByTagName("orig");
 					for (int o_i = 0; o_i < nodes.getLength() && o_i < 1; o_i++) {
-						Orig orig = new Orig();
-						orig.setText(nodes.item(o_i).getTextContent());
+						Orig orig = origExtractor.extractOrig(nodes.item(o_i));
 						item.setOrig(orig);
 					}
 
 					nodes = e.getElementsByTagName("reg");
 					for (int o_i = 0; o_i < nodes.getLength() && o_i < 1; o_i++) {
-						Reg reg = new Reg();
-						String tmpCriticalApparatus = "";
+						Reg reg = origExtractor.extractReg(nodes.item(o_i));
+						//Reg reg = new Reg();
+						/**String tmpCriticalApparatus = "";
 						NodeList withinOrig = nodes.item(o_i).getChildNodes();
 						for (int u = 0; u < withinOrig.getLength(); u++) {
 							Node withinOrigNode = withinOrig.item(u);
@@ -102,7 +106,7 @@ public class ContentItemsExtractor {
 										item.addPerson(persname);
 									}
 								}
-								else if (withinOrigNode.getNodeName().equals("placecName")) {
+								else if (withinOrigNode.getNodeName().equals("placeName")) {
 									if (withinOrigNode.getAttributes().getNamedItem("key") != null) {
 										String placeName = withinOrigNode.getAttributes().getNamedItem("key")
 												.getTextContent();
@@ -112,7 +116,7 @@ public class ContentItemsExtractor {
 							}
 						}
 						reg.setText(nodes.item(o_i).getTextContent());
-						reg.setCriticalApparatus(tmpCriticalApparatus);
+						reg.setCriticalApparatus(tmpCriticalApparatus);*/
 						item.setReg(reg);
 					}
 				}
