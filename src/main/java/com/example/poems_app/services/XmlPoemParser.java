@@ -62,27 +62,17 @@ public class XmlPoemParser {
 			ParserConfigurationException, SAXException, IOException {
 		XmlPoem poem = new XmlPoem();
 		if (FileFormatHelper.hasXMLFormat(file)) {
-			
+
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = builder.parse(new BufferedInputStream(new FileInputStream(file)));
-			
+
 			NodeList teiHeaders = doc.getElementsByTagName("teiHeader");
 			TeiHeader teiHeader = teiHeaderExtractor.getTeiHeader(doc, teiHeaders);
-			
-//			NodeList textNodes = doc.getElementsByTagName("text");
-//			Text text = textExtractor.getText(doc, textNodes);
-			
+
 			Text text = textExtractor.getText(doc);
-			
+
 			poem.setTeiHeader(teiHeader);
 			poem.setText(text);
-/**			poem.setName(teiHeader.getFileDescription().getTitleStatement().getTitle());
-			NodeList cis = doc.getElementsByTagName("seg");
-			
-			List<Seg> contentItems = ciExtractor.getContentItems(doc, cis);
-			poem.setContentItems(new HashSet<ContentItem>(contentItems));
-			//Synchronization
-			poem.getContentItems().forEach(ci -> ci.setXmlPoem(poem));*/
 		}
 		return poem;
 	}

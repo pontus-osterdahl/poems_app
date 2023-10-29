@@ -32,7 +32,17 @@ public class ContentItemsExtractor {
 	@Autowired
 	private OrigExtractor origExtractor;
 	
-	
+	/**
+	 * Method returns content items
+	 * @param doc Full document from which relations can be extracted.
+	 * @param cis List of Nodes from which contentitems are to be extracted
+	 * @return List of parsed content items
+	 * @throws ParserConfigurationException
+	 * @throws FileNotFoundException
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws XPathExpressionException
+	 */
 	public List<Seg> getContentItems(Document doc, NodeList cis) throws ParserConfigurationException,
 			FileNotFoundException, SAXException, IOException, XPathExpressionException {
 		List<Seg> segs = new ArrayList<Seg>();
@@ -74,49 +84,6 @@ public class ContentItemsExtractor {
 					nodes = e.getElementsByTagName("reg");
 					for (int o_i = 0; o_i < nodes.getLength() && o_i < 1; o_i++) {
 						Reg reg = origExtractor.extractReg(nodes.item(o_i));
-						//Reg reg = new Reg();
-						/**String tmpCriticalApparatus = "";
-						NodeList withinOrig = nodes.item(o_i).getChildNodes();
-						for (int u = 0; u < withinOrig.getLength(); u++) {
-							Node withinOrigNode = withinOrig.item(u);
-							if (withinOrigNode.getNodeType() == Node.ELEMENT_NODE) {
-								if (withinOrigNode.getNodeName().equals("choice")) {
-									String origReading = "";
-									String correction = "";
-									NodeList withinInnerChoiceList = withinOrigNode.getChildNodes();
-									for (int z = 0; z < withinInnerChoiceList.getLength(); z++) {
-										Node aNode = withinInnerChoiceList.item(z);
-										if (aNode.getNodeType() == Node.ELEMENT_NODE
-												&& aNode.getNodeName().equals("sic")) {
-											origReading = aNode.getTextContent();
-											aNode.setTextContent("");
-										} else if (aNode.getNodeType() == Node.ELEMENT_NODE
-												&& aNode.getNodeName().equals("corr")) {
-											correction = aNode.getTextContent();
-										}
-									}
-									if (correction != "" && origReading != "") {
-										String addedValue = tmpCriticalApparatus != "" ? " | " : "";
-										tmpCriticalApparatus += addedValue + correction + " : " + origReading;
-									}
-								} else if (withinOrigNode.getNodeName().equals("persName")) {
-									if (withinOrigNode.getAttributes().getNamedItem("key") != null) {
-										String persname = withinOrigNode.getAttributes().getNamedItem("key")
-												.getTextContent();
-										item.addPerson(persname);
-									}
-								}
-								else if (withinOrigNode.getNodeName().equals("placeName")) {
-									if (withinOrigNode.getAttributes().getNamedItem("key") != null) {
-										String placeName = withinOrigNode.getAttributes().getNamedItem("key")
-												.getTextContent();
-										item.addPlacename(placeName);
-									}
-								}
-							}
-						}
-						reg.setText(nodes.item(o_i).getTextContent());
-						reg.setCriticalApparatus(tmpCriticalApparatus);*/
 						item.setReg(reg);
 					}
 				}
