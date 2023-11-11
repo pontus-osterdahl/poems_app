@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrigText } from '../orig-text';
 
 @Component({
@@ -9,7 +9,10 @@ import { OrigText } from '../orig-text';
 export class OrigTextComponent implements OnInit {
 
   constructor() { }
-  public text : OrigText = new OrigText();
+  @Input() text?: OrigText;
+
+ // }
+ // public text : OrigText = new OrigText();
 
   ngOnInit(): void {
   }
