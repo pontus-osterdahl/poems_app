@@ -1,9 +1,10 @@
+import { Break } from "src/break";
+
 export class OrigText {
     constructor() {
         this.id = 0;
-        this.text = "";
+        this.breaks = [];
     }
     id : number;
-    text : String;
- 
+    breaks : Break[]; 
 }

@@ -12,6 +12,9 @@ import { Apophthegm } from '../apophthegm';
 export class ContentItemComponent implements OnInit {
 
   showRelations : boolean = false;
+  showReg : boolean = false;
+  showOrig : boolean = false; 
+
 
   constructor(private ciService : ContentItemServiceService) { }
 
@@ -25,6 +28,14 @@ export class ContentItemComponent implements OnInit {
 
   toggleShowRelations() {
       this.showRelations = !this.showRelations;
+  }
+
+  toggleReg() {
+      this.showReg = !this.showReg;
+  }
+
+  toggleOrig() {
+    this.showOrig = !this.showOrig;
   }
 
   ngOnInit(): void {

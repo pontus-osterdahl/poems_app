@@ -5,9 +5,9 @@
     background-color: #E3F4F7
 }
 
-.ciWrapper:hover {
+/**.ciWrapper:hover {
     text-shadow: 2px 2px black;
-}
+}*/
 
 .contentItem {
     border: red;
