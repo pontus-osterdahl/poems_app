@@ -1,4 +1,4 @@
-<div *ngFor="let break of text?.breaks" class="nobreak">
+
     <div [ngSwitch]="break.type" class="nobreak">
         <div *ngSwitchCase="'ADD'" class="nobreak"></div>
         <div *ngSwitchCase="'HIGH_LIGHTED'" class="nobreak">
@@ -27,6 +27,12 @@
                     <h1>{{attr.value}}</h1>
                 </div>
             </div>
+            <div *ngFor="let inBreak of break.content" class="nobreak">
+                <app-reg-break [break]="inBreak"/>
+            </div>
         </div>
-    </div> 
-</div>
+        <div *ngSwitchCase="'NAME'" class="nobreak">
+            <div *ngFor="let inBreak of break.content" class="nobreak">
+            <app-reg-break [break]="inBreak"/>
+        </div>
+        </div>

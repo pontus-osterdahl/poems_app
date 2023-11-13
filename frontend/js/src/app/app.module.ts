@@ -30,6 +30,8 @@ import { PlacesComponent } from './places/places.component';
 import { PersonsComponent } from './persons/persons.component';
 import { DeleteXmlpoemComponent } from './delete-xmlpoem/delete-xmlpoem.component';
 import { TeiheaderComponent } from './teiheader/teiheader.component';
+import { RegBreakComponent } from './reg-break/reg-break.component';
+import { OrigBreakComponent } from './orig-break/orig-break.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,9 @@ import { TeiheaderComponent } from './teiheader/teiheader.component';
     PlacesComponent,
     PersonsComponent,
     DeleteXmlpoemComponent,
-    TeiheaderComponent
+    TeiheaderComponent,
+    RegBreakComponent,
+    OrigBreakComponent
   ],
   imports: [
     BrowserModule,

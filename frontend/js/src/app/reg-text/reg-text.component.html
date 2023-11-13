@@ -1,3 +1,4 @@
-<p>reg-text works!</p>
 
-    
+    <div *ngFor="let break of text?.breaks" class="nobreak">
+        <app-reg-break [break]="break"></app-reg-break>
+</div>
