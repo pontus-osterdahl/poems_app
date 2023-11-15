@@ -22,8 +22,6 @@ import com.example.poems_app.xml.AuthorSection;
 import com.example.poems_app.xml.Body;
 import com.example.poems_app.xml.DocTitle;
 import com.example.poems_app.xml.Front;
-import com.example.poems_app.xml.TextGroup;
-import com.example.poems_app.xml.InnerText;
 import com.example.poems_app.xml.Letter;
 import com.example.poems_app.xml.Part;
 import com.example.poems_app.xml.Seg;
@@ -38,14 +36,20 @@ public class TextExtractor {
 	@Autowired
 	ContentItemsExtractor cisExtractor;
 
-	private InnerText getInnerText(Document doc, NodeList innerTexts) throws FileNotFoundException,
+	public Text getText(Document doc) throws FileNotFoundException,
 			XPathExpressionException, ParserConfigurationException, SAXException, IOException {
-		InnerText innerText = new InnerText();
-		for (int i = 0; i < innerTexts.getLength(); i++) {
-			if (innerTexts.item(i).getNodeName().equals("text")) {
-				String xmlId = innerTexts.item(i).getAttributes().getNamedItem("xml:id").getNodeValue();
+		XPath xPath = XPathFactory.newInstance().newXPath();
+		String expression = "//TEI/text";
+
+		NodeList nL = (NodeList) xPath.compile(expression).evaluate(doc, XPathConstants.NODESET);
+
+		Text text = new Text();
+		Text innerText = new Text();
+		for (int i = 0; i < nL.getLength(); i++) {
+			if (nL.item(i).getNodeName().equals("text")) {
+				String xmlId = nL.item(i).getAttributes().getNamedItem("xml:id").getNodeValue();
 				innerText.setXmlId(xmlId);
-				NodeList innerTextChildren = innerTexts.item(i).getChildNodes();
+				NodeList innerTextChildren = nL.item(i).getChildNodes();
 				for (int y = 0; y < innerTextChildren.getLength(); y++) {
                     if (innerTextChildren.item(y).getNodeName().equals("front")) {
     					Front front = getFront(innerTextChildren.item(y).getChildNodes());
@@ -61,7 +65,7 @@ public class TextExtractor {
 		return innerText;
 	}
 
-	public Text getText(Document doc) throws FileNotFoundException, XPathExpressionException,
+	/**public Text getText(Document doc) throws FileNotFoundException, XPathExpressionException,
 			ParserConfigurationException, SAXException, IOException {
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String expression = "//TEI/text";
@@ -94,7 +98,7 @@ public class TextExtractor {
 		}
 		return text;
 
-	}
+	}*/
 
 	public Front getFront(NodeList frontList) {
 		Front front = new Front();

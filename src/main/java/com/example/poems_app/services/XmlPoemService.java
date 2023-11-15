@@ -75,7 +75,7 @@ public class XmlPoemService {
 
 	public List<Part> getPartsByXmlPoemId(int id) {
 		return xmlPoemRepository.findById(id).orElseThrow()
-				.getText().getGroup().getInnerText().getBody().getParts();
+				.getText().getBody().getParts();
 	}
 	
 	public List<Letter> getLettersByXmlPoemId(int id) {

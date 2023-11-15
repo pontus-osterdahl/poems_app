@@ -20,17 +20,6 @@ public class Reg extends ApophthegmText {
 		
 	private String criticalApparatus;
 	
-	@Lob
-	protected String text;
-	
-	public void setText(String text) {
-		this.text = text;
-	}
-	
-	public String getText() {
-		return this.text;
-	}
-	
 	public void setCriticalApparatus(String criticalApparatus) {
 		this.criticalApparatus = criticalApparatus;
 	}

@@ -23,12 +23,10 @@ import com.example.poems_app.repositories.XmlPoemRepository;
 import com.example.poems_app.xml.AuthorSection;
 import com.example.poems_app.xml.Body;
 import com.example.poems_app.xml.ContentItem;
-import com.example.poems_app.xml.InnerText;
 import com.example.poems_app.xml.Letter;
 import com.example.poems_app.xml.Part;
 import com.example.poems_app.xml.Seg;
 import com.example.poems_app.xml.Text;
-import com.example.poems_app.xml.TextGroup;
 import com.example.poems_app.xml.XmlPoem;
 
 @SpringBootTest
