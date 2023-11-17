@@ -14,15 +14,36 @@ public class Text {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	private TextGroup group;
+	private String xmlId;
 
-	public TextGroup getGroup() {
-		return group;
+	public String getXmlId() {
+		return xmlId;
 	}
 
-	public void setGroup(TextGroup group) {
-		this.group = group;
+	public void setXmlId(String xmlId) {
+		this.xmlId = xmlId;
+	}
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Front front;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	private Body body;
+
+	public Front getFront() {
+		return front;
+	}
+
+	public void setFront(Front front) {
+		this.front = front;
+	}
+
+	public Body getBody() {
+		return body;
+	}
+
+	public void setBody(Body body) {
+		this.body = body;
 	}
 
 	public int getId() {

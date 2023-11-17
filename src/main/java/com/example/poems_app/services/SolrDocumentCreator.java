@@ -66,9 +66,9 @@ public class SolrDocumentCreator {
 			doc.addField("orig_text",text);
 		}
 		
-		if (Objects.nonNull(item.getReg())) {
+/**		if (Objects.nonNull(item.getReg())) {
 			doc.addField("reg_text",item.getReg().getText());
-		}
+		}*/
 		
 		return doc;
 	}

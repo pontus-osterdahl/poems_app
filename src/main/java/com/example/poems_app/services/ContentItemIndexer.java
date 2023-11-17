@@ -21,11 +21,8 @@ public class ContentItemIndexer implements Indexer<ContentItem> {
         final SolrInputDocument doc = new SolrInputDocument();
 		
 		doc.addField("id", item.getId());
-		doc.addField("authorSection", item.getAuthorSection().getId());
 		doc.addField("relations", item.getRelations());
 		doc.addField("text_id", item.getTextId());
-		//doc.addField("orig", item.getOrig().getText());
-		//doc.addField("reg", item.getReg().getText());
 		
 		try {
      		client.add("poems", doc);

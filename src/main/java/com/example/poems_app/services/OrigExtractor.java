@@ -21,6 +21,7 @@ import com.example.poems_app.xml.PageBreak;
 import com.example.poems_app.xml.PersName;
 import com.example.poems_app.xml.Reg;
 import com.example.poems_app.xml.TextWrapper;
+import com.example.poems_app.xml.Word;
 
 @Service
 public class OrigExtractor {
@@ -73,34 +74,26 @@ public class OrigExtractor {
 			Node n = nl.item(i);
 			String nodename = n.getNodeName();
 			Break breakItem = null;
-
 			if ("pb".equals(nodename) || "lb".equals(nodename)) {
-				// String line = n.getAttributes().getNamedItem("n").getNodeValue();
 				breakItem = nodename.equals("pb") ? new PageBreak() : new LineBreak();
-				// breakItem.setText(line);
 			} else if ("hi".equals(nodename)) {
 				breakItem = new HighLighted();
-//					String line = n.getTextContent();
-//					breakItem.setText(line);
 			} else if ("url".equals(nodename)) {
 				breakItem = new Graphic();
-//					String line = n.getTextContent();
-//					breakItem.setText(line);
 			} else if ("add".equals(nodename)) {
 				breakItem = new Add();
-//					if (n.getAttributes().getNamedItem("place") != null) {
-//					    String line = n.getAttributes().getNamedItem("place").getNodeValue();
-//					    breakItem.setText(line);
-//					}
-//					NodeList addNl = n.getChildNodes();
-//					List<Break> content = generateContent(addNl);
-//					breakItem.setContent(content);
 			} else if ("persName".equals(nodename)) {
 				breakItem = new PersName();
 			} else if ("name".equals(nodename)) {
 				breakItem = new Name();
 			}
-			
+			else if ("w".equals(nodename)) {
+				breakItem = new Word();
+				String line = n.getTextContent();
+				breakItem.setText(line);
+				breaks.add(breakItem);
+				return breaks;
+			}
 			
 			else if (n.getNodeType() == Node.TEXT_NODE) {
 				breakItem = new TextWrapper();
