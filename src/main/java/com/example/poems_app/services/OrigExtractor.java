@@ -91,6 +91,8 @@ public class OrigExtractor {
 				breakItem = new Word();
 				String line = n.getTextContent();
 				breakItem.setText(line);
+				breaks.add(breakItem);
+				return breaks;
 			}
 			
 			else if (n.getNodeType() == Node.TEXT_NODE) {
