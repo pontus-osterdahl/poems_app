@@ -6,9 +6,10 @@
             <app-teiheader [xmlid] = "x.id"></app-teiheader>
         </div>
         <button (click)="show(x.id)">Show Apophthegms</button>
+        
+        <button (click)="delete(x.id)">Delete Manuscript</button>
         <div *ngIf="tobeshown(x.id)">
             <app-xmlpoem [id] = "x.id"></app-xmlpoem>
         </div>
-        <button (click)="delete(x.id)">Delete Manuscript</button>
     </div>
 </div>

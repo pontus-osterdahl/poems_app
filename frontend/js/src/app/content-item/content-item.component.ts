@@ -12,13 +12,14 @@ import { Apophthegm } from '../apophthegm';
 export class ContentItemComponent implements OnInit {
 
   showRelations : boolean = false;
-  showReg : boolean = false;
-  showOrig : boolean = false; 
+  
 
 
   constructor(private ciService : ContentItemServiceService) { }
 
   @Input() apophthegm? : Apophthegm;
+  @Input() showReg : boolean = false;
+  @Input() showOrig : boolean = false; 
   @Output('relation')
   ciEmitter = new EventEmitter<String>();
 

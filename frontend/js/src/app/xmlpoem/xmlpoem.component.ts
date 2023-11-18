@@ -27,6 +27,14 @@ export class XmlpoemComponent implements OnInit {
       
   }
 
+  toggleReg() {
+    this.showReg = !this.showReg;
+}
+
+toggleOrig() {
+  this.showOrig = !this.showOrig;
+}
+
   selectRelation(contentItem: String) {
       const dialogConfig = new MatDialogConfig();
       let dialogRef = this.dialog.open(ContentItemComponentWrapperComponent, {

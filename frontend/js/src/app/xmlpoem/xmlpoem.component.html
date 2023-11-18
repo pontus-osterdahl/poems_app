@@ -4,7 +4,9 @@
     <p>{{poem.name}}</p>
 </div>
 
+    <button (click)="toggleReg()">Reg</button>
+    <button (click)="toggleOrig()">Orig</button>
 <div data-cy="cis" *ngFor="let ci of apophthegms">
-    <app-content-item [apophthegm] = "ci" class="red" (relation)="selectRelation($event)"></app-content-item>    
+    <app-content-item [apophthegm] = "ci" [showReg] = "showReg" [showOrig] = "showOrig" class="red" (relation)="selectRelation($event)"></app-content-item>    
 </div>
 
