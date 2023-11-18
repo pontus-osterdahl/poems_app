@@ -1,7 +1,5 @@
 <div *ngIf="apophthegm" class="ciWrapper">
     <h4>{{apophthegm.textId}}</h4>
-    <button (click)="toggleReg()">Reg</button>
-    <button (click)="toggleOrig()">Orig</button>
     <div *ngIf="showReg">
     <app-reg-text [text]="apophthegm.reg"/>
 </div>
