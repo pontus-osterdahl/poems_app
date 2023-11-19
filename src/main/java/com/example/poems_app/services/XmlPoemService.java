@@ -185,6 +185,7 @@ public class XmlPoemService {
 	 * Starts process to save Poem by sending message to kafka broker.
 	 * 
 	 * @param file File to be parsed to poem
+	 * @param fileName Explicit name of file
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
