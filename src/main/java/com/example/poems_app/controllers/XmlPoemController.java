@@ -68,8 +68,8 @@ public class XmlPoemController {
 	 */
 	@PostMapping(value = "/save-poem", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	@CrossOrigin
-	public void sendMessage(@RequestPart MultipartFile file) throws IllegalStateException, IOException {
-		xmlPoemService.startSavePoem(file);
+	public void sendMessage(@RequestPart MultipartFile file, @RequestPart String fileName) throws IllegalStateException, IOException {
+		xmlPoemService.startSavePoem(file, fileName);
 	}
 	
 	@CrossOrigin

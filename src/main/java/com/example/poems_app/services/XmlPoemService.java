@@ -178,7 +178,19 @@ public class XmlPoemService {
 	 * @throws IOException
 	 */
 	public void startSavePoem(MultipartFile file) throws IllegalStateException, IOException {
-		String filePath = FilenameUtils.concat(folder, file.getName());
+		startSavePoem(file,file.getName());
+	}
+	
+	/**
+	 * Starts process to save Poem by sending message to kafka broker.
+	 * 
+	 * @param file File to be parsed to poem
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	public void startSavePoem(MultipartFile file, String fileName) throws IllegalStateException, IOException {
+		String filePath = FilenameUtils.concat(folder, fileName);
+		file.getOriginalFilename();
 		File persistent_file = new File(filePath);
 		if (persistent_file.createNewFile()) {
 			file.transferTo(persistent_file);
@@ -217,7 +229,6 @@ public class XmlPoemService {
 		File xmlFile = new File(filepath);
 
 		if (xmlFile.isFile()) {
-			System.out.println("HALLO");
 			XmlPoem poem = xmlParser.XmlPoem(xmlFile);
 			poem.setFilepath(filepath);
 			poem = xmlPoemRepository.save(poem);
