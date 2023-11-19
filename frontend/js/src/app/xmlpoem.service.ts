@@ -35,6 +35,7 @@ export class XmlpoemService {
   saveXmlPoem(file : File) : void {
     const formdata = new FormData();
     formdata.append("file", file);
+    formdata.append("fileName", file.name);
     this.httpClient.post<XmlPoem>(this.savepoems_url, formdata).subscribe(); 
   }
 
