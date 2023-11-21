@@ -12,5 +12,14 @@ constructor() {
   this.break = new Break();
 }
 
+trimBreakText() : string {
+  var array = this.break.text.split("\n");
+  array = array.filter((item) => {
+    return item !== '';
+  });
+  return array.join(" "); 
+}
+
+
   @Input() break : Break; 
 }
