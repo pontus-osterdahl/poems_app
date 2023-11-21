@@ -8,6 +8,7 @@ export class Break {
         this.content = [];
         this.attributes = [];
     }
+    
     id: number;
     type: String;
     text: string;

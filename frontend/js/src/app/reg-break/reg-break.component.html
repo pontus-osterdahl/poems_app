@@ -1,11 +1,11 @@
-
-    <div [ngSwitch]="break.type" class="nobreak">
+<div [ngSwitch]="break.type" class="nobreak">
+        <!--{{break.text}}-->
         <div *ngSwitchCase="'ADD'" class="nobreak"></div>
         <div *ngSwitchCase="'HIGH_LIGHTED'" class="nobreak">
             <b>{{break.content[0].text}}</b>
         </div>
         <div *ngSwitchCase="'TEXT_WRAPPER'" class="nobreak">
-            {{break.text}}
+            <!--{{trimBreakText()}}-->
         </div>
         <div *ngSwitchCase="'LINE_BREAK'" class="line_number" class="nobreak">
             <div *ngFor="let attr of break.attributes" class="nobreak">
@@ -34,5 +34,10 @@
         <div *ngSwitchCase="'NAME'" class="nobreak">
             <div *ngFor="let inBreak of break.content" class="nobreak">
             <app-reg-break [break]="inBreak"/>
+        </div>
+        <div *ngSwitchCase="'WORD'" class="nobreak">
+ <!--           <div *ngFor="let inBreak of break.content" class="nobreak">
+            <app-reg-break [break]="inBreak"/>-->
+            {{break.text}}
         </div>
         </div>

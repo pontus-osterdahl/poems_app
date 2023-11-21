@@ -15,4 +15,12 @@ export class RegTextComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  trimBreakText(breaktext : string) : string {
+    var array = breaktext.split("\n");
+    array = array.filter((item) => {
+      return item !== '';
+    });
+    return array.join(" "); 
+  }
+
 }

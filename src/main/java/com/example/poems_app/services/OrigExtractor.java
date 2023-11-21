@@ -74,6 +74,7 @@ public class OrigExtractor {
 			Node n = nl.item(i);
 			String nodename = n.getNodeName();
 			Break breakItem = null;
+			Boolean continuate = true;
 			if ("pb".equals(nodename) || "lb".equals(nodename)) {
 				breakItem = nodename.equals("pb") ? new PageBreak() : new LineBreak();
 			} else if ("hi".equals(nodename)) {
@@ -92,7 +93,7 @@ public class OrigExtractor {
 				String line = n.getTextContent();
 				breakItem.setText(line);
 				breaks.add(breakItem);
-				return breaks;
+				continuate = false;
 			}
 			
 			else if (n.getNodeType() == Node.TEXT_NODE) {
@@ -101,14 +102,13 @@ public class OrigExtractor {
 				breakItem.setText(line);
 			}
 
-			if (Objects.nonNull(breakItem)) {
+			if (Objects.nonNull(breakItem) && continuate) {
 				List<Attribute> attrs = generateAttributes(n.getAttributes());
 				breakItem.setAttributes(attrs);
 				NodeList addNl = n.getChildNodes();
 				List<Break> content = generateContent(addNl);
 				breakItem.setContent(content);
 				breaks.add(breakItem);
-
 			}
 		}
 		return breaks;
