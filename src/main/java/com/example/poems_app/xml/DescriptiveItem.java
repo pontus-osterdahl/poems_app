@@ -1,6 +1,6 @@
 package com.example.poems_app.xml;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 import org.apache.solr.common.SolrInputDocument;
 
