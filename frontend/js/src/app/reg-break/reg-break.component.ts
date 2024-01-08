@@ -12,6 +12,13 @@ constructor() {
   this.break = new Break();
 }
 
+getrep() : string {
+  var arr = this.break.attributes.filter((attr) => {
+    return attr.name = "resp";
+  })
+  return arr[0].value;
+}
+
 trimBreakText() : string {
   var array = this.break.text.split("\n");
   array = array.filter((item) => {

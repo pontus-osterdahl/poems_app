@@ -1,0 +1,24 @@
+.nobreak_white {
+    background-color: white;
+}
+
+.nobreak {
+    display: inline;
+}
+
+.hidden {
+    opacity: 0;
+    display: inline;
+    background-color: white;
+    color: blue;
+    z-index: 10000;
+    width: 0;
+}
+
+.hidden:hover {
+    opacity: 100;
+    display: inline;
+    background-color: white;
+    color: blue;
+    z-index: 10000;
+  }

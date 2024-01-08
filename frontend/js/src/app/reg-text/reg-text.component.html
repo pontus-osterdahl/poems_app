@@ -1,39 +1,6 @@
 
 <div class="nobreak_white">
     <div *ngFor="let break of text?.breaks" class="nobreak">
-        <!--<app-reg-break [break]="break"></app-reg-break>-->
-        <div [ngSwitch]="break.type" class="nobreak">
-            <div *ngSwitchCase="'ADD'" class="nobreak"></div>
-                <div *ngSwitchCase="'HIGH_LIGHTED'" class="nobreak">
-                    <b>{{break.content[0].text}}</b>
-                </div>
-                <div *ngSwitchCase="'TEXT_WRAPPER'" class="nobreak">
-                     {{trimBreakText(break.text)}}
-                </div>
-                <div *ngSwitchCase="'WORD'" class="nobreak">
-                        {{trimBreakText(break.text)}}
-                    </div>
-                <div *ngSwitchCase="'LINE_BREAK'" class="line_number" class="nobreak">
-                    <div *ngFor="let attr of break.attributes" class="nobreak">
-                        <div *ngIf="attr.name=='n'" class="nobreak">
-                            <br/>{{attr.value}}
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase="'PAGE_BREAK'">
-                    <div *ngFor="let attr of break.attributes" class="nobreak">
-                        <div *ngIf="attr.name=='n'" class="nobreak">
-                            <h1>{{attr.value}}</h1>
-                        </div>
-                    </div>
-                </div>
-                <div *ngSwitchCase="'PERS_NAME'">
-                    <div *ngFor="let attr of break.attributes" class="nobreak">
-                        <div *ngIf="attr.name=='key'" class="nobreak">
-                            <h1>{{attr.value}}</h1>
-                        </div>
-                    </div>
-                </div>
-            </div> 
+        <app-reg-break [break]="break"></app-reg-break>
     </div>
 </div>
