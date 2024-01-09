@@ -1,6 +1,6 @@
 package com.example.poems_app;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
 
 @Entity
 public class Article extends BibItem {

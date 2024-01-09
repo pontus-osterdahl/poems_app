@@ -1,12 +1,14 @@
 <div [ngSwitch]="break.type" class="nobreak">
-        <!--{{break.text}}-->
-        <div *ngSwitchCase="'ADD'" class="nobreak"></div>
+    <div *ngSwitchCase="'ADD'" class="nobreak"></div>
         <div *ngSwitchCase="'HIGH_LIGHTED'" class="nobreak">
             <b>{{break.content[0].text}}</b>
         </div>
         <div *ngSwitchCase="'TEXT_WRAPPER'" class="nobreak">
-            <!--{{trimBreakText()}}-->
+             {{trimBreakText()}}
         </div>
+        <div *ngSwitchCase="'WORD'" class="nobreak">
+                {{trimBreakText()}}
+            </div>
         <div *ngSwitchCase="'LINE_BREAK'" class="line_number" class="nobreak">
             <div *ngFor="let attr of break.attributes" class="nobreak">
                 <div *ngIf="attr.name=='n'" class="nobreak">
@@ -14,30 +16,27 @@
                 </div>
             </div>
         </div>
-        <div *ngSwitchCase="'PAGE_BREAK'">
+        <div *ngSwitchCase="'PAGE_BREAK'" class="nobreak">
             <div *ngFor="let attr of break.attributes" class="nobreak">
                 <div *ngIf="attr.name=='n'" class="nobreak">
                     <h1>{{attr.value}}</h1>
                 </div>
             </div>
         </div>
-        <div *ngSwitchCase="'PERS_NAME'">
-            <div *ngFor="let attr of break.attributes" class="nobreak">
-                <div *ngIf="attr.name=='key'" class="nobreak">
-                    <h1>{{attr.value}}</h1>
-                </div>
-            </div>
-            <div *ngFor="let inBreak of break.content" class="nobreak">
-                <app-reg-break [break]="inBreak"/>
+        <div *ngSwitchCase="'PERS_NAME'" class="nobreak">
+            <div *ngFor="let content of break.content" class="nobreak">
+                <app-reg-break [break]="content"></app-reg-break>
             </div>
         </div>
         <div *ngSwitchCase="'NAME'" class="nobreak">
-            <div *ngFor="let inBreak of break.content" class="nobreak">
-            <app-reg-break [break]="inBreak"/>
+            <div *ngFor="let content of break.content" class="nobreak">
+                <app-reg-break [break]="content"></app-reg-break>
+            </div>
         </div>
-        <div *ngSwitchCase="'WORD'" class="nobreak">
- <!--           <div *ngFor="let inBreak of break.content" class="nobreak">
-            <app-reg-break [break]="inBreak"/>-->
-            {{break.text}}
+        <div *ngSwitchCase="'SUPPLEMENT'" class="nobreak">
+            <div *ngFor="let content of break.content" class="nobreak">
+                <div class="hidden">{{getrep()}}</div>
+                [<app-reg-break [break]="content" class="nobreak"></app-reg-break>]
+            </div>
         </div>
-        </div>
+    </div> 

@@ -7,10 +7,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
 
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -65,7 +65,7 @@ public class FileFormatHelper {
 	  
 	  JAXBContext jaxbContext 	= JAXBContext.newInstance( ComplexPoem.class,ComplexPoemOld.class, Lemma.class,Word.class,Diacritic.class );
 	  Unmarshaller um = jaxbContext.createUnmarshaller();
-	  um.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
+	  um.setEventHandler(new jakarta.xml.bind.helpers.DefaultValidationEventHandler());
 	  return (ComplexPoemOld) um.unmarshal(is);
 	  
   }

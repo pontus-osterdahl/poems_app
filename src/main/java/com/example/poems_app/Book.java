@@ -1,7 +1,7 @@
 package com.example.poems_app;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 import org.json.JSONObject;
 

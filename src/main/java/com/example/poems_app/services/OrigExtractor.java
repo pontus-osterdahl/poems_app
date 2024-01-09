@@ -20,6 +20,7 @@ import com.example.poems_app.xml.Orig;
 import com.example.poems_app.xml.PageBreak;
 import com.example.poems_app.xml.PersName;
 import com.example.poems_app.xml.Reg;
+import com.example.poems_app.xml.Supplement;
 import com.example.poems_app.xml.TextWrapper;
 import com.example.poems_app.xml.Word;
 
@@ -87,6 +88,9 @@ public class OrigExtractor {
 				breakItem = new PersName();
 			} else if ("name".equals(nodename)) {
 				breakItem = new Name();
+			}
+			else if ("supplied".equals(nodename)) {
+				breakItem = new Supplement();
 			}
 			else if ("w".equals(nodename)) {
 				breakItem = new Word();
